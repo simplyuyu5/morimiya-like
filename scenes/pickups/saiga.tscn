@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsj0os0qkpodi"]
+
+[ext_resource type="Texture2D" uid="uid://b8b0t6qbtvclt" path="res://images/pickups/saiga.png" id="1_ntuw2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ddre"]
+size = Vector2(11.907869, 5.005966)
+
+[node name="pickup_saiga" type="Node2D"]
+
+[node name="saiga" type="Area2D" parent="." groups=["weapon_pick"]]
+rotation = 0.17104226
+scale = Vector2(5, 5)
+collision_layer = 2
+collision_mask = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="saiga"]
+texture = ExtResource("1_ntuw2")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="saiga"]
+position = Vector2(0.03010559, -0.0030059814)
+shape = SubResource("RectangleShape2D_7ddre")
+metadata/_edit_lock_ = true

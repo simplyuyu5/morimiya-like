@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://db2nddnxop73g"]
+
+[ext_resource type="Script" uid="uid://bfv1fqti2f80n" path="res://scripts/dummy.gd" id="1_xmspm"]
+[ext_resource type="Texture2D" uid="uid://c6qcwyyd1rjbd" path="res://images/living/npc-01.png" id="2_0umox"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1324b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_0umox")
+}],
+"loop": true,
+"name": &"bodies",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k5f3b"]
+radius = 3.0
+height = 8.0
+
+[node name="dummy" type="CharacterBody2D"]
+script = ExtResource("1_xmspm")
+
+[node name="texture" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_1324b")
+animation = &"bodies"
+metadata/_edit_lock_ = true
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 16
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 2)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_k5f3b")

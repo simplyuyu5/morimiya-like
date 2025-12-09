@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://drv1wy547paas"]
+
+[ext_resource type="Texture2D" uid="uid://ctndcpgss1j7p" path="res://images/pickups/ar15.png" id="1_rmo8f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8xqtg"]
+size = Vector2(15, 4)
+
+[node name="pickup_ar" type="Node2D"]
+scale = Vector2(0.5, 0.5)
+
+[node name="ar15" type="Area2D" parent="." groups=["weapon_pick"]]
+rotation = 2.0751965
+scale = Vector2(5, 5)
+collision_layer = 2
+collision_mask = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="ar15"]
+texture = ExtResource("1_rmo8f")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ar15"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_8xqtg")
+metadata/_edit_lock_ = true
