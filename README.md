@@ -5,3 +5,4 @@ to-do list:
  - progression?: shoot to earn points, buy pew-pews for points!
  - skills: basic character can get boring!
  - get attention of someone who can draw so game doesnt looks like ass????
+ - maybe character-difficulty selection
