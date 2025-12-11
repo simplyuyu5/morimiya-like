@@ -33,13 +33,13 @@ animations = [{
 
 [node name="runner" type="CharacterBody2D"]
 scale = Vector2(5, 5)
-motion_mode = 1
 script = ExtResource("1_5qbmg")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 3.0
 target_desired_distance = 3.0
-path_postprocessing = 2
+navigation_layers = 128
+path_postprocessing = 1
 debug_enabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -73,5 +73,6 @@ metadata/_edit_lock_ = true
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.4
+autostart = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

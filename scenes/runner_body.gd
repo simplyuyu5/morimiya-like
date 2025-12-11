@@ -7,21 +7,24 @@ extends CharacterBody2D
 var speed = 100
 
 func _ready() -> void:
+	my_time.start()
 	agent.target_position = goal.global_position
 	
 func _process(_delta: float) -> void:
-	#if Input.is_key_label_pressed(KEY_T):
+	var nav_point_dir = to_local(agent.get_next_path_position()).normalized()
+	velocity = nav_point_dir * (help.hp)
+	move_and_slide()
 
-	walk()
+	#walk()
 
-func walk():
-	if agent.is_target_reached():
-		var nav_point_dir = to_local(agent.get_next_path_position()).normalized()
-		velocity = nav_point_dir * speed * (help.hp/10)
-		move_and_slide()
+#func walk():
+	#if agent.is_target_reached():
+		#var nav_point_dir = to_local(agent.get_next_path_position()).normalized()
+		#velocity = nav_point_dir# * speed * (help.hp/10)
+		#move_and_slide()
 
 
-func _on_timer_timeout() -> void:
+func _on_timer_timeout():
 	if agent.target_position != goal.global_position:
 		agent.target_position = goal.global_position
 	my_time.start()
