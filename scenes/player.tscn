@@ -1,8 +1,57 @@
-[gd_scene load_steps=5 format=3 uid="uid://blhcllsye5ckw"]
+[gd_scene load_steps=13 format=3 uid="uid://blhcllsye5ckw"]
 
 [ext_resource type="Script" uid="uid://dddqbgfrxouwf" path="res://scripts/character_body_2d.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://cukfanhbs1bpi" path="res://images/mc/mc.png" id="2_i3pqv"]
 [ext_resource type="Script" uid="uid://2nns71jjfnmc" path="res://scripts/weapons.gd" id="3_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://bbu44ygucnq64" path="res://images/nothing.png" id="3_y4r1p"]
+[ext_resource type="Texture2D" uid="uid://cwd1xonwjc7i1" path="res://images/effects/pews/pew_medium2.png" id="4_y4r1p"]
+[ext_resource type="Texture2D" uid="uid://cy5ux433f02q1" path="res://images/effects/pews/pew_medium3.png" id="5_d2wvv"]
+[ext_resource type="Texture2D" uid="uid://cfvbxyb8uqih5" path="res://images/effects/pews/pew_medium5.png" id="7_jej6c"]
+[ext_resource type="Texture2D" uid="uid://cqka6x73umc2u" path="res://images/effects/pews/pew_small1.png" id="10_oprun"]
+[ext_resource type="Texture2D" uid="uid://d3t714un82r0v" path="res://images/effects/pews/pew_small3.png" id="12_qfm1y"]
+[ext_resource type="Texture2D" uid="uid://lmwqgbetvt4e" path="res://images/effects/pews/pew_small5.png" id="14_4r5pv"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oprun"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_y4r1p")
+}],
+"loop": false,
+"name": &"nothing",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_y4r1p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_d2wvv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_jej6c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_y4r1p")
+}],
+"loop": false,
+"name": &"pew_medium",
+"speed": 50.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_oprun")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_qfm1y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_4r5pv")
+}],
+"loop": false,
+"name": &"pew_small",
+"speed": 50.0
+}]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
 radius = 4.0
@@ -13,22 +62,40 @@ motion_mode = 1
 script = ExtResource("1_onrkg")
 
 [node name="Mc" type="Sprite2D" parent="."]
+position = Vector2(-2.0833726, -0.018236637)
 rotation = 1.5707964
 scale = Vector2(0.99999994, 0.99999994)
 texture = ExtResource("2_i3pqv")
+offset = Vector2(0.018236518, -2.0833726)
 metadata/_edit_lock_ = true
 
 [node name="ray_long" type="RayCast2D" parent="."]
-position = Vector2(5, 2.5)
+position = Vector2(2, 0)
 target_position = Vector2(400, 0)
 collision_mask = 17
 collide_with_areas = true
 collide_with_bodies = false
+metadata/_edit_lock_ = true
 
-[node name="ColorRect" type="ColorRect" parent="ray_long"]
+[node name="line" type="ColorRect" parent="ray_long"]
 visible = false
-offset_right = 400.0
-offset_bottom = 1.0
+offset_left = 2.0
+offset_top = -1.0
+offset_right = 7.0
+metadata/_edit_lock_ = true
+
+[node name="line2" type="ColorRect" parent="ray_long"]
+visible = false
+offset_left = 2.0
+offset_top = -0.5
+offset_right = 7.0
+offset_bottom = 0.5
+metadata/_edit_lock_ = true
+
+[node name="pew" type="AnimatedSprite2D" parent="ray_long"]
+position = Vector2(5.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_oprun")
+animation = &"nothing"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 0)
@@ -41,7 +108,8 @@ script = ExtResource("3_qhqgy")
 
 [node name="pickup_ray" type="RayCast2D" parent="."]
 target_position = Vector2(10, 0)
-collision_mask = 2
+collision_mask = 18
+hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
 
@@ -57,3 +125,17 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 30
 text = "23hi"
+
+[node name="mags" type="Label" parent="gui"]
+offset_left = 16.0
+offset_top = 564.0
+offset_right = 78.0
+offset_bottom = 606.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 30
+text = "mags"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true

@@ -4,6 +4,8 @@ extends CharacterBody2D
 @onready var weapon = $weapons
 @onready var ray_pick = $pickup_ray
 
+@onready var pew = $ray_long/pew
+
 var weapon_under :bool = false
 var pickup_under :bool = false
 var under_name
@@ -12,6 +14,8 @@ var health = 200
 var speed_fin = 300
 #const SPEED = 300.0
 
+func _ready() -> void:
+	pew.play("nothing")
 
 func _physics_process(_delta: float) -> void:
 
@@ -30,6 +34,7 @@ func _physics_process(_delta: float) -> void:
 		#print("no collision")
 
 	equip()
+	change()
 	shoot()
 	reload()
 	move()
@@ -44,13 +49,17 @@ func _physics_process(_delta: float) -> void:
 func shoot():
 	var target = ray.get_collider()
 	if Input.is_action_just_pressed("lmb") and weapon.rounds >= 1:
+		gun_smoke(weapon.style)
 		weapon.rounds -= weapon.shots
 		if ray.is_colliding() and target.is_in_group("living"):
 			target.hp -= weapon.damage
 
 
 func reload():
-	pass
+	if Input.is_action_just_pressed("r"):
+		if weapon.mags > 0:
+			weapon.mags -=1
+			weapon.rounds = weapon.rounds_max
 
 func  move():
 	var input_dir := Input.get_vector("a", "d", "w", "s")
@@ -62,13 +71,22 @@ func  move():
 		velocity.x = move_toward(velocity.x, 0, speed_fin)
 		velocity.y = move_toward(velocity.y, 0, speed_fin)
 
+func change():
+	if Input.is_action_just_pressed("q") and weapon.current != null:
+		if weapon.in_hands == weapon.current_prim:
+			weapon.in_hands = weapon.current_sec
+			weapon.weapon_change()
+		else:
+			weapon.in_hands = weapon.current_prim
+			weapon.weapon_change()
+
 func equip():
 	var target = ray_pick.get_collider()
 	if ray_pick.is_colliding() and target.is_in_group("weapon_pick"):
 		if Input.is_action_just_pressed("p"):
 			print(target.name, " target")
-			weapon.current_prim = target.name
-			print("picked up weapon! ", weapon.current_prim)
+			weapon.in_hands = target.name
+			print("picked up weapon! ", weapon.in_hands)
 			weapon.weapon_change()
 
 
@@ -80,11 +98,22 @@ func equip():
 	else:
 		pass
 
-@onready var label_rou = $gui/rounds
 
+
+func gun_smoke(style):
+	if style == 0:
+		pew.play("pew_small")
+	elif style == 1:
+		pew.play("pew_medium")
+	elif style == 2:
+		pew.play("pew_big")
+
+@onready var label_rou = $gui/rounds
+@onready var label_mag = $gui/mags
 
 func gui():
 	label_rou.text = str(weapon.rounds) + " rounds"
+	label_mag.text = str(weapon.mags) + " mags"
 #func _on_pick_range_area_entered(area: Area2D):
 	#if area.is_in_group("weapon_pick"):
 		#print(area.name)

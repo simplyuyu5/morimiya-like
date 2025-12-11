@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://2ta8a0fdumwm"]
+
+[ext_resource type="Texture2D" uid="uid://dl28teu0e2ico" path="res://images/pickups/g17.png" id="1_dve55"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ddre"]
+size = Vector2(8.057871, 4.0187225)
+
+[node name="pickup_g17" type="Node2D"]
+rotation = -1.2199851
+
+[node name="g17" type="Area2D" parent="." groups=["weapon_pick"]]
+rotation = 0.17104226
+scale = Vector2(5, 5)
+collision_layer = 2
+collision_mask = 2
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="g17"]
+texture = ExtResource("1_dve55")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="g17"]
+position = Vector2(0.0151844025, -0.49661255)
+shape = SubResource("RectangleShape2D_7ddre")
+metadata/_edit_lock_ = true

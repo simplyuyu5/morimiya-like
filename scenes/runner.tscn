@@ -1,0 +1,77 @@
+[gd_scene load_steps=8 format=3 uid="uid://dpmxu45hbr6wn"]
+
+[ext_resource type="Script" uid="uid://c2me1tlf88evi" path="res://scenes/runner_body.gd" id="1_5qbmg"]
+[ext_resource type="Script" uid="uid://b6f3f5njnsnx6" path="res://scenes/runner.gd" id="2_a6sfn"]
+[ext_resource type="Texture2D" uid="uid://5r3jknl314v6" path="res://images/living/npc-02.png" id="3_ouwii"]
+[ext_resource type="Texture2D" uid="uid://3v45xq2out8" path="res://images/living/corpses/dead-02.png" id="4_1ty2h"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u0xbq"]
+radius = 2.9999998
+height = 8.4
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ntc4i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_1ty2h")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gthg3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ouwii")
+}],
+"loop": true,
+"name": &"bodies",
+"speed": 5.0
+}]
+
+[node name="runner" type="CharacterBody2D"]
+scale = Vector2(5, 5)
+motion_mode = 1
+script = ExtResource("1_5qbmg")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 3.0
+target_desired_distance = 3.0
+path_postprocessing = 2
+debug_enabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(6.9277927e-15, 1.8)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_u0xbq")
+metadata/_edit_lock_ = true
+
+[node name="Area2D" type="Area2D" parent="." groups=["living"]]
+script = ExtResource("2_a6sfn")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 1.8000011)
+rotation = 1.5707964
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("CapsuleShape2D_u0xbq")
+metadata/_edit_lock_ = true
+
+[node name="dead" type="AnimatedSprite2D" parent="Area2D"]
+visible = false
+scale = Vector2(0.99999976, 0.99999976)
+sprite_frames = SubResource("SpriteFrames_ntc4i")
+animation = &"dead"
+metadata/_edit_lock_ = true
+
+[node name="alive" type="AnimatedSprite2D" parent="Area2D"]
+scale = Vector2(0.99999976, 0.99999976)
+sprite_frames = SubResource("SpriteFrames_gthg3")
+animation = &"bodies"
+metadata/_edit_lock_ = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.4
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
