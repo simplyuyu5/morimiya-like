@@ -6,7 +6,7 @@
 size = Vector2(12, 6)
 
 [node name="StaticBody2D" type="StaticBody2D"]
-rotation = 0.25307277
+rotation = -0.7627089
 scale = Vector2(4.9999995, 4.9999995)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
