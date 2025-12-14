@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://dei1peug41rxi"]
+[gd_scene load_steps=12 format=4 uid="uid://dei1peug41rxi"]
 
 [ext_resource type="Texture2D" uid="uid://mgjscx22fche" path="res://images/tiles/grey_tile.png" id="1_x6hnt"]
 [ext_resource type="Texture2D" uid="uid://d77a3o8gpg7n" path="res://images/objects/home_base/mess.png" id="2_3scp5"]
@@ -176,6 +176,15 @@ terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/2 = SubResource("TileSetAtlasSource_6khdi")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3scp5"]
+size = Vector2(60, 60)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pkxii"]
+size = Vector2(120, 60)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v00u0"]
+size = Vector2(12.000008, 24.000004)
+
 [node name="Node2D" type="Node2D"]
 
 [node name="base" type="TileMapLayer" parent="."]
@@ -185,53 +194,84 @@ tile_set = SubResource("TileSet_rntoh")
 
 [node name="Node" type="Node" parent="base"]
 
-[node name="mess" type="Node" parent="base/Node"]
+[node name="StaticBody2D" type="StaticBody2D" parent="base/Node"]
+position = Vector2(1043, 270)
 
-[node name="Mess" type="Sprite2D" parent="base/Node/mess"]
+[node name="Shelves2" type="Sprite2D" parent="base/Node/StaticBody2D"]
+scale = Vector2(5, 5)
+texture = ExtResource("5_b7pu3")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="base/Node/StaticBody2D"]
+shape = SubResource("RectangleShape2D_3scp5")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="base/Node"]
+position = Vector2(750, 630)
+
+[node name="Shelves" type="Sprite2D" parent="base/Node/StaticBody2D2"]
+rotation = -3.1415925
+scale = Vector2(5, 5)
+texture = ExtResource("5_b7pu3")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="base/Node/StaticBody2D2"]
+shape = SubResource("RectangleShape2D_3scp5")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="base/Node"]
+position = Vector2(953, 270)
+
+[node name="DeskPipebombs" type="Sprite2D" parent="base/Node/StaticBody2D3"]
+scale = Vector2(5, 5)
+texture = ExtResource("4_v00u0")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="base/Node/StaticBody2D3"]
+shape = SubResource("RectangleShape2D_pkxii")
+
+[node name="Area2D" type="Area2D" parent="base/Node/StaticBody2D3" groups=["weapons_desk"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="base/Node/StaticBody2D3/Area2D"]
+shape = SubResource("RectangleShape2D_pkxii")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="base/Node"]
+position = Vector2(750, 300)
+
+[node name="Bed" type="Sprite2D" parent="base/Node/StaticBody2D4"]
+scale = Vector2(5, 5)
+texture = ExtResource("3_pkxii")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="base/Node/StaticBody2D4"]
+scale = Vector2(4.999999, 4.999999)
+shape = SubResource("RectangleShape2D_v00u0")
+metadata/_edit_lock_ = true
+
+[node name="mess" type="Node2D" parent="."]
+
+[node name="Mess" type="Sprite2D" parent="mess"]
 position = Vector2(792, 481)
 rotation = 0.065054104
 scale = Vector2(5, 5)
 texture = ExtResource("2_3scp5")
 
-[node name="Mess2" type="Sprite2D" parent="base/Node/mess"]
+[node name="Mess2" type="Sprite2D" parent="mess"]
 position = Vector2(893.99994, 421)
 rotation = -0.67342675
 scale = Vector2(5, 5)
 texture = ExtResource("2_3scp5")
 
-[node name="Mess3" type="Sprite2D" parent="base/Node/mess"]
+[node name="Mess3" type="Sprite2D" parent="mess"]
 position = Vector2(856, 307.99997)
 rotation = 2.093237
 scale = Vector2(5, 5)
 texture = ExtResource("2_3scp5")
 
-[node name="Mess4" type="Sprite2D" parent="base/Node/mess"]
+[node name="Mess4" type="Sprite2D" parent="mess"]
 position = Vector2(1254.9999, 351)
-rotation = -0.30329
+rotation = -0.30329004
 scale = Vector2(5, 5)
 texture = ExtResource("2_3scp5")
 
-[node name="Bed" type="Sprite2D" parent="base/Node"]
-position = Vector2(752.99994, 301)
-scale = Vector2(5, 5)
-texture = ExtResource("3_pkxii")
-
-[node name="DeskPipebombs" type="Sprite2D" parent="base/Node"]
-position = Vector2(987, 272)
-scale = Vector2(5, 5)
-texture = ExtResource("4_v00u0")
-
-[node name="Shelves" type="Sprite2D" parent="base/Node"]
-position = Vector2(750, 630)
-rotation = 3.1415927
-scale = Vector2(5, 5)
-texture = ExtResource("5_b7pu3")
-
-[node name="Shelves2" type="Sprite2D" parent="base/Node"]
-position = Vector2(1077, 271.99997)
-scale = Vector2(5, 5)
-texture = ExtResource("5_b7pu3")
-
 [node name="CharacterBody2D" parent="." instance=ExtResource("2_6khdi")]
 position = Vector2(1036, 473.99997)
-scale = Vector2(5, 5)
+scale = Vector2(3.5, 3.5)

@@ -3,8 +3,10 @@ extends CharacterBody2D
 @onready var ray = $ray_long
 @onready var weapon = $weapons
 @onready var ray_pick = $pickup_ray
+@onready var body = $Mc
 
 @onready var pew = $ray_long/pew
+@onready var store = $store
 
 var weapon_under :bool = false
 var pickup_under :bool = false
@@ -33,11 +35,12 @@ func _physics_process(_delta: float) -> void:
 	#if not ray.is_colliding():
 		#print("no collision")
 
-	equip()
+	equip_ult()
 	change()
 	shoot()
 	reload()
 	move()
+	move_anim()
 	gui()
 
 
@@ -80,16 +83,21 @@ func change():
 			weapon.in_hands = weapon.current_prim
 			weapon.weapon_change()
 
-func equip():
+func equip_ult():
 	var target = ray_pick.get_collider()
 	if ray_pick.is_colliding() and target.is_in_group("weapon_pick"):
+		equip_weapon()
+	if ray_pick.is_colliding() and target.is_in_group("weapons_desk"):
 		if Input.is_action_just_pressed("p"):
+			store.init()
+
+func equip_weapon():
+	var target = ray_pick.get_collider()
+	if Input.is_action_just_pressed("p"):
 			print(target.name, " target")
 			weapon.in_hands = target.name
 			print("picked up weapon! ", weapon.in_hands)
 			weapon.weapon_change()
-
-
 			target.queue_free()
 			ray_pick.enabled = false
 			await get_tree().create_timer(1.0).timeout
@@ -99,6 +107,16 @@ func equip():
 		pass
 
 
+
+
+
+
+
+func move_anim():
+	if Input.is_action_pressed("moving"):
+		body.play("walk")
+	else:
+		body.play("idle")
 
 func gun_smoke(style):
 	if style == 0:

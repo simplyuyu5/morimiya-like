@@ -1,15 +1,67 @@
-[gd_scene load_steps=13 format=3 uid="uid://blhcllsye5ckw"]
+[gd_scene load_steps=24 format=3 uid="uid://blhcllsye5ckw"]
 
 [ext_resource type="Script" uid="uid://dddqbgfrxouwf" path="res://scripts/character_body_2d.gd" id="1_onrkg"]
-[ext_resource type="Texture2D" uid="uid://cukfanhbs1bpi" path="res://images/mc/mc.png" id="2_i3pqv"]
+[ext_resource type="Texture2D" uid="uid://cbewdwsj8ik5q" path="res://images/mc/girl/mc1.png" id="2_fulsm"]
+[ext_resource type="Texture2D" uid="uid://hldjx77hnbye" path="res://images/mc/girl/mc2.png" id="3_4r5pv"]
 [ext_resource type="Script" uid="uid://2nns71jjfnmc" path="res://scripts/weapons.gd" id="3_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://bbu44ygucnq64" path="res://images/nothing.png" id="3_y4r1p"]
+[ext_resource type="Texture2D" uid="uid://bwpkuwj7hhg6l" path="res://images/mc/girl/mc3.png" id="4_60mlk"]
 [ext_resource type="Texture2D" uid="uid://cwd1xonwjc7i1" path="res://images/effects/pews/pew_medium2.png" id="4_y4r1p"]
 [ext_resource type="Texture2D" uid="uid://cy5ux433f02q1" path="res://images/effects/pews/pew_medium3.png" id="5_d2wvv"]
+[ext_resource type="Texture2D" uid="uid://d4kuglffuj581" path="res://images/mc/girl/mc4.png" id="5_i4ail"]
+[ext_resource type="Texture2D" uid="uid://cs3e1c5yev8jp" path="res://images/mc/girl/mc5.png" id="6_a38lo"]
+[ext_resource type="Texture2D" uid="uid://du15gilghdfol" path="res://images/mc/girl/mc6.png" id="7_4ni07"]
 [ext_resource type="Texture2D" uid="uid://cfvbxyb8uqih5" path="res://images/effects/pews/pew_medium5.png" id="7_jej6c"]
+[ext_resource type="Texture2D" uid="uid://ciognn0hdu3u1" path="res://images/mc/girl/mc7.png" id="8_l71n6"]
+[ext_resource type="Texture2D" uid="uid://cdf68vqaec06c" path="res://images/mc/girl/mc8.png" id="9_ke2ow"]
 [ext_resource type="Texture2D" uid="uid://cqka6x73umc2u" path="res://images/effects/pews/pew_small1.png" id="10_oprun"]
+[ext_resource type="Texture2D" uid="uid://0p0y24qd6ck4" path="res://images/mc/girl/mc9.png" id="10_ujl30"]
 [ext_resource type="Texture2D" uid="uid://d3t714un82r0v" path="res://images/effects/pews/pew_small3.png" id="12_qfm1y"]
 [ext_resource type="Texture2D" uid="uid://lmwqgbetvt4e" path="res://images/effects/pews/pew_small5.png" id="14_4r5pv"]
+[ext_resource type="Script" uid="uid://d0qgfvvijomj8" path="res://scenes/store.gd" id="19_4r5pv"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_31cv2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_fulsm")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_fulsm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_4r5pv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_60mlk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_i4ail")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_a38lo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_4ni07")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_l71n6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ke2ow")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ujl30")
+}],
+"loop": false,
+"name": &"walk",
+"speed": 10.0
+}]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_oprun"]
 animations = [{
@@ -57,15 +109,25 @@ animations = [{
 radius = 4.0
 height = 10.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4r5pv"]
+bg_color = Color(0.48962224, 0.48962224, 0.48962218, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0, 0, 0, 1)
+anti_aliasing = false
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_onrkg")
 
-[node name="Mc" type="Sprite2D" parent="."]
+[node name="Mc" type="AnimatedSprite2D" parent="."]
 position = Vector2(-2.0833726, -0.018236637)
 rotation = 1.5707964
 scale = Vector2(0.99999994, 0.99999994)
-texture = ExtResource("2_i3pqv")
+sprite_frames = SubResource("SpriteFrames_31cv2")
+animation = &"walk"
 offset = Vector2(0.018236518, -2.0833726)
 metadata/_edit_lock_ = true
 
@@ -93,7 +155,7 @@ offset_bottom = 0.5
 metadata/_edit_lock_ = true
 
 [node name="pew" type="AnimatedSprite2D" parent="ray_long"]
-position = Vector2(5.5, 2.5)
+position = Vector2(10, 2)
 sprite_frames = SubResource("SpriteFrames_oprun")
 animation = &"nothing"
 
@@ -101,10 +163,8 @@ animation = &"nothing"
 position = Vector2(-1, 0)
 shape = SubResource("CapsuleShape2D_g2els")
 
-[node name="weapons" type="Node" parent="."]
-physics_interpolation_mode = 2
-auto_translate_mode = 2
-script = ExtResource("3_qhqgy")
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
 
 [node name="pickup_ray" type="RayCast2D" parent="."]
 target_position = Vector2(10, 0)
@@ -137,5 +197,28 @@ theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 30
 text = "mags"
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position_smoothing_enabled = true
+[node name="store" type="CanvasLayer" parent="."]
+script = ExtResource("19_4r5pv")
+
+[node name="Panel" type="Panel" parent="store"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_4r5pv")
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="store/Panel"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+scale = Vector2(0.75, 0.75)
+theme_override_font_sizes/font_size = 30
+
+[node name="weapons" type="Node" parent="."]
+physics_interpolation_mode = 2
+auto_translate_mode = 2
+script = ExtResource("3_qhqgy")
