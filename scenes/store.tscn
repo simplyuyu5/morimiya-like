@@ -1,0 +1,97 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjc3oepe17a24"]
+
+[ext_resource type="Script" uid="uid://d0qgfvvijomj8" path="res://scenes/store.gd" id="1_jmp1n"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4r5pv"]
+bg_color = Color(0.48962224, 0.48962224, 0.48962218, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0, 0, 0, 1)
+anti_aliasing = false
+
+[node name="store" type="CanvasLayer"]
+script = ExtResource("1_jmp1n")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_4r5pv")
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -51.0
+offset_top = 11.0
+offset_right = 2.333374
+offset_bottom = 61.0
+grow_horizontal = 0
+scale = Vector2(0.75, 0.75)
+theme_override_font_sizes/font_size = 30
+text = "x"
+autowrap_mode = 2
+autowrap_trim_flags = 0
+icon_alignment = 1
+
+[node name="skills_shop" type="Control" parent="Panel"]
+visible = false
+anchors_preset = 0
+offset_left = -77.0
+offset_top = 69.0
+offset_right = -37.0
+offset_bottom = 109.0
+
+[node name="subButton" type="Button" parent="Panel/skills_shop"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 1138.0
+offset_top = -58.0
+offset_right = 1191.3334
+offset_bottom = -8.0
+grow_horizontal = 0
+scale = Vector2(0.75, 0.75)
+theme_override_font_sizes/font_size = 30
+text = "x"
+autowrap_mode = 2
+autowrap_trim_flags = 0
+icon_alignment = 1
+
+[node name="weapons_shop" type="Control" parent="Panel"]
+visible = false
+anchors_preset = 0
+offset_left = -85.0
+offset_top = 177.0
+offset_right = -45.0
+offset_bottom = 217.0
+
+[node name="subButton2" type="Button" parent="Panel/weapons_shop"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 1146.0
+offset_top = -166.0
+offset_right = 1199.3334
+offset_bottom = -116.0
+grow_horizontal = 0
+scale = Vector2(0.75, 0.75)
+theme_override_font_sizes/font_size = 30
+text = "x"
+autowrap_mode = 2
+autowrap_trim_flags = 0
+icon_alignment = 1
+
+[connection signal="pressed" from="Panel/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Panel/skills_shop/subButton" to="." method="_on_sub_button_pressed"]
+[connection signal="pressed" from="Panel/weapons_shop/subButton2" to="." method="_on_sub_button_pressed"]

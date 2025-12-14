@@ -88,7 +88,7 @@ func equip_ult():
 	if ray_pick.is_colliding() and target.is_in_group("weapon_pick"):
 		equip_weapon()
 	if ray_pick.is_colliding() and target.is_in_group("weapons_desk"):
-		if Input.is_action_just_pressed("p"):
+
 			store.init()
 
 func equip_weapon():

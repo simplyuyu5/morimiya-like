@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://blhcllsye5ckw"]
+[gd_scene load_steps=23 format=3 uid="uid://blhcllsye5ckw"]
 
 [ext_resource type="Script" uid="uid://dddqbgfrxouwf" path="res://scripts/character_body_2d.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://cbewdwsj8ik5q" path="res://images/mc/girl/mc1.png" id="2_fulsm"]
@@ -18,7 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://0p0y24qd6ck4" path="res://images/mc/girl/mc9.png" id="10_ujl30"]
 [ext_resource type="Texture2D" uid="uid://d3t714un82r0v" path="res://images/effects/pews/pew_small3.png" id="12_qfm1y"]
 [ext_resource type="Texture2D" uid="uid://lmwqgbetvt4e" path="res://images/effects/pews/pew_small5.png" id="14_4r5pv"]
-[ext_resource type="Script" uid="uid://d0qgfvvijomj8" path="res://scenes/store.gd" id="19_4r5pv"]
+[ext_resource type="PackedScene" uid="uid://bjc3oepe17a24" path="res://scenes/store.tscn" id="18_4r5pv"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_31cv2"]
 animations = [{
@@ -109,15 +109,6 @@ animations = [{
 radius = 4.0
 height = 10.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4r5pv"]
-bg_color = Color(0.48962224, 0.48962224, 0.48962218, 1)
-border_width_left = 10
-border_width_top = 10
-border_width_right = 10
-border_width_bottom = 10
-border_color = Color(0, 0, 0, 1)
-anti_aliasing = false
-
 [node name="CharacterBody2D" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_onrkg")
@@ -197,26 +188,7 @@ theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 30
 text = "mags"
 
-[node name="store" type="CanvasLayer" parent="."]
-script = ExtResource("19_4r5pv")
-
-[node name="Panel" type="Panel" parent="store"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_4r5pv")
-metadata/_edit_use_anchors_ = true
-
-[node name="Button" type="Button" parent="store/Panel"]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
-scale = Vector2(0.75, 0.75)
-theme_override_font_sizes/font_size = 30
+[node name="store" parent="." instance=ExtResource("18_4r5pv")]
 
 [node name="weapons" type="Node" parent="."]
 physics_interpolation_mode = 2

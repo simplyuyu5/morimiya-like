@@ -229,9 +229,7 @@ metadata/_edit_lock_ = true
 shape = SubResource("RectangleShape2D_pkxii")
 
 [node name="Area2D" type="Area2D" parent="base/Node/StaticBody2D3" groups=["weapons_desk"]]
-collision_layer = 19
 collision_mask = 18
-input_pickable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="base/Node/StaticBody2D3/Area2D"]
 shape = SubResource("RectangleShape2D_pkxii")
