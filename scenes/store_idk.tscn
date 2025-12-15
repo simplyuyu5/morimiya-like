@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://4jkhig0b1eg0"]
+
+[node name="store" type="CanvasLayer"]
+visible = false
+rotation = -0.7627089
+scale = Vector2(4.9999995, 4.9999995)
+transform = Transform2D(3.6148355, -3.454412, 3.454412, 3.6148355, 0, 0)

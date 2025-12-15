@@ -217,7 +217,7 @@ metadata/_edit_lock_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="base/Node/StaticBody2D2"]
 shape = SubResource("RectangleShape2D_3scp5")
 
-[node name="StaticBody2D3" type="StaticBody2D" parent="base/Node" groups=["weapons_desk"]]
+[node name="StaticBody2D3" type="StaticBody2D" parent="base/Node"]
 position = Vector2(953, 270)
 
 [node name="DeskPipebombs" type="Sprite2D" parent="base/Node/StaticBody2D3"]

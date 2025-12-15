@@ -8,6 +8,7 @@ extends CharacterBody2D
 @onready var pew = $ray_long/pew
 @onready var store = $store
 
+var spread :bool = false
 var weapon_under :bool = false
 var pickup_under :bool = false
 var under_name
@@ -54,6 +55,7 @@ func shoot():
 	if Input.is_action_just_pressed("lmb") and weapon.rounds >= 1:
 		gun_smoke(weapon.style)
 		weapon.rounds -= weapon.shots
+		recoil()
 		if ray.is_colliding() and target.is_in_group("living"):
 			target.hp -= weapon.damage
 
@@ -63,6 +65,20 @@ func reload():
 		if weapon.mags > 0:
 			weapon.mags -=1
 			weapon.rounds = weapon.rounds_max
+
+func recoil():
+
+	if ray.rotation_degrees >= weapon.max_angle:
+		ray.rotation_degrees = weapon.max_angle
+
+	if ray.rotation_degrees <= weapon.min_angle:
+		ray.rotation_degrees = weapon.min_angle
+
+	var straight = 0
+	ray.rotation_degrees += randi_range(weapon.recoil, weapon.recoil*-1) 
+	spread = true
+	
+	#await get_tree().create_timer(1).timeout
 
 func  move():
 	var input_dir := Input.get_vector("a", "d", "w", "s")
@@ -88,8 +104,7 @@ func equip_ult():
 	if ray_pick.is_colliding() and target.is_in_group("weapon_pick"):
 		equip_weapon()
 	if ray_pick.is_colliding() and target.is_in_group("weapons_desk"):
-
-			store.init()
+		store.init()
 
 func equip_weapon():
 	var target = ray_pick.get_collider()
@@ -105,7 +120,6 @@ func equip_weapon():
 			
 	else:
 		pass
-
 
 
 

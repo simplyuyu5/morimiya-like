@@ -8,6 +8,12 @@ var rounds_max = 0
 var mags_max = 0
 var shots = 1
 var style = 0
+var recoil = 0
+
+
+var max_angle = 20
+var angle = 0
+var min_angle = -20
 
 var rounds = 0
 var mags = 0
@@ -20,7 +26,8 @@ var primaries = {
 		"srounds_max":30,
 		"smags_max":4,
 		"sshots":1,
-		"sstyle":0
+		"sstyle":0,
+		"srecoil":10
 	},
 
 	"m14":{
@@ -29,7 +36,8 @@ var primaries = {
 		"srounds_max":20,
 		"smags_max":4,
 		"sshots":1,
-		"sstyle":1
+		"sstyle":1,
+		"srecoil":20
 	},
 
 	"saiga":{
@@ -38,7 +46,8 @@ var primaries = {
 		"srounds_max":5,
 		"smags_max":5,
 		"sshots":1,
-		"sstyle":1
+		"sstyle":1,
+		"srecoil":27
 	},
 
 	"m500":{
@@ -47,7 +56,8 @@ var primaries = {
 		"srounds_max":8,
 		"smags_max":24,
 		"sshots":1,
-		"sstyle":1
+		"sstyle":1,
+		"srecoil":30
 	},
 
 	"type81":{
@@ -56,7 +66,8 @@ var primaries = {
 		"srounds_max":40,
 		"smags_max":3,
 		"sshots":1,
-		"sstyle":1
+		"sstyle":1,
+		"srecoil":15
 	},
 }
 
@@ -67,7 +78,8 @@ var secondaries = {
 		"srounds_max":17,
 		"smags_max":2,
 		"sshots":1,
-		"sstyle":0
+		"sstyle":0,
+		"srecoil":2
 	},
 
 	"tt":{
@@ -76,7 +88,8 @@ var secondaries = {
 		"srounds_max":8,
 		"smags_max":2,
 		"sshots":1,
-		"sstyle":0
+		"sstyle":0,
+		"srecoil":2
 	}
 }
 
@@ -97,6 +110,7 @@ func weapon_change():
 				mags_max = primaries[in_hands]["smags_max"]
 				shots = primaries[in_hands]["sshots"]
 				style = primaries[in_hands]["sstyle"]
+				recoil = primaries[in_hands]["srecoil"]
 
 				mags = mags_max
 				rounds = rounds_max
@@ -112,6 +126,7 @@ func weapon_change():
 				mags_max = secondaries[in_hands]["smags_max"]
 				shots = secondaries[in_hands]["sshots"]
 				style = secondaries[in_hands]["sstyle"]
+				recoil = secondaries[in_hands]["srecoil"]
 
 				mags = mags_max
 				rounds = rounds_max

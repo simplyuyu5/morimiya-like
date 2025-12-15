@@ -131,14 +131,12 @@ collide_with_bodies = false
 metadata/_edit_lock_ = true
 
 [node name="line" type="ColorRect" parent="ray_long"]
-visible = false
 offset_left = 2.0
 offset_top = -1.0
 offset_right = 7.0
 metadata/_edit_lock_ = true
 
 [node name="line2" type="ColorRect" parent="ray_long"]
-visible = false
 offset_left = 2.0
 offset_top = -0.5
 offset_right = 7.0
@@ -189,6 +187,7 @@ theme_override_font_sizes/font_size = 30
 text = "mags"
 
 [node name="store" parent="." instance=ExtResource("18_4r5pv")]
+visible = false
 
 [node name="weapons" type="Node" parent="."]
 physics_interpolation_mode = 2
