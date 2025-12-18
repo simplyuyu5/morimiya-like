@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bjc3oepe17a24"]
+[gd_scene load_steps=5 format=3 uid="uid://bjc3oepe17a24"]
 
 [ext_resource type="Script" uid="uid://d0qgfvvijomj8" path="res://scenes/store.gd" id="1_jmp1n"]
+[ext_resource type="StyleBox" uid="uid://ckr0q3ajn27kr" path="res://style_temp.tres" id="2_atuvt"]
+[ext_resource type="Texture2D" uid="uid://csnr41l5hyjo2" path="res://images/weapons_portraits/ar.png" id="3_codmc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4r5pv"]
 bg_color = Color(0.48962224, 0.48962224, 0.48962218, 1)
@@ -15,7 +17,6 @@ anti_aliasing = false
 script = ExtResource("1_jmp1n")
 
 [node name="Panel" type="Panel" parent="."]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -69,22 +70,38 @@ autowrap_trim_flags = 0
 icon_alignment = 1
 
 [node name="weapons_shop" type="Control" parent="Panel"]
-visible = false
 anchors_preset = 0
 offset_left = -85.0
 offset_top = 177.0
 offset_right = -45.0
 offset_bottom = 217.0
 
-[node name="subButton2" type="Button" parent="Panel/weapons_shop"]
+[node name="Panel" type="Panel" parent="Panel/weapons_shop"]
+layout_mode = 0
+offset_left = 360.0
+offset_top = -177.0
+offset_right = 1237.0
+offset_bottom = 471.0
+theme_override_styles/panel = ExtResource("2_atuvt")
+
+[node name="ItemList_gunshop" type="ItemList" parent="Panel/weapons_shop/Panel"]
+layout_mode = 0
+offset_left = -265.0
+offset_top = 10.0
+offset_bottom = 638.0
+theme_override_font_sizes/font_size = 30
+item_count = 1
+item_0/text = "ar 15"
+
+[node name="subButton2" type="Button" parent="Panel/weapons_shop/Panel"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = 1146.0
-offset_top = -166.0
-offset_right = 1199.3334
-offset_bottom = -116.0
+offset_left = -51.0
+offset_top = 11.0
+offset_right = 2.333496
+offset_bottom = 61.0
 grow_horizontal = 0
 scale = Vector2(0.75, 0.75)
 theme_override_font_sizes/font_size = 30
@@ -93,6 +110,17 @@ autowrap_mode = 2
 autowrap_trim_flags = 0
 icon_alignment = 1
 
+[node name="TextureRect" type="TextureRect" parent="Panel/weapons_shop/Panel"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 17.0
+offset_top = 16.0
+offset_right = 322.0
+offset_bottom = 118.0
+texture = ExtResource("3_codmc")
+stretch_mode = 4
+
 [connection signal="pressed" from="Panel/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Panel/skills_shop/subButton" to="." method="_on_sub_button_pressed"]
-[connection signal="pressed" from="Panel/weapons_shop/subButton2" to="." method="_on_sub_button_pressed"]
+[connection signal="item_selected" from="Panel/weapons_shop/Panel/ItemList_gunshop" to="." method="_on_item_list_item_selected"]
+[connection signal="pressed" from="Panel/weapons_shop/Panel/subButton2" to="." method="_on_sub_button_pressed"]

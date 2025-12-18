@@ -10,6 +10,8 @@ var shots = 1
 var style = 0
 var recoil = 0
 
+var chance_hit :int = 100
+var chance_max = 100
 
 var max_angle = 20
 var angle = 0
@@ -27,7 +29,7 @@ var primaries = {
 		"smags_max":4,
 		"sshots":1,
 		"sstyle":0,
-		"srecoil":10
+		"srecoil":3
 	},
 
 	"m14":{
@@ -37,7 +39,7 @@ var primaries = {
 		"smags_max":4,
 		"sshots":1,
 		"sstyle":1,
-		"srecoil":20
+		"srecoil":15
 	},
 
 	"saiga":{
@@ -47,7 +49,7 @@ var primaries = {
 		"smags_max":5,
 		"sshots":1,
 		"sstyle":1,
-		"srecoil":27
+		"srecoil":14
 	},
 
 	"m500":{
@@ -57,7 +59,7 @@ var primaries = {
 		"smags_max":24,
 		"sshots":1,
 		"sstyle":1,
-		"srecoil":30
+		"srecoil":20
 	},
 
 	"type81":{
@@ -67,7 +69,7 @@ var primaries = {
 		"smags_max":3,
 		"sshots":1,
 		"sstyle":1,
-		"srecoil":15
+		"srecoil":5
 	},
 }
 
@@ -142,7 +144,21 @@ func weapon_change():
 		print("null")
 
 
+func recoil_regen():
+	if parent.spread == false:
+		chance_hit += 1
+	else:
+		pass
 
+
+func _process(_delta: float) -> void:
+
+	recoil_regen()
+
+	if chance_hit <= 0:
+		chance_hit = 0
+	if chance_hit >= chance_max:
+		chance_hit = chance_max
 
 
 #enum primary {

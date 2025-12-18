@@ -164,6 +164,21 @@ collide_with_bodies = false
 
 [node name="gui" type="CanvasLayer" parent="."]
 
+[node name="chance" type="Label" parent="gui"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -25.5
+offset_right = 25.5
+offset_bottom = 42.0
+grow_horizontal = 2
+scale = Vector2(0.5, 0.5)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 30
+text = "100"
+
 [node name="rounds" type="Label" parent="gui"]
 offset_left = 17.0
 offset_top = 532.0

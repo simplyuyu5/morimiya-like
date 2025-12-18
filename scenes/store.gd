@@ -22,3 +22,7 @@ func _on_button_pressed() -> void:
 func _on_sub_button_pressed() -> void:
 		$Panel/skills_shop.hide()
 		$Panel/weapons_shop.hide()
+
+
+func _on_item_list_item_gun_shop_selected(index: int) -> void:
+	pass # Replace with function body.

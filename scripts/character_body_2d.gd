@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var weapon = $weapons
 @onready var ray_pick = $pickup_ray
 @onready var body = $Mc
+@onready var time = $Timer
 
 @onready var pew = $ray_long/pew
 @onready var store = $store
@@ -39,26 +40,34 @@ func _physics_process(_delta: float) -> void:
 	equip_ult()
 	change()
 	shoot()
+	#recoil_regen()
 	reload()
 	move()
 	move_anim()
 	gui()
 
 
-
 	look_at(get_global_mouse_position())
-
 	move_and_slide()
 
 func shoot():
+	ray.enabled = true
 	var target = ray.get_collider()
 	if Input.is_action_just_pressed("lmb") and weapon.rounds >= 1:
 		gun_smoke(weapon.style)
 		weapon.rounds -= weapon.shots
-		recoil()
+		
+		if ray.is_colliding() and target.is_in_group("wall"):
+			#var tilemap = target
+			#var hit_pos = ray.get_collision_point()
+			print("kys")
+			ray.enabled = false
 		if ray.is_colliding() and target.is_in_group("living"):
-			target.hp -= weapon.damage
-
+			if randf_range(0,100.0) <= float(weapon.chance_hit):
+				target.hp -=weapon.damage
+			else:
+				print("diee!!")
+		recoil()
 
 func reload():
 	if Input.is_action_just_pressed("r"):
@@ -67,18 +76,27 @@ func reload():
 			weapon.rounds = weapon.rounds_max
 
 func recoil():
-
-	if ray.rotation_degrees >= weapon.max_angle:
-		ray.rotation_degrees = weapon.max_angle
-
-	if ray.rotation_degrees <= weapon.min_angle:
-		ray.rotation_degrees = weapon.min_angle
-
-	var straight = 0
-	ray.rotation_degrees += randi_range(weapon.recoil, weapon.recoil*-1) 
-	spread = true
 	
+	spread = true
+	#weapon.chance_hit * 100
+	print(weapon.chance_hit," % ", weapon.recoil," recoil")
+	weapon.chance_hit -= weapon.recoil
+	#weapon.chance_hit * 0.01
+	print(float(weapon.chance_hit))
+
+	await get_tree().create_timer(3).timeout
+	spread = false
+
+#v hopes and dreams zone
+	#if ray.rotation_degrees >= weapon.max_angle:
+		#ray.rotation_degrees = weapon.max_angle
+	#if ray.rotation_degrees <= weapon.min_angle:
+		#ray.rotation_degrees = weapon.min_angle
+	#var straight = 0
+	#ray.rotation_degrees += randi_range(weapon.recoil, weapon.recoil*-1) 
+	#spread = true
 	#await get_tree().create_timer(1).timeout
+#^ end of hopes and dreams zone
 
 func  move():
 	var input_dir := Input.get_vector("a", "d", "w", "s")
@@ -142,10 +160,12 @@ func gun_smoke(style):
 
 @onready var label_rou = $gui/rounds
 @onready var label_mag = $gui/mags
+@onready var label_chance = $gui/chance
 
 func gui():
 	label_rou.text = str(weapon.rounds) + " rounds"
 	label_mag.text = str(weapon.mags) + " mags"
+	label_chance.text = str(weapon.chance_hit) +" %"
 #func _on_pick_range_area_entered(area: Area2D):
 	#if area.is_in_group("weapon_pick"):
 		#print(area.name)
