@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://d0qgfvvijomj8" path="res://scenes/store.gd" id="1_jmp1n"]
 [ext_resource type="StyleBox" uid="uid://ckr0q3ajn27kr" path="res://style_temp.tres" id="2_atuvt"]
-[ext_resource type="Texture2D" uid="uid://csnr41l5hyjo2" path="res://images/weapons_portraits/ar.png" id="3_codmc"]
+[ext_resource type="Texture2D" uid="uid://dq47xwlg3pwa4" path="res://images/weapons_portraits/ar_shop.png" id="3_codmc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4r5pv"]
 bg_color = Color(0.48962224, 0.48962224, 0.48962218, 1)
