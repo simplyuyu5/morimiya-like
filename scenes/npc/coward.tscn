@@ -1,0 +1,105 @@
+[gd_scene load_steps=14 format=3 uid="uid://dy50sx76ijfi4"]
+
+[ext_resource type="Script" uid="uid://c2me1tlf88evi" path="res://scenes/runner_body.gd" id="1_jdofe"]
+[ext_resource type="Script" uid="uid://b6f3f5njnsnx6" path="res://scenes/runner.gd" id="2_2ayc0"]
+[ext_resource type="Texture2D" uid="uid://dobf1uhek57hj" path="res://images/living/corpses/dead-01.png" id="3_w41f0"]
+[ext_resource type="Texture2D" uid="uid://3v45xq2out8" path="res://images/living/corpses/dead-02.png" id="3_wfnhi"]
+[ext_resource type="Texture2D" uid="uid://5r3jknl314v6" path="res://images/living/npc-02.png" id="4_gm86a"]
+[ext_resource type="Texture2D" uid="uid://degybtofviknl" path="res://images/living/corpses/dead-03.png" id="5_fqlco"]
+[ext_resource type="Texture2D" uid="uid://bjem2g437f1ub" path="res://images/living/corpses/dead-04.png" id="6_x4ijk"]
+[ext_resource type="Texture2D" uid="uid://c6qcwyyd1rjbd" path="res://images/living/npc-01.png" id="7_a8yt0"]
+[ext_resource type="Texture2D" uid="uid://5dtal3bbveej" path="res://images/living/npc-03.png" id="9_t6vd6"]
+[ext_resource type="Texture2D" uid="uid://dmdm8e0fpabe2" path="res://images/living/npc-04.png" id="10_nrcgl"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u0xbq"]
+radius = 2.9999998
+height = 8.4
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ntc4i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_w41f0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_wfnhi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_fqlco")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_x4ijk")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gthg3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_a8yt0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_gm86a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_t6vd6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_nrcgl")
+}],
+"loop": true,
+"name": &"bodies",
+"speed": 5.0
+}]
+
+[node name="coward" type="CharacterBody2D"]
+scale = Vector2(5, 5)
+script = ExtResource("1_jdofe")
+state = 2
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 3.0
+target_desired_distance = 3.0
+navigation_layers = 128
+path_postprocessing = 1
+debug_enabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(6.9277927e-15, 1.8)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_u0xbq")
+metadata/_edit_lock_ = true
+
+[node name="Area2D" type="Area2D" parent="." groups=["living"]]
+script = ExtResource("2_2ayc0")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 1.8000011)
+rotation = 1.5707964
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("CapsuleShape2D_u0xbq")
+metadata/_edit_lock_ = true
+
+[node name="dead" type="AnimatedSprite2D" parent="Area2D"]
+visible = false
+scale = Vector2(0.99999976, 0.99999976)
+sprite_frames = SubResource("SpriteFrames_ntc4i")
+animation = &"dead"
+frame = 2
+metadata/_edit_lock_ = true
+
+[node name="alive" type="AnimatedSprite2D" parent="Area2D"]
+scale = Vector2(0.99999976, 0.99999976)
+sprite_frames = SubResource("SpriteFrames_gthg3")
+animation = &"bodies"
+frame = 2
+metadata/_edit_lock_ = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.4
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=4 uid="uid://b8pq6pahbknth"]
+[gd_scene load_steps=11 format=4 uid="uid://b8pq6pahbknth"]
 
 [ext_resource type="PackedScene" uid="uid://bo86t75r1cf3t" path="res://scenes/maps/map_test.tscn" id="1_qjeyg"]
 [ext_resource type="PackedScene" uid="uid://drv1wy547paas" path="res://scenes/pickups/ar15.tscn" id="2_7ddre"]
 [ext_resource type="PackedScene" uid="uid://blhcllsye5ckw" path="res://scenes/player.tscn" id="2_ia1lp"]
 [ext_resource type="PackedScene" uid="uid://db2nddnxop73g" path="res://scenes/npc/dummy.tscn" id="3_nd71p"]
-[ext_resource type="PackedScene" uid="uid://dpmxu45hbr6wn" path="res://scenes/runner.tscn" id="8_h3xc6"]
+[ext_resource type="PackedScene" uid="uid://dy50sx76ijfi4" path="res://scenes/npc/coward.tscn" id="7_s36qc"]
+[ext_resource type="PackedScene" uid="uid://dpmxu45hbr6wn" path="res://scenes/npc/runner.tscn" id="8_h3xc6"]
 [ext_resource type="PackedScene" uid="uid://d1ofcoh2hnwxh" path="res://scenes/pickups/m14.tscn" id="8_rnaij"]
 [ext_resource type="Script" uid="uid://clymhc0r4g4qm" path="res://scenes/node.gd" id="9_6qxox"]
 [ext_resource type="PackedScene" uid="uid://cp2vtqlgwslfu" path="res://scenes/pickups/m500.tscn" id="9_h3xc6"]
@@ -40,13 +41,15 @@ collision_mask = 3
 [node name="npc_manager" type="Node" parent="."]
 script = ExtResource("9_6qxox")
 
-[node name="runner" parent="npc_manager" node_paths=PackedStringArray("goal") instance=ExtResource("8_h3xc6")]
+[node name="runner" parent="npc_manager" instance=ExtResource("8_h3xc6")]
 position = Vector2(-566.9999, 214.00005)
 disable_mode = 2
 motion_mode = 1
 up_direction = Vector2(0, 1)
 slide_on_ceiling = false
-goal = NodePath("../../TileMapLayer/StaticBody2D")
+
+[node name="coward" parent="npc_manager" instance=ExtResource("7_s36qc")]
+position = Vector2(80, 187)
 
 [node name="pickup_ar" parent="." instance=ExtResource("2_7ddre")]
 position = Vector2(247, -108)
