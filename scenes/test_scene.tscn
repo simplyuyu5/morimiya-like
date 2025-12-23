@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://b8pq6pahbknth"]
+[gd_scene load_steps=10 format=4 uid="uid://b8pq6pahbknth"]
 
 [ext_resource type="PackedScene" uid="uid://bo86t75r1cf3t" path="res://scenes/maps/map_test.tscn" id="1_qjeyg"]
 [ext_resource type="PackedScene" uid="uid://drv1wy547paas" path="res://scenes/pickups/ar15.tscn" id="2_7ddre"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://dy50sx76ijfi4" path="res://scenes/npc/coward.tscn" id="7_s36qc"]
 [ext_resource type="PackedScene" uid="uid://dpmxu45hbr6wn" path="res://scenes/npc/runner.tscn" id="8_h3xc6"]
 [ext_resource type="PackedScene" uid="uid://d1ofcoh2hnwxh" path="res://scenes/pickups/m14.tscn" id="8_rnaij"]
-[ext_resource type="Script" uid="uid://clymhc0r4g4qm" path="res://scenes/node.gd" id="9_6qxox"]
 [ext_resource type="PackedScene" uid="uid://cp2vtqlgwslfu" path="res://scenes/pickups/m500.tscn" id="9_h3xc6"]
 [ext_resource type="PackedScene" uid="uid://bkraxu835heum" path="res://scenes/desk.tscn" id="9_s36qc"]
 
@@ -39,7 +38,6 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="npc_manager" type="Node" parent="."]
-script = ExtResource("9_6qxox")
 
 [node name="runner" parent="npc_manager" instance=ExtResource("8_h3xc6")]
 position = Vector2(-566.9999, 214.00005)

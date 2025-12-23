@@ -4,7 +4,7 @@ extends CharacterBody2D
 @onready var weapon = $weapons
 @onready var ray_pick = $pickup_ray
 @onready var body = $Mc
-@onready var time = $Timer
+#@onready var time = $Timer
 
 @onready var pew = $ray_long/pew
 @onready var store = $store

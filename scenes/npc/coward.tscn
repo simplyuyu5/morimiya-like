@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://dy50sx76ijfi4"]
 
-[ext_resource type="Script" uid="uid://c2me1tlf88evi" path="res://scenes/runner_body.gd" id="1_jdofe"]
-[ext_resource type="Script" uid="uid://b6f3f5njnsnx6" path="res://scenes/runner.gd" id="2_2ayc0"]
+[ext_resource type="Script" uid="uid://c2me1tlf88evi" path="res://scripts/coward.gd" id="1_jdofe"]
+[ext_resource type="Script" uid="uid://b6f3f5njnsnx6" path="res://scripts/runner.gd" id="2_2ayc0"]
 [ext_resource type="Texture2D" uid="uid://dobf1uhek57hj" path="res://images/living/corpses/dead-01.png" id="3_w41f0"]
 [ext_resource type="Texture2D" uid="uid://3v45xq2out8" path="res://images/living/corpses/dead-02.png" id="3_wfnhi"]
 [ext_resource type="Texture2D" uid="uid://5r3jknl314v6" path="res://images/living/npc-02.png" id="4_gm86a"]
@@ -58,7 +58,6 @@ animations = [{
 [node name="coward" type="CharacterBody2D"]
 scale = Vector2(5, 5)
 script = ExtResource("1_jdofe")
-state = 2
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 3.0
@@ -99,7 +98,18 @@ frame = 2
 metadata/_edit_lock_ = true
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.4
+process_callback = 0
+wait_time = 0.1
 autostart = true
+
+[node name="wander" type="Node2D" parent="."]
+top_level = true
+position = Vector2(-182, 325)
+
+[node name="idle" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
