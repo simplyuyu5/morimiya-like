@@ -1,0 +1,11 @@
+to-do list since i forget stuff:
+
+1. npcs bleeding
+2. furniture destruction
+3. shell ejection after shooting
+4. effect after shooting wall
+5. light?
+6. unique npcs
+7. point shop 
+8. blood effects
+9. overall decals from shooting something and someone, explosions and etc
