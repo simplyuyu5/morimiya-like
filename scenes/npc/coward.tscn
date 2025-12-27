@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dy50sx76ijfi4"]
+[gd_scene load_steps=15 format=3 uid="uid://dy50sx76ijfi4"]
 
 [ext_resource type="Script" uid="uid://c2me1tlf88evi" path="res://scripts/coward.gd" id="1_jdofe"]
 [ext_resource type="Script" uid="uid://b6f3f5njnsnx6" path="res://scripts/runner.gd" id="2_2ayc0"]
@@ -55,29 +55,25 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_w41f0"]
+radius = 105.000755
+
 [node name="coward" type="CharacterBody2D"]
 scale = Vector2(5, 5)
+motion_mode = 1
 script = ExtResource("1_jdofe")
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_desired_distance = 3.0
-target_desired_distance = 3.0
-navigation_layers = 128
-path_postprocessing = 1
-debug_enabled = true
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(6.9277927e-15, 1.8)
-rotation = 1.5707964
+position = Vector2(-1.5, 0)
 shape = SubResource("CapsuleShape2D_u0xbq")
+disabled = true
 metadata/_edit_lock_ = true
 
 [node name="Area2D" type="Area2D" parent="." groups=["living"]]
 script = ExtResource("2_2ayc0")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, 1.8000011)
-rotation = 1.5707964
+position = Vector2(-1.5, 0)
 scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("CapsuleShape2D_u0xbq")
 metadata/_edit_lock_ = true
@@ -91,11 +87,32 @@ frame = 2
 metadata/_edit_lock_ = true
 
 [node name="alive" type="AnimatedSprite2D" parent="Area2D"]
+position = Vector2(-1.4788245, 0.003344345)
+rotation = 1.5707964
 scale = Vector2(0.99999976, 0.99999976)
 sprite_frames = SubResource("SpriteFrames_gthg3")
 animation = &"bodies"
 frame = 2
-metadata/_edit_lock_ = true
+offset = Vector2(-0.0033444103, -1.4788249)
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Area2D"]
+path_desired_distance = 10.0
+target_desired_distance = 3.0
+path_max_distance = 200.0
+navigation_layers = 128
+path_postprocessing = 1
+simplify_path = true
+avoidance_enabled = true
+neighbor_distance = 200.0
+avoidance_layers = 129
+avoidance_mask = 129
+debug_enabled = true
+
+[node name="panic_area" type="Area2D" parent="."]
+position = Vector2(0, -0.2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="panic_area"]
+shape = SubResource("CircleShape2D_w41f0")
 
 [node name="Timer" type="Timer" parent="."]
 process_callback = 0
@@ -112,4 +129,19 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="state_debug" type="Label" parent="."]
+offset_left = -13.8
+offset_top = -14.6
+offset_right = 116.2
+offset_bottom = 27.4
+scale = Vector2(0.2, 0.2)
+theme_override_font_sizes/font_size = 30
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[connection signal="target_reached" from="Area2D/NavigationAgent2D" to="." method="_on_navigation_agent_2d_target_reached"]
+[connection signal="area_entered" from="panic_area" to="." method="_on_panic_area_area_entered"]
+[connection signal="area_exited" from="panic_area" to="." method="_on_panic_area_area_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

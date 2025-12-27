@@ -18,7 +18,9 @@ func _physics_process(_delta: float) -> void:
 		die()
 
 func die():
+	get_parent().death()
 	dead.rotate(randf_range(0,360))
 	dead.show()
 	$CollisionShape2D2.disabled = true
+	$NavigationAgent2D.target_position = global_position
 	alive.queue_free()

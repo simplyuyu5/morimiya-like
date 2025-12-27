@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://b8pq6pahbknth"]
+[gd_scene load_steps=11 format=4 uid="uid://b8pq6pahbknth"]
 
 [ext_resource type="PackedScene" uid="uid://bo86t75r1cf3t" path="res://scenes/maps/map_test.tscn" id="1_qjeyg"]
 [ext_resource type="PackedScene" uid="uid://drv1wy547paas" path="res://scenes/pickups/ar15.tscn" id="2_7ddre"]
@@ -9,6 +9,15 @@
 [ext_resource type="PackedScene" uid="uid://d1ofcoh2hnwxh" path="res://scenes/pickups/m14.tscn" id="8_rnaij"]
 [ext_resource type="PackedScene" uid="uid://cp2vtqlgwslfu" path="res://scenes/pickups/m500.tscn" id="9_h3xc6"]
 [ext_resource type="PackedScene" uid="uid://bkraxu835heum" path="res://scenes/desk.tscn" id="9_s36qc"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_h3xc6"]
+vertices = PackedVector2Array(403.2422, -151.1875, 403.75, -89.07031, 331.6328, -90.07031, 32.203125, -150.60156, 330.20313, 122.21094, 332.1328, 282.77344, 153.24219, 282, 133.03906, 259.39844, -54.960938, 43.601563, -55.59375, 259.39844, -55.398438, 95.4375, -151, 43.601563, -151, -150.78906)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7, 8, 3), PackedInt32Array(7, 9, 10, 8), PackedInt32Array(11, 12, 3, 8), PackedInt32Array(3, 2, 4)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-155.99998, -155.79999, -155.99998, 48.6, -59.999996, 48.6, -60.399998, 95.399994, -60.599995, 264.4, 130.79999, 264.4, 150.99998, 286.99997, 337.19998, 287.8, 335.19998, 122.19999, 336.59998, -84.99999, 408.8, -83.99999, 408.19998, -156.2, 32.199997, -155.59999)])
+parsed_collision_mask = 4294967056
+cell_size = 49.0
+border_size = 447.0
+agent_radius = 5.0
 
 [node name="Node2D" type="Node2D"]
 
@@ -22,6 +31,12 @@ position = Vector2(-5.7999997, -62.399998)
 position = Vector2(-19.6, -25.000002)
 scale = Vector2(1, 1)
 constant_linear_velocity = Vector2(100, 0)
+
+[node name="NavigationRegion2D2" type="NavigationRegion2D" parent="TileMapLayer"]
+position = Vector2(2.3841858e-07, 0)
+navigation_polygon = SubResource("NavigationPolygon_h3xc6")
+navigation_layers = 129
+travel_cost = 0.2
 
 [node name="dummy" parent="." instance=ExtResource("3_nd71p")]
 position = Vector2(1095.9999, 12.000008)
@@ -48,6 +63,12 @@ slide_on_ceiling = false
 
 [node name="coward" parent="npc_manager" instance=ExtResource("7_s36qc")]
 position = Vector2(80, 187)
+
+[node name="coward2" parent="npc_manager" instance=ExtResource("7_s36qc")]
+position = Vector2(768.99994, 188)
+
+[node name="coward3" parent="npc_manager" instance=ExtResource("7_s36qc")]
+position = Vector2(298.99997, -458.99997)
 
 [node name="pickup_ar" parent="." instance=ExtResource("2_7ddre")]
 position = Vector2(247, -108)
