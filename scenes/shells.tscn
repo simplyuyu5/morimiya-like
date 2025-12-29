@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://b5mrumywma0sf"]
+
+[ext_resource type="Texture2D" uid="uid://i222drdr37sl" path="res://images/decals_n_effects/shells/shell_fmj.png" id="1_ptmjk"]
+[ext_resource type="Script" uid="uid://bj2ixfvykc45y" path="res://scripts/shells.gd" id="1_vdsjt"]
+[ext_resource type="Texture2D" uid="uid://cwcl7k3n4i2ol" path="res://images/decals_n_effects/shells/shell_12.png" id="2_vdsjt"]
+[ext_resource type="Texture2D" uid="uid://bidms33n2n5x8" path="res://images/decals_n_effects/shells/shell_smol.png" id="3_1hgbd"]
+
+[node name="shells_core" type="Node2D"]
+scale = Vector2(5, 5)
+script = ExtResource("1_vdsjt")
+
+[node name="fmj" type="Sprite2D" parent="."]
+texture = ExtResource("1_ptmjk")
+hframes = 2
+
+[node name="g12" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_vdsjt")
+hframes = 2
+
+[node name="smol" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("3_1hgbd")
+hframes = 2

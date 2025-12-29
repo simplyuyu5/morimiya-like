@@ -4,6 +4,9 @@ extends CharacterBody2D
 @onready var weapon = $weapons
 @onready var ray_pick = $pickup_ray
 @onready var body = $Mc
+@onready var pos = $shell_pos
+var shells = preload("res://scenes/shells.tscn")#.instantiate()
+var shell_look :int = 0
 
 @onready var pew = $ray_long/pew
 @onready var store = $store
@@ -12,12 +15,14 @@ var spread :bool = false
 var weapon_under :bool = false
 var pickup_under :bool = false
 var under_name
+var gui_show:bool = true
 
 var health = 200
 var speed_fin = 300
 
 func _ready() -> void:
 	pew.play("nothing")
+	#preload("res://scenes/shells.tscn")
 
 func _physics_process(_delta: float) -> void:
 	equip_ult()
@@ -26,7 +31,8 @@ func _physics_process(_delta: float) -> void:
 	reload()
 	move()
 	move_anim()
-	gui()
+	if gui_show == true:
+		gui()
 
 	look_at(get_global_mouse_position())
 	move_and_slide()
@@ -128,7 +134,11 @@ func move_anim():
 		body.play("idle")
 
 func shell_eject(shell):
-	pass
+	var shell_inst = shells.instantiate()
+	shell_inst.shell_look = shell
+
+	shell_inst.position = pos.global_position;
+	shell_inst.global_transform = pos.global_transform;
 
 func gun_smoke(style):
 	match style:

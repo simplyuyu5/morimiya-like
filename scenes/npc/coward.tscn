@@ -60,13 +60,14 @@ radius = 105.000755
 
 [node name="coward" type="CharacterBody2D"]
 scale = Vector2(5, 5)
-collision_mask = 17
+collision_mask = 19
 motion_mode = 1
 script = ExtResource("1_jdofe")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1.5, 0)
 shape = SubResource("CapsuleShape2D_u0xbq")
+disabled = true
 metadata/_edit_lock_ = true
 
 [node name="Area2D" type="Area2D" parent="." groups=["living"]]
@@ -112,6 +113,7 @@ position = Vector2(0, -0.2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="panic_area"]
 shape = SubResource("CircleShape2D_w41f0")
+disabled = true
 
 [node name="Timer" type="Timer" parent="."]
 process_callback = 0

@@ -8,7 +8,12 @@ var hp = 100
 
 @export var goal :Node = null
 
+func _ready():
+	skin()
+
 func _physics_process(_delta: float) -> void:
+
+
 
 	if hp <= 1:
 		hp = 0
@@ -24,3 +29,8 @@ func die():
 	$CollisionShape2D2.disabled = true
 	$NavigationAgent2D.target_position = global_position
 	alive.queue_free()
+
+func skin():
+	var i = randi_range(0,3)
+	alive.frame = i
+	dead.frame = i
