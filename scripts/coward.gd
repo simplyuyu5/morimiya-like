@@ -8,7 +8,7 @@ var goal= null
 @onready var body = $Area2D
 @export var state = states_coward.WANDER
 var danger: Area2D
-
+var acceleration = 0.90
 
 #debug
 @onready var state_label = $state_debug
@@ -26,19 +26,18 @@ enum states_coward {
 var speed = 100
 
 func _ready() -> void:
-	
 	states()
-	var nav_point_dir = to_local(agent.get_next_path_position()).normalized()
 	goal = idle_goal
-	#my_time.start()
 	agent.target_position = goal.global_position
-	
+
 func _process(_delta: float) -> void:
 
-	debug()
+	#debug()
 
-	var nav_point_dir = to_local(agent.get_next_path_position()).normalized()
-	velocity = nav_point_dir * (help.hp)
+	var nav_point_dir = (agent.get_next_path_position() - global_position).normalized()
+
+	velocity =velocity.lerp(nav_point_dir * help.hp, acceleration)
+	#velocity = nav_point_dir * (help.hp)
 	help.rotation = velocity.angle()
 	
 	move_and_slide()

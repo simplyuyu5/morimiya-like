@@ -4,7 +4,6 @@ extends CharacterBody2D
 @onready var weapon = $weapons
 @onready var ray_pick = $pickup_ray
 @onready var body = $Mc
-#@onready var time = $Timer
 
 @onready var pew = $ray_long/pew
 @onready var store = $store
@@ -16,36 +15,18 @@ var under_name
 
 var health = 200
 var speed_fin = 300
-#const SPEED = 300.0
 
 func _ready() -> void:
 	pew.play("nothing")
 
 func _physics_process(_delta: float) -> void:
-
-	#if ray.is_colliding():
-		#print("collision ray")
-		#var target = ray.get_collider()
-		#end.global_position = ray.get_collision_point()
-		#if target.is_in_group("living"):
-			#target.hp -= damage
-			#ray.enabled = false
-			
-		#else:
-			#end.global_position = ray.cast_to()
-
-	#if not ray.is_colliding():
-		#print("no collision")
-
 	equip_ult()
 	change()
 	shoot()
-	#recoil_regen()
 	reload()
 	move()
 	move_anim()
 	gui()
-
 
 	look_at(get_global_mouse_position())
 	move_and_slide()
@@ -55,18 +36,16 @@ func shoot():
 	var target = ray.get_collider()
 	if Input.is_action_just_pressed("lmb") and weapon.rounds >= 1:
 		gun_smoke(weapon.style)
+		shell_eject(weapon.shell)
 		weapon.rounds -= weapon.shots
-		
+
 		if ray.is_colliding() and target.is_in_group("wall"):
-			#var tilemap = target
-			#var hit_pos = ray.get_collision_point()
-			print("kys")
 			ray.enabled = false
 		if ray.is_colliding() and target.is_in_group("living"):
 			if randf_range(0,100.0) <= float(weapon.chance_hit):
 				target.hp -=weapon.damage
 			else:
-				print("diee!!")
+				print("miss lol")
 		recoil()
 
 func reload():
@@ -78,11 +57,9 @@ func reload():
 func recoil():
 	
 	spread = true
-	#weapon.chance_hit * 100
-	print(weapon.chance_hit," % ", weapon.recoil," recoil")
+	#print(weapon.chance_hit," % ", weapon.recoil," recoil")
 	weapon.chance_hit -= weapon.recoil
-	#weapon.chance_hit * 0.01
-	print(float(weapon.chance_hit))
+	#print(float(weapon.chance_hit))
 
 	await get_tree().create_timer(3).timeout
 	spread = false
@@ -127,9 +104,9 @@ func equip_ult():
 func equip_weapon():
 	var target = ray_pick.get_collider()
 	if Input.is_action_just_pressed("p"):
-			print(target.name, " target")
+			#print(target.name, " target")
 			weapon.in_hands = target.name
-			print("picked up weapon! ", weapon.in_hands)
+			#print("picked up weapon! ", weapon.in_hands)
 			weapon.weapon_change()
 			target.queue_free()
 			ray_pick.enabled = false
@@ -150,22 +127,32 @@ func move_anim():
 	else:
 		body.play("idle")
 
+func shell_eject(shell):
+	pass
+
 func gun_smoke(style):
-	if style == 0:
-		pew.play("pew_small")
-	elif style == 1:
-		pew.play("pew_medium")
-	elif style == 2:
-		pew.play("pew_big")
+	match style:
+		0:pew.play("pew_small")
+		1:pew.play("pew_medium")
+		2:pew.play("pew_big")
+		5:pew.play("slash")
+	#if style == 0:
+		#pew.play("pew_small")
+	#elif style == 1:
+		#pew.play("pew_medium")
+	#elif style == 2:
+		#pew.play("pew_big") <- yandere dev soul belongs here
 
 @onready var label_rou = $gui/rounds
 @onready var label_mag = $gui/mags
 @onready var label_chance = $gui/chance
+@onready var weapon_icon = $gui/weapon
 
 func gui():
 	label_rou.text = str(weapon.rounds) + " rounds"
 	label_mag.text = str(weapon.mags) + " mags"
 	label_chance.text = str(weapon.chance_hit) +" %"
+	weapon_icon.play(weapon.in_hands)
 #func _on_pick_range_area_entered(area: Area2D):
 	#if area.is_in_group("weapon_pick"):
 		#print(area.name)

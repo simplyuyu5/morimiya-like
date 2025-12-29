@@ -2,13 +2,13 @@ extends Node
 
 @onready var parent = get_parent()
 
-var reload_type = "mag"
+var reload_type = "mag" 
+var shots = 1 #for burst fire?
 var damage = 0
-var rounds_max = 0
-var mags_max = 0
-var shots = 1
-var style = 0
 var recoil = 0
+
+var style = 0 
+var shell = 0
 
 var chance_hit :int = 100
 var chance_max = 100
@@ -17,8 +17,11 @@ var max_angle = 20
 var angle = 0
 var min_angle = -20
 
+var rounds_max = 0
+var mags_max = 0
 var rounds = 0
 var mags = 0
+
 
 
 var primaries = {
@@ -29,7 +32,8 @@ var primaries = {
 		"smags_max":4,
 		"sshots":1,
 		"sstyle":0,
-		"srecoil":3
+		"srecoil":3,
+		"sshell":0,
 	},
 
 	"m14":{
@@ -39,7 +43,8 @@ var primaries = {
 		"smags_max":4,
 		"sshots":1,
 		"sstyle":1,
-		"srecoil":15
+		"srecoil":15,
+		"sshell":0,
 	},
 
 	"saiga":{
@@ -49,7 +54,8 @@ var primaries = {
 		"smags_max":5,
 		"sshots":1,
 		"sstyle":1,
-		"srecoil":14
+		"srecoil":14,
+		"sshell":1,
 	},
 
 	"m500":{
@@ -59,7 +65,8 @@ var primaries = {
 		"smags_max":24,
 		"sshots":1,
 		"sstyle":1,
-		"srecoil":20
+		"srecoil":20,
+		"sshell":1,
 	},
 
 	"type81":{
@@ -69,7 +76,8 @@ var primaries = {
 		"smags_max":3,
 		"sshots":1,
 		"sstyle":1,
-		"srecoil":5
+		"srecoil":5,
+		"sshell":0,
 	},
 }
 
@@ -81,7 +89,8 @@ var secondaries = {
 		"smags_max":2,
 		"sshots":1,
 		"sstyle":0,
-		"srecoil":2
+		"srecoil":2,
+		"sshell":2,
 	},
 
 	"tt":{
@@ -91,15 +100,17 @@ var secondaries = {
 		"smags_max":2,
 		"sshots":1,
 		"sstyle":0,
-		"srecoil":2
+		"srecoil":2,
+		"sshell":2,
 	}
 }
 
 
 
-var current_sec = null
-var current_prim = null
-var in_hands = null
+var current_sec = "null"
+var current_prim = "null"
+var current_melee = "null"
+var in_hands = "null"
 
 func weapon_change():
 	if in_hands != null:
@@ -113,6 +124,7 @@ func weapon_change():
 				shots = primaries[in_hands]["sshots"]
 				style = primaries[in_hands]["sstyle"]
 				recoil = primaries[in_hands]["srecoil"]
+				shell = primaries[in_hands]["sshell"]
 
 				mags = mags_max
 				rounds = rounds_max
@@ -142,6 +154,7 @@ func weapon_change():
 				#print("cant find info")
 	else:
 		print("null")
+		in_hands = "null"
 
 
 func recoil_regen():

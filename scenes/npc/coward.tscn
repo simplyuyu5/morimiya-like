@@ -60,13 +60,13 @@ radius = 105.000755
 
 [node name="coward" type="CharacterBody2D"]
 scale = Vector2(5, 5)
+collision_mask = 17
 motion_mode = 1
 script = ExtResource("1_jdofe")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1.5, 0)
 shape = SubResource("CapsuleShape2D_u0xbq")
-disabled = true
 metadata/_edit_lock_ = true
 
 [node name="Area2D" type="Area2D" parent="." groups=["living"]]
@@ -76,7 +76,6 @@ script = ExtResource("2_2ayc0")
 position = Vector2(-1.5, 0)
 scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("CapsuleShape2D_u0xbq")
-metadata/_edit_lock_ = true
 
 [node name="dead" type="AnimatedSprite2D" parent="Area2D"]
 visible = false
@@ -99,13 +98,13 @@ offset = Vector2(-0.0033444103, -1.4788249)
 path_desired_distance = 10.0
 target_desired_distance = 3.0
 path_max_distance = 200.0
-navigation_layers = 128
-path_postprocessing = 1
+navigation_layers = 129
 simplify_path = true
+simplify_epsilon = 1.0
 avoidance_enabled = true
-neighbor_distance = 200.0
-avoidance_layers = 129
-avoidance_mask = 129
+neighbor_distance = 50.0
+avoidance_layers = 145
+avoidance_mask = 145
 debug_enabled = true
 
 [node name="panic_area" type="Area2D" parent="."]
