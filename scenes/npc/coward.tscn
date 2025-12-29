@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dy50sx76ijfi4"]
+[gd_scene load_steps=16 format=3 uid="uid://dy50sx76ijfi4"]
 
 [ext_resource type="Script" uid="uid://c2me1tlf88evi" path="res://scripts/coward.gd" id="1_jdofe"]
 [ext_resource type="Script" uid="uid://b6f3f5njnsnx6" path="res://scripts/runner.gd" id="2_2ayc0"]
@@ -12,6 +12,10 @@
 [ext_resource type="Texture2D" uid="uid://dmdm8e0fpabe2" path="res://images/living/npc-04.png" id="10_nrcgl"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u0xbq"]
+radius = 2.6
+height = 8.4
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w41f0"]
 radius = 2.9999998
 height = 8.4
 
@@ -65,18 +69,15 @@ motion_mode = 1
 script = ExtResource("1_jdofe")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1.5, 0)
 shape = SubResource("CapsuleShape2D_u0xbq")
-disabled = true
 metadata/_edit_lock_ = true
 
 [node name="Area2D" type="Area2D" parent="." groups=["living"]]
 script = ExtResource("2_2ayc0")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-1.5, 0)
 scale = Vector2(0.99999994, 0.99999994)
-shape = SubResource("CapsuleShape2D_u0xbq")
+shape = SubResource("CapsuleShape2D_w41f0")
 
 [node name="dead" type="AnimatedSprite2D" parent="Area2D"]
 visible = false
@@ -84,10 +85,9 @@ scale = Vector2(0.99999976, 0.99999976)
 sprite_frames = SubResource("SpriteFrames_ntc4i")
 animation = &"dead"
 frame = 2
-metadata/_edit_lock_ = true
 
 [node name="alive" type="AnimatedSprite2D" parent="Area2D"]
-position = Vector2(-1.4788245, 0.003344345)
+position = Vector2(-1.1920929e-07, -4.656613e-10)
 rotation = 1.5707964
 scale = Vector2(0.99999976, 0.99999976)
 sprite_frames = SubResource("SpriteFrames_gthg3")
@@ -113,7 +113,7 @@ position = Vector2(0, -0.2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="panic_area"]
 shape = SubResource("CircleShape2D_w41f0")
-disabled = true
+metadata/_edit_lock_ = true
 
 [node name="Timer" type="Timer" parent="."]
 process_callback = 0

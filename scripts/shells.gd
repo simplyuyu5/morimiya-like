@@ -10,8 +10,8 @@ var shell_look :int = 0
 func _ready() -> void:
 	looks()
 
-func _process(delta: float) -> void:
-	looks()
+#func _process(_delta: float) -> void:
+	#looks()
 
 func looks():
 	match shell_look:

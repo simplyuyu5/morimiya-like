@@ -1,6 +1,7 @@
 extends CharacterBody2D
 @onready var agent = $Area2D/NavigationAgent2D
 var goal= null
+@onready var that_guy_who_i_hate = $CollisionShape2D
 @onready var help = $Area2D
 @onready var my_time = $Timer
 @onready var wander_goal = $wander
@@ -39,6 +40,7 @@ func _process(_delta: float) -> void:
 	velocity =velocity.lerp(nav_point_dir * help.hp, acceleration)
 	#velocity = nav_point_dir * (help.hp)
 	help.rotation = velocity.angle()
+	that_guy_who_i_hate.rotation = velocity.angle() #npc rotates where he goes
 	
 	move_and_slide()
 

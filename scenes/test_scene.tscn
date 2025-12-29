@@ -77,25 +77,10 @@ collision_mask = 3
 [node name="npc_manager" type="Node" parent="."]
 
 [node name="coward" parent="npc_manager" instance=ExtResource("7_s36qc")]
-position = Vector2(-548.00006, -49.999985)
+position = Vector2(-34.00006, -264)
 
 [node name="coward2" parent="npc_manager" instance=ExtResource("7_s36qc")]
-position = Vector2(747, 627)
-
-[node name="coward3" parent="npc_manager" instance=ExtResource("7_s36qc")]
-position = Vector2(419.00006, -333.0001)
-
-[node name="coward4" parent="npc_manager" instance=ExtResource("7_s36qc")]
-position = Vector2(-640, 610)
-
-[node name="coward5" parent="npc_manager" instance=ExtResource("7_s36qc")]
-position = Vector2(-86, 735)
-
-[node name="coward6" parent="npc_manager" instance=ExtResource("7_s36qc")]
-position = Vector2(1388, 492)
-
-[node name="coward7" parent="npc_manager" instance=ExtResource("7_s36qc")]
-position = Vector2(-629, -207)
+position = Vector2(507.00006, 816.00006)
 
 [node name="pickup_ar" parent="." instance=ExtResource("2_7ddre")]
 position = Vector2(312, -61)
