@@ -14,11 +14,9 @@ texture = ExtResource("1_ptmjk")
 hframes = 2
 
 [node name="g12" type="Sprite2D" parent="."]
-visible = false
 texture = ExtResource("2_vdsjt")
 hframes = 2
 
 [node name="smol" type="Sprite2D" parent="."]
-visible = false
 texture = ExtResource("3_1hgbd")
 hframes = 2

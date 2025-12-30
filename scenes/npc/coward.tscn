@@ -97,9 +97,8 @@ offset = Vector2(-0.0033444103, -1.4788249)
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="Area2D"]
 path_desired_distance = 10.0
-target_desired_distance = 3.0
+target_desired_distance = 7.0
 path_max_distance = 200.0
-navigation_layers = 129
 simplify_path = true
 simplify_epsilon = 1.0
 avoidance_enabled = true

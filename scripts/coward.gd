@@ -33,7 +33,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 
-	#debug()
+	debug()
 
 	var nav_point_dir = (agent.get_next_path_position() - global_position).normalized()
 
@@ -52,19 +52,25 @@ func walk():
 	pass
 
 func states():
-#idea :D:
-	#print(state)
-# have Goal node, in WANDER state put it somewhere randomly instead of picking goal as some coordinate.!!!!
-	if state == states_coward.CALM:
-		var i = randi_range(2,10)
-		print(i)
-		await get_tree().create_timer(i).timeout
-		state = states_coward.WANDER
-		states()
-	if state == states_coward.WANDER:
-		change_goal()
-	if state == states_coward.PANIC:
-		goal = danger
+	match state:
+
+		states_coward.CALM:
+			var i = randi_range(2,10)
+			print(i)
+			await get_tree().create_timer(i).timeout
+			state = states_coward.WANDER
+			states()
+
+		states_coward.WANDER:
+			change_goal_rand()
+			await get_tree().create_timer(3).timeout
+			if agent.distance_to_target() <= 10:
+				change_goal_rand()
+
+		states_coward.PANIC:
+			wander_goal.position -= self.position.direction_to(danger.position) * help.hp
+			goal = wander_goal
+
 		#var i = randi_range(0,1)
 		#print(i," chance")
 		#if i == 1:
@@ -72,17 +78,9 @@ func states():
 		#else:
 			#state = states_coward.CALM
 
-func change_goal():
+func change_goal_rand():
 	wander_goal.position = Vector2i(randi_range(-300,300),randi_range(-200,200)) + Vector2i(position)
 	goal = wander_goal
-
-
-func looks():
-	pass
-	#look_at(goal.position)
-	#var nav_point_dir = to_global(agent.get_next_path_position()).normalized()
-	#velocity = nav_point_dir * (help.hp)
-
 
 func _on_timer_timeout():
 	if agent.target_position != goal.global_position:
@@ -101,13 +99,17 @@ func _on_panic_area_area_entered(area: Area2D) -> void:
 		print(area.name, " danger spotted")
 		state = states_coward.PANIC
 		danger = area
+		states()
+	else: 
+		state = states_coward.WANDER
+		
 
 
 func _on_panic_area_area_exited(area: Area2D) -> void:
 	if area.is_in_group("danger"):
 		print("phew")
 		state = states_coward.WANDER
-		change_goal()
+		change_goal_rand()
 
 func death():
 	$panic_area/CollisionShape2D.disabled = true

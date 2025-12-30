@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://bjc3oepe17a24"]
+[gd_scene load_steps=9 format=3 uid="uid://bjc3oepe17a24"]
 
 [ext_resource type="Script" uid="uid://d0qgfvvijomj8" path="res://scripts/store.gd" id="1_jmp1n"]
 [ext_resource type="StyleBox" uid="uid://ckr0q3ajn27kr" path="res://style_temp.tres" id="2_atuvt"]
 [ext_resource type="Texture2D" uid="uid://dq47xwlg3pwa4" path="res://images/weapons_portraits/ar_shop.png" id="3_codmc"]
+[ext_resource type="Texture2D" uid="uid://brmdkm2ix0opo" path="res://images/weapons_portraits/g17_shop.png" id="4_5bups"]
+[ext_resource type="Texture2D" uid="uid://dlfu1udpvweav" path="res://images/weapons_portraits/m14_shop.png" id="5_vb4ln"]
+[ext_resource type="Texture2D" uid="uid://c4mhgvel1egqo" path="res://images/weapons_portraits/nothing.png" id="6_tmp5q"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4r5pv"]
 bg_color = Color(0.48962224, 0.48962224, 0.48962218, 1)
@@ -12,6 +15,41 @@ border_width_right = 10
 border_width_bottom = 10
 border_color = Color(0, 0, 0, 1)
 anti_aliasing = false
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_phafb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_codmc")
+}],
+"loop": true,
+"name": &"ar15",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_5bups")
+}],
+"loop": true,
+"name": &"g17",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_vb4ln")
+}],
+"loop": true,
+"name": &"m14",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_tmp5q")
+}],
+"loop": true,
+"name": &"null",
+"speed": 5.0
+}]
 
 [node name="store" type="CanvasLayer"]
 script = ExtResource("1_jmp1n")
@@ -26,6 +64,26 @@ size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_4r5pv")
 metadata/_edit_use_anchors_ = true
+
+[node name="buy prim" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 784.0
+offset_top = 14.0
+offset_right = 1107.0
+offset_bottom = 64.0
+scale = Vector2(0.7, 0.7)
+theme_override_font_sizes/font_size = 30
+text = "buy primary weapons"
+
+[node name="equip prim" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 764.99994
+offset_top = 55.999996
+offset_right = 1116.0
+offset_bottom = 106.0
+scale = Vector2(0.7, 0.7)
+theme_override_font_sizes/font_size = 30
+text = "equip primary weapons"
 
 [node name="Button" type="Button" parent="Panel"]
 layout_mode = 1
@@ -76,7 +134,7 @@ offset_top = 177.0
 offset_right = -45.0
 offset_bottom = 217.0
 
-[node name="Panel" type="Panel" parent="Panel/weapons_shop"]
+[node name="prim_buy" type="Panel" parent="Panel/weapons_shop"]
 layout_mode = 0
 offset_left = 360.0
 offset_top = -177.0
@@ -84,16 +142,20 @@ offset_right = 1237.0
 offset_bottom = 471.0
 theme_override_styles/panel = ExtResource("2_atuvt")
 
-[node name="ItemList_gunshop" type="ItemList" parent="Panel/weapons_shop/Panel"]
+[node name="itemlist_prim" type="ItemList" parent="Panel/weapons_shop/prim_buy"]
 layout_mode = 0
 offset_left = -265.0
 offset_top = 10.0
 offset_bottom = 638.0
 theme_override_font_sizes/font_size = 30
-item_count = 1
-item_0/text = "ar 15"
+item_count = 5
+item_0/text = "ar15"
+item_1/text = "m14"
+item_2/text = "saiga"
+item_3/text = "m500"
+item_4/text = "type81"
 
-[node name="subButton2" type="Button" parent="Panel/weapons_shop/Panel"]
+[node name="subButton2" type="Button" parent="Panel/weapons_shop/prim_buy"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -110,17 +172,70 @@ autowrap_mode = 2
 autowrap_trim_flags = 0
 icon_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="Panel/weapons_shop/Panel"]
-texture_filter = 1
-layout_mode = 0
-offset_left = 17.0
-offset_top = 16.0
-offset_right = 322.0
-offset_bottom = 118.0
-texture = ExtResource("3_codmc")
-stretch_mode = 4
+[node name="weapon" type="AnimatedSprite2D" parent="Panel/weapons_shop/prim_buy"]
+position = Vector2(241, 88)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_phafb")
+animation = &"null"
 
+[node name="damage" type="Label" parent="Panel/weapons_shop/prim_buy"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 169.0
+offset_right = 112.0
+offset_bottom = 192.0
+theme_override_font_sizes/font_size = 25
+text = "damage - 50"
+
+[node name="roundsmax" type="Label" parent="Panel/weapons_shop/prim_buy"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 203.0
+offset_right = 172.0
+offset_bottom = 238.0
+theme_override_font_sizes/font_size = 25
+text = "mag size - 30"
+
+[node name="mags" type="Label" parent="Panel/weapons_shop/prim_buy"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 236.0
+offset_right = 118.0
+offset_bottom = 271.0
+theme_override_font_sizes/font_size = 25
+text = "mags - 4"
+
+[node name="reloadtype" type="Label" parent="Panel/weapons_shop/prim_buy"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 266.0
+offset_right = 242.0
+offset_bottom = 301.0
+theme_override_font_sizes/font_size = 25
+text = "reload type - mags"
+
+[node name="recoil" type="Label" parent="Panel/weapons_shop/prim_buy"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 300.0
+offset_right = 122.0
+offset_bottom = 335.0
+theme_override_font_sizes/font_size = 25
+text = "recoil - 3"
+
+[node name="description" type="Label" parent="Panel/weapons_shop/prim_buy"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 363.0
+offset_right = 867.0
+offset_bottom = 436.0
+theme_override_font_sizes/font_size = 25
+text = "ar 15 - popular base for a lot of weapons, widely spread among 
+civilians of usa"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="Panel/buy prim" to="." method="_on_buy_prim_pressed"]
 [connection signal="pressed" from="Panel/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Panel/skills_shop/subButton" to="." method="_on_sub_button_pressed"]
-[connection signal="item_selected" from="Panel/weapons_shop/Panel/ItemList_gunshop" to="." method="_on_item_list_item_selected"]
-[connection signal="pressed" from="Panel/weapons_shop/Panel/subButton2" to="." method="_on_sub_button_pressed"]
+[connection signal="item_selected" from="Panel/weapons_shop/prim_buy/itemlist_prim" to="." method="_on_itemlist_prim_item_selected"]
+[connection signal="pressed" from="Panel/weapons_shop/prim_buy/subButton2" to="." method="_on_sub_button_pressed"]
