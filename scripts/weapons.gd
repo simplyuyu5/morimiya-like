@@ -7,6 +7,8 @@ var shots = 1 #for burst fire?
 var damage = 0
 var recoil = 0
 var description :String = ""
+var reload_time = 1 #time needed to reload in s 
+var delay = 0 #delay between shots #P.S. morimiya's BS3, KS25 and many other shotguns are reason for adding this
 
 var style = 0 
 var shell = 0
@@ -31,11 +33,13 @@ var primaries = {
 		"sdamage":50,
 		"srounds_max":30,
 		"smags_max":4,
+		"sdelay":0,
+		"rel_time":1.5,
 		"sshots":1,
 		"sstyle":0,
-		"srecoil":3,
+		"srecoil":6,
 		"sshell":0,
-		"sdesc":"ar 15 - popular base for a lot of weapons, lightweight \n and semi-automatic rifle",
+		"sdesc":"Semi-automatic rifle with fine recoil and decent damage.",
 		"sbought":false
 	},
 
@@ -44,12 +48,14 @@ var primaries = {
 		"sdamage":90,
 		"srounds_max":20,
 		"smags_max":4,
+		"sdelay":0,
+		"rel_time":4,
 		"sshots":1,
 		"sstyle":1,
-		"srecoil":15,
+		"srecoil":11,
 		"sshell":0,
-		"sdesc":"description placeholder",
-		"sbought":false
+		"sdesc":"Reliable semi-automatic rifle with high damage and medium recoil",
+		"sbought":true
 	},
 
 	"saiga":{
@@ -57,11 +63,13 @@ var primaries = {
 		"sdamage":80,
 		"srounds_max":5,
 		"smags_max":5,
+		"sdelay":0.4,
+		"rel_time":2,
 		"sshots":1,
 		"sstyle":1,
-		"srecoil":14,
+		"srecoil":18,
 		"sshell":1,
-		"sdesc":"description placeholder",
+		"sdesc":"Magazine fed shotgun, low capacity but faster to reload",
 		"sbought":false
 	},
 
@@ -70,9 +78,11 @@ var primaries = {
 		"sdamage":110,
 		"srounds_max":8,
 		"smags_max":24,
+		"sdelay":0.7,
+		"rel_time":1,
 		"sshots":1,
 		"sstyle":1,
-		"srecoil":20,
+		"srecoil":22,
 		"sshell":1,
 		"sdesc":"description placeholder",
 		"sbought":false
@@ -83,6 +93,8 @@ var primaries = {
 		"sdamage":45,
 		"srounds_max":40,
 		"smags_max":3,
+		"sdelay":0,
+		"rel_time":3,
 		"sshots":1,
 		"sstyle":1,
 		"srecoil":5,
@@ -98,12 +110,15 @@ var secondaries = {
 		"sdamage":10,
 		"srounds_max":17,
 		"smags_max":2,
+		"sdelay":0,
+		"rel_time":1,
 		"sshots":1,
 		"sstyle":0,
 		"srecoil":2,
 		"sshell":2,
 		"sdesc":"description placeholder",
-		"sbought":false
+		"sbought":true,
+		"cost":10
 	},
 
 	"tt":{
@@ -111,6 +126,8 @@ var secondaries = {
 		"sdamage":25,
 		"srounds_max":8,
 		"smags_max":2,
+		"sdelay":0,
+		"rel_time":2,
 		"sshots":1,
 		"sstyle":0,
 		"srecoil":2,
@@ -120,7 +137,7 @@ var secondaries = {
 	}
 }
 
-
+#ADD GRENADES !!!!!!!!!
 
 var current_sec = "null"
 var current_prim = "null"
@@ -142,6 +159,8 @@ func weapon_change():
 				shell = primaries[in_hands]["sshell"]
 				description = primaries[in_hands]["sdesc"]
 				reload_type = primaries[in_hands]["sreload_type"]
+				reload_time = primaries[in_hands]["rel_time"]
+				delay = primaries[in_hands]["sdelay"]
 
 				mags = mags_max
 				rounds = rounds_max

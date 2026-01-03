@@ -7,6 +7,8 @@ extends CharacterBody2D
 @onready var pos = $shell_pos
 var shells = preload("res://scenes/shells.tscn")#.instantiate()
 var shell_look :int = 0
+var can_shoot := true
+var reloading := true
 
 @onready var pew = $ray_long/pew
 @onready var store = $store
@@ -24,9 +26,13 @@ func _ready() -> void:
 	pew.play("nothing")
 	#preload("res://scenes/shells.tscn")
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 		move()
 		move_anim()
+
+func _input(_event: InputEvent) -> void:
+	if gui_show == true:
+		gui()
 
 func _physics_process(_delta: float) -> void:
 	equip_ult()
@@ -34,19 +40,22 @@ func _physics_process(_delta: float) -> void:
 	shoot()
 	reload()
 
-	if gui_show == true:
-		gui()
-
 	look_at(get_global_mouse_position())
 	move_and_slide()
 
 func shoot():
 	ray.enabled = true
 	var target = ray.get_collider()
-	if Input.is_action_just_pressed("lmb") and weapon.rounds >= 1:
+	if Input.is_action_just_pressed("lmb") and weapon.rounds >= 1 and can_shoot == true:
 		gun_smoke(weapon.style)
 		shell_eject(weapon.shell)
 		weapon.rounds -= weapon.shots
+		can_shoot = false
+		await get_tree().create_timer(weapon.delay).timeout
+		print("u can pew")
+		can_shoot = true
+
+
 
 		if ray.is_colliding() and target.is_in_group("wall"):
 			ray.enabled = false
@@ -59,6 +68,9 @@ func shoot():
 
 func reload():
 	if Input.is_action_just_pressed("r"):
+		reloading = true
+		await get_tree().create_timer(weapon.reload_time).timeout
+		reloading = false
 		if weapon.mags > 0:
 			weapon.mags -=1
 			weapon.rounds = weapon.rounds_max

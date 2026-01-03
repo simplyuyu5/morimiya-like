@@ -2,13 +2,7 @@ extends Node
 @onready var parent = get_parent()
 
 var open :bool = false
-
-func populate_shop(prim):
-	var list = $Panel/weapons_shop/prim_buy/itemlist_prim
-	list.clear()
-	for i in prim:
-		if i in prim and prim[i]["sbought"] == false:
-			list.add_item(i)
+var inder = 0
 
 
 func init():
@@ -23,6 +17,17 @@ func init():
 		#$Panel.hide()
 
 
+func populate_shop(prim):
+	var list = $Panel/weapons_shop/prim_buy/itemlist_prim
+	list.clear()
+	for i in prim:
+		if i in prim and prim[i]["sbought"] == false:
+			list.add_item(i)
+
+func populate_anim():
+	pass
+	#instead of brainfucking self and making THAT ill rather put index into global variable :/
+
 func _on_button_pressed() -> void:
 		open = false
 		$Panel.hide()
@@ -33,10 +38,12 @@ func _on_sub_button_pressed() -> void:
 		$Panel/weapons_shop.hide()
 
 
+
 func _on_itemlist_prim_item_selected(index: int) -> void:
 	var prim_icon = $Panel/weapons_shop/prim_buy/weapon
 	var list = $Panel/weapons_shop/prim_buy/itemlist_prim
 	var i:String = list.get_item_text(index)
+	inder = index #and i already did that >:D
 	var weapons = $"/root/Node2D/CharacterBody2D/weapons"
 	var prim = weapons.primaries
 	prim_icon.play(i)
@@ -52,7 +59,6 @@ func _on_itemlist_prim_item_selected(index: int) -> void:
 #omagah progress barsss
 	$Panel/weapons_shop/prim_buy/damage/prog.value = prim[i]["sdamage"]
 	$Panel/weapons_shop/prim_buy/roundsmax/prog.value =prim[i]["srounds_max"]
-	$Panel/weapons_shop/prim_buy/mags/prog.value =prim[i]["smags_max"]
 	$Panel/weapons_shop/prim_buy/recoil/prog.value =prim[i]["srecoil"]
 
 	#var i:String = prim[index] 
@@ -67,8 +73,8 @@ func _on_buy_prim_pressed() -> void:
 
 func _on_buy_button_shop_pressed() -> void:
 	var i = $Panel/weapons_shop/prim_buy/weapon.animation
-	print("meow")
-	print($"/root/Node2D/CharacterBody2D/weapons".primaries[i], " meow")
 	if i in $"/root/Node2D/CharacterBody2D/weapons".primaries:
 		$"/root/Node2D/CharacterBody2D/weapons".primaries[i]["sbought"] = true
+	else:
+		pass
 	populate_shop($"/root/Node2D/CharacterBody2D/weapons".primaries)
