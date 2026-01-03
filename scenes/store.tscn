@@ -150,12 +150,6 @@ offset_left = -265.0
 offset_top = 10.0
 offset_bottom = 638.0
 theme_override_font_sizes/font_size = 30
-item_count = 5
-item_0/text = "ar15"
-item_1/text = "m14"
-item_2/text = "saiga"
-item_3/text = "m500"
-item_4/text = "type81"
 
 [node name="subButton2" type="Button" parent="Panel/weapons_shop/prim_buy"]
 layout_mode = 1
@@ -173,6 +167,32 @@ text = "x"
 autowrap_mode = 2
 autowrap_trim_flags = 0
 icon_alignment = 1
+
+[node name="buy_button_shop" type="Button" parent="Panel/weapons_shop/prim_buy"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -384.0
+offset_top = 16.0
+offset_right = -213.33325
+offset_bottom = 80.0
+grow_horizontal = 0
+scale = Vector2(0.75, 0.75)
+theme_override_font_sizes/font_size = 30
+text = "buy"
+autowrap_mode = 2
+autowrap_trim_flags = 0
+icon_alignment = 1
+
+[node name="cost" type="Label" parent="Panel/weapons_shop/prim_buy"]
+layout_mode = 0
+offset_left = 477.0
+offset_top = 88.0
+offset_right = 637.0
+offset_bottom = 123.0
+theme_override_font_sizes/font_size = 25
+text = "1000 KP"
 
 [node name="weapon" type="AnimatedSprite2D" parent="Panel/weapons_shop/prim_buy"]
 position = Vector2(241, 88)
@@ -328,3 +348,4 @@ color = Color(0, 0, 0, 0.44705883)
 [connection signal="pressed" from="Panel/skills_shop/subButton" to="." method="_on_sub_button_pressed"]
 [connection signal="item_selected" from="Panel/weapons_shop/prim_buy/itemlist_prim" to="." method="_on_itemlist_prim_item_selected"]
 [connection signal="pressed" from="Panel/weapons_shop/prim_buy/subButton2" to="." method="_on_sub_button_pressed"]
+[connection signal="pressed" from="Panel/weapons_shop/prim_buy/buy_button_shop" to="." method="_on_buy_button_shop_pressed"]

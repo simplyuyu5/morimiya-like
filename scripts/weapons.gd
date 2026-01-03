@@ -35,7 +35,8 @@ var primaries = {
 		"sstyle":0,
 		"srecoil":3,
 		"sshell":0,
-		"sdesc":"ar 15 - popular base for a lot of weapons, lightweight \n and semi-automatic rifle"
+		"sdesc":"ar 15 - popular base for a lot of weapons, lightweight \n and semi-automatic rifle",
+		"sbought":false
 	},
 
 	"m14":{
@@ -47,7 +48,8 @@ var primaries = {
 		"sstyle":1,
 		"srecoil":15,
 		"sshell":0,
-		"sdesc":"description placeholder"
+		"sdesc":"description placeholder",
+		"sbought":false
 	},
 
 	"saiga":{
@@ -59,7 +61,8 @@ var primaries = {
 		"sstyle":1,
 		"srecoil":14,
 		"sshell":1,
-		"sdesc":"description placeholder"
+		"sdesc":"description placeholder",
+		"sbought":false
 	},
 
 	"m500":{
@@ -71,7 +74,8 @@ var primaries = {
 		"sstyle":1,
 		"srecoil":20,
 		"sshell":1,
-		"sdesc":"description placeholder"
+		"sdesc":"description placeholder",
+		"sbought":false
 	},
 
 	"type81":{
@@ -83,7 +87,8 @@ var primaries = {
 		"sstyle":1,
 		"srecoil":5,
 		"sshell":0,
-		"sdesc":"description placeholder"
+		"sdesc":"description placeholder",
+		"sbought":false
 	},
 }
 
@@ -97,7 +102,8 @@ var secondaries = {
 		"sstyle":0,
 		"srecoil":2,
 		"sshell":2,
-		"sdesc":"description placeholder"
+		"sdesc":"description placeholder",
+		"sbought":false
 	},
 
 	"tt":{
@@ -109,7 +115,8 @@ var secondaries = {
 		"sstyle":0,
 		"srecoil":2,
 		"sshell":2,
-		"sdesc":"description placeholder"
+		"sdesc":"description placeholder",
+		"sbought":false
 	}
 }
 

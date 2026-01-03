@@ -3,6 +3,13 @@ extends Node
 
 var open :bool = false
 
+func populate_shop(prim):
+	var list = $Panel/weapons_shop/prim_buy/itemlist_prim
+	list.clear()
+	for i in prim:
+		if i in prim and prim[i]["sbought"] == false:
+			list.add_item(i)
+
 
 func init():
 	if Input.is_action_just_pressed("p") and open == false:
@@ -10,6 +17,7 @@ func init():
 		open = true
 		Input.mouse_mode =Input.MOUSE_MODE_VISIBLE
 		$Panel.show()
+		populate_shop($"/root/Node2D/CharacterBody2D/weapons".primaries)
 	#elif Input.is_action_just_pressed("p") and open == true: 
 		#open = false
 		#$Panel.hide()
@@ -55,3 +63,12 @@ func _on_buy_prim_pressed() -> void:
 	$Panel/weapons_shop.show()
 	$Panel/weapons_shop/prim_buy.show()
 	$Panel/skills_shop.hide()
+
+
+func _on_buy_button_shop_pressed() -> void:
+	var i = $Panel/weapons_shop/prim_buy/weapon.animation
+	print("meow")
+	print($"/root/Node2D/CharacterBody2D/weapons".primaries[i], " meow")
+	if i in $"/root/Node2D/CharacterBody2D/weapons".primaries:
+		$"/root/Node2D/CharacterBody2D/weapons".primaries[i]["sbought"] = true
+	populate_shop($"/root/Node2D/CharacterBody2D/weapons".primaries)
