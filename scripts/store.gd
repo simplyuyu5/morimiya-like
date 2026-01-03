@@ -4,6 +4,12 @@ extends Node
 var open :bool = false
 var inder = 0
 
+@onready var prim_icon = $Panel/weapons_shop/prim_buy/weapon
+@onready var list = $Panel/weapons_shop/prim_buy/itemlist_prim
+@onready var weapons = $"/root/Node2D/CharacterBody2D/weapons"
+@onready var prim = weapons.primaries
+
+
 
 func init():
 	if Input.is_action_just_pressed("p") and open == false:
@@ -11,22 +17,18 @@ func init():
 		open = true
 		Input.mouse_mode =Input.MOUSE_MODE_VISIBLE
 		$Panel.show()
-		populate_shop($"/root/Node2D/CharacterBody2D/weapons".primaries)
+		populate_shop(prim)
 	#elif Input.is_action_just_pressed("p") and open == true: 
 		#open = false
 		#$Panel.hide()
 
 
 func populate_shop(prim):
-	var list = $Panel/weapons_shop/prim_buy/itemlist_prim
 	list.clear()
 	for i in prim:
-		if i in prim and prim[i]["sbought"] == false:
+		if i in prim and prim[i]["sbought"] == false and prim[i]["cost"] is int:
 			list.add_item(i)
 
-func populate_anim():
-	pass
-	#instead of brainfucking self and making THAT ill rather put index into global variable :/
 
 func _on_button_pressed() -> void:
 		open = false
@@ -40,12 +42,8 @@ func _on_sub_button_pressed() -> void:
 
 
 func _on_itemlist_prim_item_selected(index: int) -> void:
-	var prim_icon = $Panel/weapons_shop/prim_buy/weapon
-	var list = $Panel/weapons_shop/prim_buy/itemlist_prim
 	var i:String = list.get_item_text(index)
-	inder = index #and i already did that >:D
-	var weapons = $"/root/Node2D/CharacterBody2D/weapons"
-	var prim = weapons.primaries
+	inder = index
 	prim_icon.play(i)
 
 	#text and descr :c
@@ -56,25 +54,22 @@ func _on_itemlist_prim_item_selected(index: int) -> void:
 	$Panel/weapons_shop/prim_buy/recoil.text = str("recoil - ", prim[i]["srecoil"])
 	$Panel/weapons_shop/prim_buy/description.text = str(prim[i]["sdesc"])
 
-#omagah progress barsss
+	#omagah progress barsss
 	$Panel/weapons_shop/prim_buy/damage/prog.value = prim[i]["sdamage"]
 	$Panel/weapons_shop/prim_buy/roundsmax/prog.value =prim[i]["srounds_max"]
 	$Panel/weapons_shop/prim_buy/recoil/prog.value =prim[i]["srecoil"]
 
-	#var i:String = prim[index] 
-	#print(i)
 
-
-func _on_buy_prim_pressed() -> void:
+func _on_buy_prim_pressed():
 	$Panel/weapons_shop.show()
 	$Panel/weapons_shop/prim_buy.show()
 	$Panel/skills_shop.hide()
 
 
-func _on_buy_button_shop_pressed() -> void:
-	var i = $Panel/weapons_shop/prim_buy/weapon.animation
-	if i in $"/root/Node2D/CharacterBody2D/weapons".primaries:
-		$"/root/Node2D/CharacterBody2D/weapons".primaries[i]["sbought"] = true
+func _on_buy_button_shop_pressed():
+	var i:String = list.get_item_text(inder)
+	if i in prim:
+		prim[i]["sbought"] = true
 	else:
 		pass
-	populate_shop($"/root/Node2D/CharacterBody2D/weapons".primaries)
+	populate_shop(prim)

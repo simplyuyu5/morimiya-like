@@ -2,7 +2,7 @@
 
 [ext_resource type="TileSet" uid="uid://c23nv05j5yn67" path="res://tile_map_base.tres" id="1_s36qc"]
 [ext_resource type="TileSet" uid="uid://cdcappb5xnoap" path="res://tile_map_walls.tres" id="2_6qxox"]
-[ext_resource type="PackedScene" uid="uid://drv1wy547paas" path="res://scenes/pickups/ar15.tscn" id="2_7ddre"]
+[ext_resource type="PackedScene" uid="uid://drv1wy547paas" path="res://scenes/pickups/xm15.tscn" id="2_7ddre"]
 [ext_resource type="PackedScene" uid="uid://blhcllsye5ckw" path="res://scenes/player.tscn" id="2_ia1lp"]
 [ext_resource type="PackedScene" uid="uid://db2nddnxop73g" path="res://scenes/npc/dummy.tscn" id="3_nd71p"]
 [ext_resource type="PackedScene" uid="uid://dy50sx76ijfi4" path="res://scenes/npc/coward.tscn" id="7_s36qc"]

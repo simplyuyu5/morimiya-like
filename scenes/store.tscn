@@ -22,14 +22,6 @@ anti_aliasing = false
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_codmc")
-}],
-"loop": true,
-"name": &"ar15",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": ExtResource("4_5bups")
 }],
 "loop": true,
@@ -50,6 +42,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"null",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_codmc")
+}],
+"loop": true,
+"name": &"xm15",
 "speed": 5.0
 }]
 
@@ -199,7 +199,7 @@ text = "1000 KP"
 position = Vector2(241, 88)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_phafb")
-animation = &"null"
+animation = &"m14"
 
 [node name="damage" type="Label" parent="Panel/weapons_shop/prim_buy"]
 layout_mode = 0

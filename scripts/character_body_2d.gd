@@ -107,13 +107,18 @@ func move():
 		velocity.y = move_toward(velocity.y, 0, speed_fin)
 
 func change():
-	if Input.is_action_just_pressed("q") and weapon.current != null:
-		if weapon.in_hands == weapon.current_prim:
-			weapon.in_hands = weapon.current_sec
-			weapon.weapon_change()
-		else:
-			weapon.in_hands = weapon.current_prim
-			weapon.weapon_change()
+	var i:String
+	if Input.is_action_just_pressed("1"):
+		weapon.in_hands = weapon.current_prim
+		weapon.weapon_change(1)
+	if Input.is_action_just_pressed("2"):
+		weapon.in_hands = weapon.current_sec
+		weapon.weapon_change(2)
+	if Input.is_action_just_pressed("3"):
+		weapon.in_hands = weapon.current_melee
+		weapon.weapon_change(3)
+#i tried to use match but idk how to do it so die idc
+
 
 func equip_ult():
 	var target = ray_pick.get_collider()
@@ -161,12 +166,6 @@ func gun_smoke(style):
 		1:pew.play("pew_medium")
 		2:pew.play("pew_big")
 		5:pew.play("slash")
-	#if style == 0:
-		#pew.play("pew_small")
-	#elif style == 1:
-		#pew.play("pew_medium")
-	#elif style == 2:
-		#pew.play("pew_big") <- yandere dev soul belongs here
 
 @onready var label_rou = $gui/rounds
 @onready var label_mag = $gui/mags

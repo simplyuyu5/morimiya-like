@@ -26,6 +26,16 @@
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_31cv2"]
 animations = [{
+"frames": [],
+"loop": true,
+"name": &"IDLE",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"WALK",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_fulsm")
@@ -117,14 +127,6 @@ height = 10.0
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("18_60mlk")
-}],
-"loop": true,
-"name": &"ar15",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": ExtResource("19_4ni07")
 }],
 "loop": true,
@@ -146,6 +148,14 @@ animations = [{
 "loop": true,
 "name": &"null",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_60mlk")
+}],
+"loop": true,
+"name": &"xm15",
+"speed": 5.0
 }]
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
@@ -159,7 +169,7 @@ position = Vector2(-2.0833726, -0.018236637)
 rotation = 1.5707964
 scale = Vector2(0.99999994, 0.99999994)
 sprite_frames = SubResource("SpriteFrames_31cv2")
-animation = &"walk"
+animation = &"idle"
 offset = Vector2(0.018236518, -2.0833726)
 metadata/_edit_lock_ = true
 
@@ -247,7 +257,7 @@ text = "mags"
 position = Vector2(130, 580)
 scale = Vector2(1.6, 1.6)
 sprite_frames = SubResource("SpriteFrames_i4ail")
-animation = &"ar15"
+animation = &"xm15"
 
 [node name="store" parent="." instance=ExtResource("18_4r5pv")]
 
