@@ -6,6 +6,7 @@ var reload_type = "mag"
 var shots = 1 #for burst fire?
 var damage = 0
 var recoil = 0
+var description :String = ""
 
 var style = 0 
 var shell = 0
@@ -34,6 +35,7 @@ var primaries = {
 		"sstyle":0,
 		"srecoil":3,
 		"sshell":0,
+		"sdesc":"ar 15 - popular base for a lot of weapons, lightweight \n and semi-automatic rifle"
 	},
 
 	"m14":{
@@ -45,6 +47,7 @@ var primaries = {
 		"sstyle":1,
 		"srecoil":15,
 		"sshell":0,
+		"sdesc":"description placeholder"
 	},
 
 	"saiga":{
@@ -56,6 +59,7 @@ var primaries = {
 		"sstyle":1,
 		"srecoil":14,
 		"sshell":1,
+		"sdesc":"description placeholder"
 	},
 
 	"m500":{
@@ -67,6 +71,7 @@ var primaries = {
 		"sstyle":1,
 		"srecoil":20,
 		"sshell":1,
+		"sdesc":"description placeholder"
 	},
 
 	"type81":{
@@ -78,6 +83,7 @@ var primaries = {
 		"sstyle":1,
 		"srecoil":5,
 		"sshell":0,
+		"sdesc":"description placeholder"
 	},
 }
 
@@ -91,6 +97,7 @@ var secondaries = {
 		"sstyle":0,
 		"srecoil":2,
 		"sshell":2,
+		"sdesc":"description placeholder"
 	},
 
 	"tt":{
@@ -102,6 +109,7 @@ var secondaries = {
 		"sstyle":0,
 		"srecoil":2,
 		"sshell":2,
+		"sdesc":"description placeholder"
 	}
 }
 
@@ -125,6 +133,8 @@ func weapon_change():
 				style = primaries[in_hands]["sstyle"]
 				recoil = primaries[in_hands]["srecoil"]
 				shell = primaries[in_hands]["sshell"]
+				description = primaries[in_hands]["sdesc"]
+				reload_type = primaries[in_hands]["sreload_type"]
 
 				mags = mags_max
 				rounds = rounds_max
@@ -141,6 +151,8 @@ func weapon_change():
 				shots = secondaries[in_hands]["sshots"]
 				style = secondaries[in_hands]["sstyle"]
 				recoil = secondaries[in_hands]["srecoil"]
+				shell = secondaries[in_hands]["sshell"]
+				description = secondaries[in_hands]["sdesc"]
 
 				mags = mags_max
 				rounds = rounds_max

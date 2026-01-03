@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bjc3oepe17a24"]
+[gd_scene load_steps=11 format=3 uid="uid://bjc3oepe17a24"]
 
 [ext_resource type="Script" uid="uid://d0qgfvvijomj8" path="res://scripts/store.gd" id="1_jmp1n"]
 [ext_resource type="StyleBox" uid="uid://ckr0q3ajn27kr" path="res://style_temp.tres" id="2_atuvt"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://brmdkm2ix0opo" path="res://images/weapons_portraits/g17_shop.png" id="4_5bups"]
 [ext_resource type="Texture2D" uid="uid://dlfu1udpvweav" path="res://images/weapons_portraits/m14_shop.png" id="5_vb4ln"]
 [ext_resource type="Texture2D" uid="uid://c4mhgvel1egqo" path="res://images/weapons_portraits/nothing.png" id="6_tmp5q"]
+[ext_resource type="Texture2D" uid="uid://c6l12vwljjxgy" path="res://images/decals_n_effects/progress_shop2.png" id="7_tmp5q"]
+[ext_resource type="Texture2D" uid="uid://dc0h70vo031bo" path="res://images/decals_n_effects/progress_shop1.png" id="8_phafb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4r5pv"]
 bg_color = Color(0.48962224, 0.48962224, 0.48962218, 1)
@@ -182,28 +184,84 @@ animation = &"null"
 layout_mode = 0
 offset_left = 18.0
 offset_top = 169.0
-offset_right = 112.0
-offset_bottom = 192.0
+offset_right = 178.0
+offset_bottom = 204.0
 theme_override_font_sizes/font_size = 25
 text = "damage - 50"
+
+[node name="prog" type="TextureProgressBar" parent="Panel/weapons_shop/prim_buy/damage"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 200.0
+offset_top = -9.5
+offset_right = 600.0
+offset_bottom = 7.5
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 110.0
+value = 50.0
+nine_patch_stretch = true
+texture_under = ExtResource("7_tmp5q")
+texture_progress = ExtResource("8_phafb")
 
 [node name="roundsmax" type="Label" parent="Panel/weapons_shop/prim_buy"]
 layout_mode = 0
 offset_left = 18.0
 offset_top = 203.0
-offset_right = 172.0
+offset_right = 188.0
 offset_bottom = 238.0
 theme_override_font_sizes/font_size = 25
 text = "mag size - 30"
+
+[node name="prog" type="TextureProgressBar" parent="Panel/weapons_shop/prim_buy/roundsmax"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 195.0
+offset_top = -9.5
+offset_right = 594.99756
+offset_bottom = 7.5
+grow_horizontal = 2
+grow_vertical = 2
+value = 30.0
+nine_patch_stretch = true
+texture_under = ExtResource("7_tmp5q")
+texture_progress = ExtResource("8_phafb")
 
 [node name="mags" type="Label" parent="Panel/weapons_shop/prim_buy"]
 layout_mode = 0
 offset_left = 18.0
 offset_top = 236.0
-offset_right = 118.0
+offset_right = 175.0
 offset_bottom = 271.0
 theme_override_font_sizes/font_size = 25
 text = "mags - 4"
+
+[node name="prog" type="TextureProgressBar" parent="Panel/weapons_shop/prim_buy/mags"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 202.5
+offset_top = -9.5
+offset_right = 602.5
+offset_bottom = 7.5
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 5.0
+value = 4.0
+nine_patch_stretch = true
+texture_under = ExtResource("7_tmp5q")
+texture_progress = ExtResource("8_phafb")
 
 [node name="reloadtype" type="Label" parent="Panel/weapons_shop/prim_buy"]
 layout_mode = 0
@@ -212,27 +270,58 @@ offset_top = 266.0
 offset_right = 242.0
 offset_bottom = 301.0
 theme_override_font_sizes/font_size = 25
-text = "reload type - mags"
+text = "reload type - mag"
 
 [node name="recoil" type="Label" parent="Panel/weapons_shop/prim_buy"]
 layout_mode = 0
 offset_left = 19.0
 offset_top = 300.0
-offset_right = 122.0
+offset_right = 176.0
 offset_bottom = 335.0
 theme_override_font_sizes/font_size = 25
 text = "recoil - 3"
 
+[node name="prog" type="TextureProgressBar" parent="Panel/weapons_shop/prim_buy/recoil"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 201.5
+offset_top = -9.5
+offset_right = 601.5
+offset_bottom = 7.5
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 50.0
+value = 3.0
+nine_patch_stretch = true
+texture_under = ExtResource("7_tmp5q")
+texture_progress = ExtResource("8_phafb")
+
 [node name="description" type="Label" parent="Panel/weapons_shop/prim_buy"]
 layout_mode = 0
-offset_left = 10.0
-offset_top = 363.0
-offset_right = 867.0
-offset_bottom = 436.0
+offset_left = 9.0
+offset_top = 371.0
+offset_right = 866.0
+offset_bottom = 637.0
 theme_override_font_sizes/font_size = 25
 text = "ar 15 - popular base for a lot of weapons, widely spread among 
 civilians of usa"
 horizontal_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="Panel/weapons_shop/prim_buy/description"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.99183196
+anchor_bottom = 0.97744364
+offset_left = 8.0
+offset_right = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.44705883)
 
 [connection signal="pressed" from="Panel/buy prim" to="." method="_on_buy_prim_pressed"]
 [connection signal="pressed" from="Panel/Button" to="." method="_on_button_pressed"]

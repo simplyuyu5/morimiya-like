@@ -24,13 +24,16 @@ func _ready() -> void:
 	pew.play("nothing")
 	#preload("res://scenes/shells.tscn")
 
+func _process(delta: float) -> void:
+		move()
+		move_anim()
+
 func _physics_process(_delta: float) -> void:
 	equip_ult()
 	change()
 	shoot()
 	reload()
-	move()
-	move_anim()
+
 	if gui_show == true:
 		gui()
 
@@ -81,7 +84,7 @@ func recoil():
 	#await get_tree().create_timer(1).timeout
 #^ end of hopes and dreams zone
 
-func  move():
+func move():
 	var input_dir := Input.get_vector("a", "d", "w", "s")
 	var direction := (transform.determinant() * Vector2(input_dir.x, input_dir.y)).normalized()
 	if direction:

@@ -169,8 +169,8 @@ texture_region_size = Vector2i(12, 12)
 
 [sub_resource type="TileSet" id="TileSet_rntoh"]
 tile_size = Vector2i(12, 12)
-physics_layer_0/collision_layer = 3
-physics_layer_0/collision_mask = 3
+physics_layer_0/collision_layer = 16
+physics_layer_0/collision_mask = 2
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
@@ -196,6 +196,8 @@ tile_set = SubResource("TileSet_rntoh")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="base/Node"]
 position = Vector2(1043, 270)
+collision_layer = 16
+collision_mask = 2
 
 [node name="Shelves2" type="Sprite2D" parent="base/Node/StaticBody2D"]
 scale = Vector2(5, 5)
@@ -207,6 +209,8 @@ shape = SubResource("RectangleShape2D_3scp5")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="base/Node"]
 position = Vector2(750, 630)
+collision_layer = 16
+collision_mask = 2
 
 [node name="Shelves" type="Sprite2D" parent="base/Node/StaticBody2D2"]
 rotation = -3.1415925
