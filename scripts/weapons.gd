@@ -1,6 +1,7 @@
 extends Node
 
 @onready var parent = get_parent()
+@onready var bank = $saved_data
 
 var reload_type = "mag" 
 var shots = 1 #for burst fire?
@@ -196,54 +197,73 @@ var in_hands = "m14"
 func _ready() -> void:
 	weapon_change(1)
 
+
+func assign_weapon_rounds(num):
+	match num:
+			1:
+				if primaries[current_prim] != null:
+					rounds_max = primaries[current_prim]["srounds_max"]
+					mags_max = primaries[current_prim]["smags_max"]
+					mags = mags_max
+					rounds = rounds_max
+					bank.mags_prim = mags_max
+					bank.rounds_prim = rounds_max
+			2:
+				if secondaries[current_sec] != null:
+					rounds_max = secondaries[current_sec]["srounds_max"]
+					mags_max = secondaries[current_sec]["smags_max"]
+					mags = mags_max
+					rounds = rounds_max
+					bank.mags_sec = mags_max
+					bank.rounds_sec = rounds_max
+
+
+
 func weapon_change(num):
 	if in_hands != null:
 		match num:
 			1:
-				if primaries[in_hands] != null:
+				if primaries[current_prim] != null:
 					#current_prim = in_hands
-					damage = primaries[in_hands]["sdamage"]
-					rounds_max = primaries[in_hands]["srounds_max"]
-					mags_max = primaries[in_hands]["smags_max"]
-					shots = primaries[in_hands]["sshots"]
-					style = primaries[in_hands]["sstyle"]
-					recoil = primaries[in_hands]["srecoil"]
-					shell = primaries[in_hands]["sshell"]
-					description = primaries[in_hands]["sdesc"]
-					reload_type = primaries[in_hands]["sreload_type"]
-					reload_time = primaries[in_hands]["rel_time"]
-					delay = primaries[in_hands]["sdelay"]
-					mags = mags_max
-					rounds = rounds_max
+					damage = primaries[current_prim]["sdamage"]
+					rounds_max = primaries[current_prim]["srounds_max"]
+					mags_max = primaries[current_prim]["smags_max"]
+					shots = primaries[current_prim]["sshots"]
+					style = primaries[current_prim]["sstyle"]
+					recoil = primaries[current_prim]["srecoil"]
+					shell = primaries[current_prim]["sshell"]
+					description = primaries[current_prim]["sdesc"]
+					reload_type = primaries[current_prim]["sreload_type"]
+					reload_time = primaries[current_prim]["rel_time"]
+					delay = primaries[current_prim]["sdelay"]
+					mags = bank.mags_prim
+					rounds = bank.rounds_prim
 
 			2:
-				if secondaries[in_hands] != null:
+				if secondaries[current_sec] != null:
 					#current_sec = in_hands
-					damage = secondaries[in_hands]["sdamage"]
-					rounds_max = secondaries[in_hands]["srounds_max"]
-					mags_max = secondaries[in_hands]["smags_max"]
-					shots = secondaries[in_hands]["sshots"]
-					style = secondaries[in_hands]["sstyle"]
-					recoil = secondaries[in_hands]["srecoil"]
-					shell = secondaries[in_hands]["sshell"]
-					description = secondaries[in_hands]["sdesc"]
-					reload_type = secondaries[in_hands]["sreload_type"]
-					reload_time = secondaries[in_hands]["rel_time"]
-					delay = secondaries[in_hands]["sdelay"]
-					mags = mags_max
-					rounds = rounds_max
-
-	else:
-		print("null")
-		in_hands = "null"
-
+					damage = secondaries[current_sec]["sdamage"]
+					rounds_max = secondaries[current_sec]["srounds_max"]
+					mags_max = secondaries[current_sec]["smags_max"]
+					shots = secondaries[current_sec]["sshots"]
+					style = secondaries[current_sec]["sstyle"]
+					recoil = secondaries[current_sec]["srecoil"]
+					shell = secondaries[current_sec]["sshell"]
+					description = secondaries[current_sec]["sdesc"]
+					reload_type = secondaries[current_sec]["sreload_type"]
+					reload_time = secondaries[current_sec]["rel_time"]
+					delay = secondaries[current_sec]["sdelay"]
+					mags = bank.mags_sec
+					rounds = bank.rounds_sec
+	#else:
+		#print("null")
+		#in_hands = "null"
 
 func recoil_regen():
 	if parent.spread == false:
 		chance_hit += 1
 	else:
 		pass
-
 
 func _process(_delta: float) -> void:
 
@@ -253,15 +273,3 @@ func _process(_delta: float) -> void:
 		chance_hit = 0
 	if chance_hit >= chance_max:
 		chance_hit = chance_max
-
-
-#enum primary {
-	#ar15,
-	#m14,
-	#saiga
-#} 
-#
-#enum secondary{
-	#m1911,
-	#g18
-#}

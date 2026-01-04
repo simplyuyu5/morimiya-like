@@ -47,6 +47,10 @@ func shoot():
 	ray.enabled = true
 	var target = ray.get_collider()
 	if Input.is_action_just_pressed("lmb") and weapon.rounds >= 1 and can_shoot == true:
+		if weapon.in_hands == weapon.current_prim:
+			weapon.bank.rounds_prim = weapon.rounds
+		elif weapon.in_hands == weapon.current_sec:
+			weapon.bank.rounds_sec = weapon.rounds
 		gun_smoke(weapon.style)
 		shell_eject(weapon.shell)
 		weapon.rounds -= weapon.shots
@@ -70,31 +74,20 @@ func reload():
 	if Input.is_action_just_pressed("r"):
 		reloading = true
 		await get_tree().create_timer(weapon.reload_time).timeout
+		if weapon.in_hands == weapon.current_prim:
+			weapon.bank.mags_prim = weapon.mags - 1
+		elif weapon.in_hands == weapon.current_sec:
+			weapon.bank.mags_sec = weapon.mags - 1
 		reloading = false
 		if weapon.mags > 0:
 			weapon.mags -=1
 			weapon.rounds = weapon.rounds_max
 
 func recoil():
-	
 	spread = true
-	#print(weapon.chance_hit," % ", weapon.recoil," recoil")
 	weapon.chance_hit -= weapon.recoil
-	#print(float(weapon.chance_hit))
-
 	await get_tree().create_timer(3).timeout
 	spread = false
-
-#v hopes and dreams zone
-	#if ray.rotation_degrees >= weapon.max_angle:
-		#ray.rotation_degrees = weapon.max_angle
-	#if ray.rotation_degrees <= weapon.min_angle:
-		#ray.rotation_degrees = weapon.min_angle
-	#var straight = 0
-	#ray.rotation_degrees += randi_range(weapon.recoil, weapon.recoil*-1) 
-	#spread = true
-	#await get_tree().create_timer(1).timeout
-#^ end of hopes and dreams zone
 
 func move():
 	var input_dir := Input.get_vector("a", "d", "w", "s")
@@ -107,12 +100,13 @@ func move():
 		velocity.y = move_toward(velocity.y, 0, speed_fin)
 
 func change():
-	var i:String
 	if Input.is_action_just_pressed("1"):
 		weapon.in_hands = weapon.current_prim
+		#weapon.assign_weapon_rounds(1)
 		weapon.weapon_change(1)
 	if Input.is_action_just_pressed("2"):
 		weapon.in_hands = weapon.current_sec
+		#weapon.assign_weapon_rounds(2)
 		weapon.weapon_change(2)
 	if Input.is_action_just_pressed("3"):
 		weapon.in_hands = weapon.current_melee
