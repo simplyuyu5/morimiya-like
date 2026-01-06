@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://ckawym3tsfqf7"]
+[gd_scene load_steps=3 format=3 uid="uid://ckawym3tsfqf7"]
 
 [ext_resource type="PackedScene" uid="uid://drq70gpb1g2w3" path="res://scenes/maps/map.tscn" id="1_5owsa"]
 [ext_resource type="PackedScene" uid="uid://blhcllsye5ckw" path="res://scenes/player.tscn" id="2_ropr1"]
-[ext_resource type="PackedScene" uid="uid://dy50sx76ijfi4" path="res://scenes/npc/coward.tscn" id="3_ropr1"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -10,11 +9,8 @@
 scale = Vector2(5, 5)
 metadata/_edit_lock_ = true
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("2_ropr1")]
-position = Vector2(95.00003, 948.99994)
-scale = Vector2(3.5, 3.5)
-
 [node name="npcs" type="Node" parent="."]
 
-[node name="coward" parent="." instance=ExtResource("3_ropr1")]
-position = Vector2(385.99997, 84.00012)
+[node name="CharacterBody2D" parent="." instance=ExtResource("2_ropr1")]
+position = Vector2(95.00003, 948.9999)
+scale = Vector2(3.4999995, 3.4999995)

@@ -1,0 +1,96 @@
+[gd_scene load_steps=13 format=3 uid="uid://dxgaqwnsyvxs0"]
+
+[ext_resource type="Texture2D" uid="uid://dobf1uhek57hj" path="res://images/living/corpses/dead-01.png" id="1_4xgab"]
+[ext_resource type="Script" uid="uid://cfhiihppfx3jj" path="res://scripts/30_npc_area.gd" id="1_kyfuo"]
+[ext_resource type="Texture2D" uid="uid://3v45xq2out8" path="res://images/living/corpses/dead-02.png" id="2_kyfuo"]
+[ext_resource type="Texture2D" uid="uid://degybtofviknl" path="res://images/living/corpses/dead-03.png" id="3_i76qr"]
+[ext_resource type="Texture2D" uid="uid://bjem2g437f1ub" path="res://images/living/corpses/dead-04.png" id="4_168wh"]
+[ext_resource type="Texture2D" uid="uid://c6qcwyyd1rjbd" path="res://images/living/npc-01.png" id="5_k73aa"]
+[ext_resource type="Texture2D" uid="uid://5r3jknl314v6" path="res://images/living/npc-02.png" id="6_aqwbi"]
+[ext_resource type="Texture2D" uid="uid://5dtal3bbveej" path="res://images/living/npc-03.png" id="7_kbm7u"]
+[ext_resource type="Texture2D" uid="uid://dmdm8e0fpabe2" path="res://images/living/npc-04.png" id="8_rk3wh"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bn6rf"]
+radius = 2.9999998
+height = 8.4
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gxeka"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_4xgab")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_kyfuo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_i76qr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_168wh")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ojvar"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_k73aa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_aqwbi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_kbm7u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_rk3wh")
+}],
+"loop": true,
+"name": &"bodies",
+"speed": 5.0
+}]
+
+[node name="tpo_npc" type="CharacterBody2D"]
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+scale = Vector2(0.9999998, 0.9999998)
+shape = SubResource("CapsuleShape2D_bn6rf")
+debug_color = Color(1, 0, 0, 0.19607843)
+
+[node name="Area2D" type="Area2D" parent="." groups=["living"]]
+scale = Vector2(5, 5)
+script = ExtResource("1_kyfuo")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("CapsuleShape2D_bn6rf")
+debug_color = Color(0, 0.6, 0.7019608, 0.5882353)
+
+[node name="dead" type="AnimatedSprite2D" parent="Area2D"]
+visible = false
+scale = Vector2(0.99999976, 0.99999976)
+sprite_frames = SubResource("SpriteFrames_gxeka")
+animation = &"dead"
+
+[node name="alive" type="AnimatedSprite2D" parent="Area2D"]
+position = Vector2(-1.1920929e-07, -4.656613e-10)
+rotation = 1.5707964
+scale = Vector2(0.99999976, 0.99999976)
+sprite_frames = SubResource("SpriteFrames_ojvar")
+animation = &"bodies"
+offset = Vector2(-0.0033444103, -1.4788249)
+
+[node name="ears??" type="Area2D" parent="."]
+scale = Vector2(4.9999995, 4.9999995)
+
+[node name="eyes" type="RayCast2D" parent="."]
+position = Vector2(0, -1)
+target_position = Vector2(500, 0)
+collision_mask = 18
+
+[node name="audio" type="AudioStreamPlayer2D" parent="."]
+scale = Vector2(4.9999995, 4.9999995)

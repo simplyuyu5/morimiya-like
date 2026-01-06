@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://dei1peug41rxi"]
+[gd_scene load_steps=13 format=4 uid="uid://dei1peug41rxi"]
 
 [ext_resource type="Texture2D" uid="uid://mgjscx22fche" path="res://images/tiles/grey_tile.png" id="1_x6hnt"]
 [ext_resource type="Texture2D" uid="uid://d77a3o8gpg7n" path="res://images/objects/home_base/mess.png" id="2_3scp5"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ud005qin71kr" path="res://images/objects/home_base/bed.png" id="3_pkxii"]
 [ext_resource type="Texture2D" uid="uid://bx4sb2p0tacux" path="res://images/objects/home_base/desk_pipebombs.png" id="4_v00u0"]
 [ext_resource type="Texture2D" uid="uid://bbyr47bbsaonk" path="res://images/objects/home_base/shelves.png" id="5_b7pu3"]
+[ext_resource type="PackedScene" uid="uid://dxgaqwnsyvxs0" path="res://scenes/npc/30_npc.tscn" id="7_pkxii"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6khdi"]
 texture = ExtResource("1_x6hnt")
@@ -287,3 +288,6 @@ texture = ExtResource("2_3scp5")
 [node name="CharacterBody2D" parent="." instance=ExtResource("2_6khdi")]
 position = Vector2(1036, 473.99997)
 scale = Vector2(3.5, 3.5)
+
+[node name="tpo_npc" parent="." instance=ExtResource("7_pkxii")]
+position = Vector2(1264, 447)

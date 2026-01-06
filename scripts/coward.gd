@@ -28,7 +28,7 @@ var speed = 100
 
 func _ready() -> void:
 	states()
-	goal = idle_goal
+	#goal = idle_goal
 	agent.target_position = goal.global_position
 
 func _process(_delta: float) -> void:
@@ -70,6 +70,8 @@ func states():
 		states_coward.PANIC:
 			wander_goal.position -= self.position.direction_to(danger.position) * help.hp
 			goal = wander_goal
+			if agent.distance_to_target() <= 10:
+				wander_goal.position -= self.position.direction_to(danger.position) * help.hp
 
 		#var i = randi_range(0,1)
 		#print(i," chance")
