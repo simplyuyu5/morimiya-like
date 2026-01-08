@@ -84,6 +84,10 @@ sprite_frames = SubResource("SpriteFrames_ojvar")
 animation = &"bodies"
 offset = Vector2(-0.0033444103, -1.4788249)
 
+[node name="bleed_decal" type="StaticBody2D" parent="Area2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D/bleed_decal"]
+
 [node name="ears??" type="Area2D" parent="."]
 scale = Vector2(4.9999995, 4.9999995)
 

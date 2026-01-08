@@ -4,6 +4,7 @@ var hp = 120
 var bleed := 0
 var is_bleeding := false
 var is_dead := false
+var hp_saved = 120
 
 func _ready() -> void:
 	skins(randi_range(0,3))
@@ -12,12 +13,14 @@ func _process(_delta:float):
 	if hp <= 0:
 		hp = 0
 
-	if hp <= 120:
+	if hp != hp_saved and bleed == 0:
 		bleed = randi_range(0,2)
+	else:
+		bleed -=1
 
 	if bleed >= 0 and is_bleeding == false:
 		bleeding()
-		await get_tree().create_timer(bleed * -1).timeout
+		await get_tree().create_timer(2 - bleed).timeout
 		is_bleeding = false
 	
 
@@ -40,8 +43,10 @@ func die():
 
 
 func bleeding():
-	if is_dead == true:
+	if is_dead == false:
 		is_bleeding = true
 		hp -= bleed
+		hp_saved = hp
+		print(bleed, " bleed!")
 	else:
 		bleed = 0

@@ -1,6 +1,6 @@
 extends Node
 
-var mags_prim = 0
+var mags_prim = 5
 var mags_sec = 0
 
 var grens = 0
