@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bidms33n2n5x8" path="res://images/decals_n_effects/shells/shell_smol.png" id="3_1hgbd"]
 
 [node name="shells_core" type="Node2D"]
+show_behind_parent = true
 scale = Vector2(5, 5)
 script = ExtResource("1_vdsjt")
 

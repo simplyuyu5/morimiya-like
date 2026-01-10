@@ -288,7 +288,7 @@ shape = SubResource("CapsuleShape2D_g2els")
 disabled = true
 
 [node name="shell_pos" type="Node2D" parent="."]
-position = Vector2(8, 2.5)
+position = Vector2(6, 3)
 
 [node name="shoot" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_l71n6")

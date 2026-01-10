@@ -153,6 +153,10 @@ func shell_eject(shell):
 
 	shell_inst.position = pos.global_position;
 	shell_inst.global_transform = pos.global_transform;
+	shell_inst.rotation_degrees = pos.rotation_degrees
+	shell_inst.rotation_degrees += randi_range(0,70)
+
+	add_sibling(shell_inst)
 
 func gun_smoke(style):
 	match style:
