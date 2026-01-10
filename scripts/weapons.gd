@@ -10,6 +10,8 @@ var recoil = 0
 var description :String = ""
 var reload_time = 1 #time needed to reload in s 
 var delay = 0 #delay between shots #P.S. morimiya's BS3, KS25 and many other shotguns are reason for adding this
+var sound = 0
+#^ 0-5 loudness ig. 4 for shotguns 5 is supah loud
 
 var style = 0 
 var shell = 0
@@ -38,6 +40,7 @@ var primaries = {
 		"rel_time":1.5,
 		"sshots":1,
 		"sstyle":0,
+		"ssound":1,
 		"srecoil":6,
 		"sshell":0,
 		"sdesc":".223 Rem. Semi-automatic rifle with fine recoil and decent damage",
@@ -55,6 +58,7 @@ var primaries = {
 		"rel_time":3,
 		"sshots":1,
 		"sstyle":1,
+		"ssound":2,
 		"srecoil":11,
 		"sshell":0,
 		"sdesc":"Reliable semi-automatic rifle with high damage and medium recoil",
@@ -72,6 +76,7 @@ var primaries = {
 		"rel_time":1.3,
 		"sshots":1,
 		"sstyle":1,
+		"ssound":4,
 		"srecoil":18,
 		"sshell":1,
 		"sdesc":"Mag-fed shotgun, low capacity but faster reload",
@@ -89,6 +94,7 @@ var primaries = {
 		"rel_time":1,
 		"sshots":1,
 		"sstyle":1,
+		"ssound":4,
 		"srecoil":22,
 		"sshell":1,
 		"sdesc":"Pump action shotgun to kill them slowly and with style",
@@ -106,6 +112,7 @@ var primaries = {
 		"rel_time":3,
 		"sshots":1,
 		"sstyle":1,
+		"ssound":1,
 		"srecoil":4,
 		"sshell":0,
 		"sdesc":"5.8×42mm bullpup rifle",
@@ -122,7 +129,8 @@ var primaries = {
 		"sdelay":1,
 		"rel_time":2,
 		"sshots":1,
-		"sstyle":2,
+		"sstyle":5,
+		"ssound":1,
 		"srecoil":50,
 		"sshell":0,
 		"sdesc":"20×102 mm anti-materiel rifle, 2 m long \n weights more than 20 kg",
@@ -141,12 +149,13 @@ var primaries = {
 		"rel_time":2,
 		"sshots":1,
 		"sstyle":1,
+		"ssound":1,
 		"srecoil":5,
 		"sshell":0,
 		"sdesc":"5.45x39 rifle with good damage and magazine capacity",
 		"sbought":false,
 		"cost":15000,
-		"special":false
+		"special":true
 	},
 }
 
@@ -160,6 +169,7 @@ var secondaries = {
 		"rel_time":1,
 		"sshots":1,
 		"sstyle":0,
+		"ssound":0,
 		"srecoil":2,
 		"sshell":2,
 		"sdesc":"Popular handgun that takes a lot shots to kill someone \n while having a magazine big enough to do so",
@@ -177,6 +187,7 @@ var secondaries = {
 		"rel_time":2,
 		"sshots":1,
 		"sstyle":0,
+		"ssound":0,
 		"srecoil":2,
 		"sshell":2,
 		"sdesc":"description placeholder",
@@ -230,6 +241,7 @@ func weapon_change(num):
 					mags_max = primaries[current_prim]["smags_max"]
 					shots = primaries[current_prim]["sshots"]
 					style = primaries[current_prim]["sstyle"]
+					sound = primaries[current_prim]["ssound"]
 					recoil = primaries[current_prim]["srecoil"]
 					shell = primaries[current_prim]["sshell"]
 					description = primaries[current_prim]["sdesc"]
@@ -247,6 +259,7 @@ func weapon_change(num):
 					mags_max = secondaries[current_sec]["smags_max"]
 					shots = secondaries[current_sec]["sshots"]
 					style = secondaries[current_sec]["sstyle"]
+					sound = secondaries[current_sec]["ssound"]
 					recoil = secondaries[current_sec]["srecoil"]
 					shell = secondaries[current_sec]["sshell"]
 					description = secondaries[current_sec]["sdesc"]

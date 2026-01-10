@@ -1,15 +1,17 @@
-extends Area2D
+extends Node
 
+@onready var parent = get_parent()
 var hp = 120
 var bleed := 0
 var is_bleeding := false
 var is_dead := false
 var hp_saved = 120
 
-func _ready() -> void:
-	skins(randi_range(0,3))
-
 func _process(_delta:float):
+	hp = parent.hp 
+	hp_func()
+
+func hp_func():
 	if hp <= 0:
 		hp = 0
 
@@ -25,7 +27,7 @@ func _process(_delta:float):
 	
 
 	if hp <= 1 and is_dead != true:
-		die()
+		parent.die()
 
 @onready var dead = $dead
 @onready var alive = $alive
@@ -34,12 +36,6 @@ func skins(num):
 	dead.frame = num
 	alive.frame = num
 
-func die():
-	is_dead = true
-	$CollisionShape2D2.disabled = true
-	alive.hide()
-	dead.rotation_degrees = randf_range(0,360)
-	dead.show()
 
 
 func bleeding():

@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://dxgaqwnsyvxs0"]
+[gd_scene load_steps=15 format=3 uid="uid://dxgaqwnsyvxs0"]
 
 [ext_resource type="Texture2D" uid="uid://dobf1uhek57hj" path="res://images/living/corpses/dead-01.png" id="1_4xgab"]
-[ext_resource type="Script" uid="uid://cfhiihppfx3jj" path="res://scripts/30_npc_area.gd" id="1_kyfuo"]
+[ext_resource type="Script" uid="uid://ct3giwk67767l" path="res://scripts/30_npc_movement.gd" id="1_i76qr"]
+[ext_resource type="Script" uid="uid://cfhiihppfx3jj" path="res://scripts/30_npc_area.gd" id="2_i76qr"]
 [ext_resource type="Texture2D" uid="uid://3v45xq2out8" path="res://images/living/corpses/dead-02.png" id="2_kyfuo"]
 [ext_resource type="Texture2D" uid="uid://degybtofviknl" path="res://images/living/corpses/dead-03.png" id="3_i76qr"]
 [ext_resource type="Texture2D" uid="uid://bjem2g437f1ub" path="res://images/living/corpses/dead-04.png" id="4_168wh"]
@@ -9,10 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://5r3jknl314v6" path="res://images/living/npc-02.png" id="6_aqwbi"]
 [ext_resource type="Texture2D" uid="uid://5dtal3bbveej" path="res://images/living/npc-03.png" id="7_kbm7u"]
 [ext_resource type="Texture2D" uid="uid://dmdm8e0fpabe2" path="res://images/living/npc-04.png" id="8_rk3wh"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bn6rf"]
-radius = 2.9999998
-height = 8.4
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gxeka"]
 animations = [{
@@ -54,39 +51,38 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="tpo_npc" type="CharacterBody2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bn6rf"]
+radius = 18.000002
+height = 36.000004
+
+[sub_resource type="AudioStream" id="AudioStream_kyfuo"]
+
+[node name="tpo_npc" type="CharacterBody2D" groups=["living"]]
+collision_layer = 2
+collision_mask = 16
+script = ExtResource("1_i76qr")
+
+[node name="hp" type="Node" parent="." groups=["living"]]
+script = ExtResource("2_i76qr")
+
+[node name="dead" type="AnimatedSprite2D" parent="."]
+visible = false
+scale = Vector2(4.999999, 4.999999)
+sprite_frames = SubResource("SpriteFrames_gxeka")
+animation = &"dead"
+
+[node name="alive" type="AnimatedSprite2D" parent="."]
+position = Vector2(-5.9604645e-07, -2.3283064e-09)
+rotation = 1.5707964
+scale = Vector2(4.999999, 4.999999)
+sprite_frames = SubResource("SpriteFrames_ojvar")
+animation = &"bodies"
+offset = Vector2(-0.0033444103, -1.4788249)
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
 scale = Vector2(0.9999998, 0.9999998)
 shape = SubResource("CapsuleShape2D_bn6rf")
 debug_color = Color(1, 0, 0, 0.19607843)
-
-[node name="Area2D" type="Area2D" parent="." groups=["living"]]
-scale = Vector2(5, 5)
-script = ExtResource("1_kyfuo")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
-scale = Vector2(0.99999994, 0.99999994)
-shape = SubResource("CapsuleShape2D_bn6rf")
-debug_color = Color(0, 0.6, 0.7019608, 0.5882353)
-
-[node name="dead" type="AnimatedSprite2D" parent="Area2D"]
-visible = false
-scale = Vector2(0.99999976, 0.99999976)
-sprite_frames = SubResource("SpriteFrames_gxeka")
-animation = &"dead"
-
-[node name="alive" type="AnimatedSprite2D" parent="Area2D"]
-position = Vector2(-1.1920929e-07, -4.656613e-10)
-rotation = 1.5707964
-scale = Vector2(0.99999976, 0.99999976)
-sprite_frames = SubResource("SpriteFrames_ojvar")
-animation = &"bodies"
-offset = Vector2(-0.0033444103, -1.4788249)
-
-[node name="bleed_decal" type="StaticBody2D" parent="Area2D"]
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D/bleed_decal"]
 
 [node name="ears??" type="Area2D" parent="."]
 scale = Vector2(4.9999995, 4.9999995)
@@ -98,3 +94,13 @@ collision_mask = 18
 
 [node name="audio" type="AudioStreamPlayer2D" parent="."]
 scale = Vector2(4.9999995, 4.9999995)
+stream = SubResource("AudioStream_kyfuo")
+
+[node name="bleed_decal" type="StaticBody2D" parent="."]
+scale = Vector2(5, 5)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="bleed_decal"]
+
+[node name="goal_node" type="Node2D" parent="."]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
