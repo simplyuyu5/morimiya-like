@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://blhcllsye5ckw"]
+[gd_scene load_steps=31 format=3 uid="uid://blhcllsye5ckw"]
 
 [ext_resource type="Script" uid="uid://dddqbgfrxouwf" path="res://scripts/character_body_2d.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://cbewdwsj8ik5q" path="res://images/mc/girl/mc1.png" id="2_fulsm"]
@@ -24,6 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://dlfu1udpvweav" path="res://images/weapons_portraits/m14_shop.png" id="19_i4ail"]
 [ext_resource type="Texture2D" uid="uid://c4mhgvel1egqo" path="res://images/weapons_portraits/nothing.png" id="20_a38lo"]
 [ext_resource type="Script" uid="uid://djnyv8evdqlq3" path="res://scripts/saved_data.gd" id="24_l71n6"]
+[ext_resource type="AudioStream" uid="uid://qhyhjivd356h" path="res://sounds/loud_sounds_idk/xm15_indoors.wav" id="25_ke2ow"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_31cv2"]
 animations = [{
@@ -160,7 +161,10 @@ animations = [{
 }]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_l71n6"]
-streams_count = 2
+random_pitch = 1.1
+random_volume_offset_db = 0.3
+streams_count = 1
+stream_0/stream = ExtResource("25_ke2ow")
 
 [node name="player" type="CharacterBody2D" groups=["danger"]]
 collision_layer = 2
@@ -292,4 +296,5 @@ position = Vector2(6, 3)
 
 [node name="shoot" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_l71n6")
+max_polyphony = 2
 playback_type = 1

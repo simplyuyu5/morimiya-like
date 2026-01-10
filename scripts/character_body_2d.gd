@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var ray_pick = $pickup_ray
 @onready var body = $Mc
 @onready var pos = $shell_pos
+@onready var audio_shoot = $shoot
 var shells = preload("res://scenes/shells.tscn")#.instantiate()
 var shell_look :int = 0
 var can_shoot := true
@@ -47,13 +48,14 @@ func shoot():
 	ray.enabled = true
 	var target = ray.get_collider()
 	if Input.is_action_just_pressed("lmb") and weapon.rounds >= 1 and can_shoot == true:
+		audio_shoot.play()
+		gun_smoke(weapon.style)
+		shell_eject(weapon.shell)
+		weapon.rounds -= weapon.shots
 		if weapon.in_hands == weapon.current_prim:
 			weapon.bank.rounds_prim = weapon.rounds
 		elif weapon.in_hands == weapon.current_sec:
 			weapon.bank.rounds_sec = weapon.rounds
-		gun_smoke(weapon.style)
-		shell_eject(weapon.shell)
-		weapon.rounds -= weapon.shots
 		can_shoot = false
 		await get_tree().create_timer(weapon.delay).timeout
 		print("u can pew")
