@@ -222,12 +222,12 @@ collide_with_bodies = false
 [node name="gui" type="CanvasLayer" parent="."]
 
 [node name="chance" type="Label" parent="gui"]
-anchors_preset = 5
-anchor_left = 0.5
+anchors_preset = -1
+anchor_left = 0.4778646
 anchor_right = 0.5
-offset_left = -25.5
+anchor_bottom = 0.032407407
 offset_right = 25.5
-offset_bottom = 42.0
+offset_bottom = 21.0
 grow_horizontal = 2
 scale = Vector2(0.5, 0.5)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -235,28 +235,34 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 30
 text = "100"
+metadata/_edit_use_anchors_ = true
 
 [node name="rounds" type="Label" parent="gui"]
-offset_left = 14.0
-offset_top = 441.0
-offset_right = 76.0
-offset_bottom = 483.0
+anchors_preset = -1
+anchor_left = 0.012152778
+anchor_top = 0.6805556
+anchor_right = 0.065972224
+anchor_bottom = 0.7453704
+offset_top = -3.0517578e-05
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 30
 text = "23hi"
+metadata/_edit_use_anchors_ = true
 
 [node name="mags" type="Label" parent="gui"]
-offset_left = 13.0
-offset_top = 485.0
-offset_right = 90.0
-offset_bottom = 527.0
+anchors_preset = -1
+anchor_left = 0.011284722
+anchor_top = 0.7484568
+anchor_right = 0.078125
+anchor_bottom = 0.8132716
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 30
 text = "mags"
+metadata/_edit_use_anchors_ = true
 
 [node name="weapon" type="AnimatedSprite2D" parent="gui"]
 position = Vector2(130, 580)
@@ -284,6 +290,6 @@ disabled = true
 [node name="shell_pos" type="Node2D" parent="."]
 position = Vector2(8, 2.5)
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="shoot" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_l71n6")
 playback_type = 1

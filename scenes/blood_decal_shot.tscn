@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://cr3vo1oy4bne2"]
+
+[ext_resource type="Texture2D" uid="uid://bdrqfldiw72kt" path="res://images/decals_n_effects/blood20x20.png" id="1_egyfw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sjj1r"]
+atlas = ExtResource("1_egyfw")
+region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0pnj1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sjj1r")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="blood_decal_shot" type="AnimatedSprite2D"]
+top_level = true
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_0pnj1")

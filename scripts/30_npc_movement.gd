@@ -34,13 +34,18 @@ func _ready() -> void:
 	skins(randi_range(0,3))
 
 func _process(_delta:float):
-	eyes()
-	state()
+	if dead.visible != true:
+		hp_man.hp_func()
+		eyes()
+		state()
+	else:
+		pass
 
 func state():
 	match state_cur:
 		states.CALM:
-			print("calm")
+			#print("calm")
+			pass
 	
 
 func skins(num):

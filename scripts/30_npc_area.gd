@@ -1,23 +1,29 @@
 extends Node
 
+var blood = preload("res://scenes/blood_decal_shot.tscn").instantiate(PackedScene.GEN_EDIT_STATE_DISABLED)
 @onready var parent = get_parent()
 var hp = 120
 var bleed := 0
-var is_bleeding := false
-var is_dead := false
+var is_bleeding:bool= false
+var is_dead:bool= false
 var hp_saved = 120
 
-func _process(_delta:float):
-	hp = parent.hp 
-	hp_func()
+func _ready():
+	pass
 
-func hp_func():
+func _process(_delta:float):
 	if hp <= 0:
 		hp = 0
+	hp = parent.hp 
 
+func hp_func():
 	if hp != hp_saved and bleed == 0:
+		parent.add_child(blood)
+		print("blood1")
+		blood.position = parent.local_position - Vector2(10,0)
 		bleed = randi_range(0,2)
-	else:
+	else:# hp != hp_saved and bleed >= 1:
+		print("blood2")
 		bleed -=1
 
 	if bleed >= 0 and is_bleeding == false:
@@ -28,13 +34,6 @@ func hp_func():
 
 	if hp <= 1 and is_dead != true:
 		parent.die()
-
-@onready var dead = $dead
-@onready var alive = $alive
-
-func skins(num):
-	dead.frame = num
-	alive.frame = num
 
 
 

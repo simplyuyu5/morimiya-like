@@ -70,33 +70,39 @@ metadata/_edit_use_anchors_ = true
 
 [node name="buy prim" type="Button" parent="Panel"]
 layout_mode = 0
-offset_left = 784.0
-offset_top = 14.0
-offset_right = 1107.0
-offset_bottom = 89.0
+anchor_left = 0.6805556
+anchor_top = 0.021604938
+anchor_right = 0.8768229
+anchor_bottom = 0.102623455
+offset_right = 96.900024
+offset_bottom = 22.5
 scale = Vector2(0.7, 0.7)
 theme_override_font_sizes/font_size = 30
 text = "buy primary weapons"
+metadata/_edit_use_anchors_ = true
 
 [node name="equip prim" type="Button" parent="Panel"]
 layout_mode = 0
-offset_left = 765.0
-offset_top = 100.0
-offset_right = 1116.0
-offset_bottom = 175.0
+anchor_left = 0.6640625
+anchor_top = 0.15432099
+anchor_right = 0.8773438
+anchor_bottom = 0.23533951
+offset_right = 105.29999
+offset_bottom = 22.5
 scale = Vector2(0.7, 0.7)
 theme_override_font_sizes/font_size = 30
 text = "equip primary weapons"
+metadata/_edit_use_anchors_ = true
 
 [node name="Button" type="Button" parent="Panel"]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -51.0
-offset_top = 11.0
-offset_right = 2.333374
-offset_bottom = 61.0
+anchors_preset = -1
+anchor_left = 0.9557292
+anchor_top = 0.016975308
+anchor_right = 0.9904514
+anchor_bottom = 0.07484568
+offset_right = 13.333374
+offset_bottom = 12.5
 grow_horizontal = 0
 scale = Vector2(0.75, 0.75)
 theme_override_font_sizes/font_size = 30
@@ -104,24 +110,26 @@ text = "x"
 autowrap_mode = 2
 autowrap_trim_flags = 0
 icon_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="skills_shop" type="Control" parent="Panel"]
 visible = false
 anchors_preset = 0
-offset_left = -77.0
-offset_top = 69.0
-offset_right = -37.0
-offset_bottom = 109.0
+anchor_left = -0.066840276
+anchor_top = 0.106481485
+anchor_right = -0.032118056
+anchor_bottom = 0.16820988
+metadata/_edit_use_anchors_ = true
 
 [node name="subButton" type="Button" parent="Panel/skills_shop"]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = 1138.0
-offset_top = -58.0
-offset_right = 1191.3334
-offset_bottom = -8.0
+anchors_preset = -1
+anchor_left = 29.45
+anchor_top = -1.45
+anchor_right = 30.45
+anchor_bottom = -0.5125
+offset_right = 13.333374
+offset_bottom = 12.5
 grow_horizontal = 0
 scale = Vector2(0.75, 0.75)
 theme_override_font_sizes/font_size = 30
@@ -129,22 +137,26 @@ text = "x"
 autowrap_mode = 2
 autowrap_trim_flags = 0
 icon_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="weapons_shop" type="Control" parent="Panel"]
+visible = false
 anchors_preset = 0
-offset_left = -85.0
-offset_top = 177.0
-offset_right = -45.0
-offset_bottom = 217.0
+anchor_left = -0.073784724
+anchor_top = 0.27314815
+anchor_right = -0.0390625
+anchor_bottom = 0.33487654
+metadata/_edit_use_anchors_ = true
 
 [node name="prim_buy" type="Panel" parent="Panel/weapons_shop"]
 visible = false
 layout_mode = 0
-offset_left = 360.0
-offset_top = -177.0
-offset_right = 1237.0
-offset_bottom = 471.0
+anchor_left = 9.0
+anchor_top = -4.425
+anchor_right = 30.925
+anchor_bottom = 11.775
 theme_override_styles/panel = ExtResource("2_atuvt")
+metadata/_edit_use_anchors_ = true
 
 [node name="itemlist_prim" type="ItemList" parent="Panel/weapons_shop/prim_buy"]
 layout_mode = 0
@@ -328,11 +340,12 @@ color = Color(0, 0, 0, 0.44705883)
 
 [node name="prim_equip" type="Panel" parent="Panel/weapons_shop"]
 layout_mode = 0
-offset_left = 360.0
-offset_top = -177.0
-offset_right = 1237.0
-offset_bottom = 471.0
+anchor_left = 9.0
+anchor_top = -4.425
+anchor_right = 30.925
+anchor_bottom = 11.775
 theme_override_styles/panel = ExtResource("2_atuvt")
+metadata/_edit_use_anchors_ = true
 
 [node name="itemlist_eq" type="ItemList" parent="Panel/weapons_shop/prim_equip"]
 layout_mode = 0
@@ -343,13 +356,13 @@ theme_override_font_sizes/font_size = 30
 
 [node name="subButton2" type="Button" parent="Panel/weapons_shop/prim_equip"]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -51.0
-offset_top = 11.0
-offset_right = 2.333496
-offset_bottom = 61.0
+anchors_preset = -1
+anchor_left = 0.9418472
+anchor_top = 0.016975308
+anchor_right = 0.9874574
+anchor_bottom = 0.07484568
+offset_right = 13.333374
+offset_bottom = 12.5
 grow_horizontal = 0
 scale = Vector2(0.75, 0.75)
 theme_override_font_sizes/font_size = 30
@@ -357,6 +370,7 @@ text = "x"
 autowrap_mode = 2
 autowrap_trim_flags = 0
 icon_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="equip" type="Button" parent="Panel/weapons_shop/prim_equip"]
 layout_mode = 1
