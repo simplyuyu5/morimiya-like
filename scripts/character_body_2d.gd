@@ -5,7 +5,9 @@ extends CharacterBody2D
 @onready var ray_pick = $pickup_ray
 @onready var body = $Mc
 @onready var pos = $shell_pos
-@onready var audio_shoot = $shoot
+@onready var audio_shoot = $sounds/shoot
+@onready var audio_reload = $sounds/reload
+@onready var audio = $sounds/sounds_misc
 var shells = preload("res://scenes/shells.tscn")#.instantiate()
 var shell_look :int = 0
 var can_shoot := true
@@ -75,6 +77,7 @@ func shoot():
 func reload():
 	if Input.is_action_just_pressed("r"):
 		reloading = true
+		audio_reload.play(1)
 		await get_tree().create_timer(weapon.reload_time).timeout
 		if weapon.in_hands == weapon.current_prim:
 			weapon.bank.mags_prim = weapon.mags - 1

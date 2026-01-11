@@ -62,7 +62,7 @@ collision_layer = 2
 collision_mask = 16
 script = ExtResource("1_i76qr")
 
-[node name="hp" type="Node" parent="." groups=["living"]]
+[node name="hp" type="Node" parent="."]
 script = ExtResource("2_i76qr")
 
 [node name="dead" type="AnimatedSprite2D" parent="."]

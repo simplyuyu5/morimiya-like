@@ -8,6 +8,8 @@ var hp = 120
 @onready var eyes_ray = $eyes
 @onready var hp_man = $hp
 
+var player
+
 
 
 enum states {
@@ -34,7 +36,7 @@ func _ready() -> void:
 	skins(randi_range(0,3))
 
 func _process(_delta:float):
-	if dead.visible != true:
+	if hp_man.is_dead == false:
 		hp_man.hp_func()
 		eyes()
 		state()
@@ -53,9 +55,11 @@ func skins(num):
 	alive.frame = num
 
 func eyes():
+	player= $"/root/Node2D/CharacterBody2D"
+
 	eyes_ray.enabled = true
 	var target = eyes_ray.get_collider()
-	eyes_ray.look_at($"/root/Node2D/CharacterBody2D".global_position)
+	eyes_ray.look_at(player.position)
 	if eyes_ray.is_colliding() and target.is_in_group("wall"):
 		eyes_ray.enabled = false
 	elif eyes_ray.is_colliding() and target.is_in_group("danger"):
