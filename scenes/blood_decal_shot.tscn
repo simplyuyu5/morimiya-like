@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://cr3vo1oy4bne2"]
+[gd_scene load_steps=5 format=3 uid="uid://cr3vo1oy4bne2"]
 
+[ext_resource type="Script" uid="uid://b3mwf6oqetcn4" path="res://scenes/blood_decal_shot.gd" id="1_dwlrt"]
 [ext_resource type="Texture2D" uid="uid://bdrqfldiw72kt" path="res://images/decals_n_effects/blood20x20.png" id="1_egyfw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sjj1r"]
@@ -17,7 +18,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="blood_decal_shot" type="AnimatedSprite2D"]
-top_level = true
+[node name="blood_decal" type="Node2D"]
+show_behind_parent = true
 scale = Vector2(5, 5)
+script = ExtResource("1_dwlrt")
+
+[node name="blood_decal_shot" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0pnj1")

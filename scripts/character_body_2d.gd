@@ -32,10 +32,11 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 		move()
 		move_anim()
+		if gui_show == true:gui()
+		else:pass
 
-func _input(_event: InputEvent) -> void:
-	if gui_show == true:
-		gui()
+#func _input(_event: InputEvent) -> void:
+	#pass
 
 func _physics_process(_delta: float) -> void:
 	equip_ult()
@@ -60,7 +61,7 @@ func shoot():
 			weapon.bank.rounds_sec = weapon.rounds
 		can_shoot = false
 		await get_tree().create_timer(weapon.delay).timeout
-		print("u can pew")
+		#print("u can pew")
 		can_shoot = true
 
 
@@ -70,6 +71,8 @@ func shoot():
 		if ray.is_colliding() and target.is_in_group("living"):
 			if randf_range(0,100.0) <= float(weapon.chance_hit):
 				target.hp -=weapon.damage
+				target.bleed += randi_range(0,weapon.bleed_max)
+				print(target.bleed)
 			else:
 				print("miss lol")
 		recoil()

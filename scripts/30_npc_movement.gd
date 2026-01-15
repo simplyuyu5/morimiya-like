@@ -1,20 +1,27 @@
 extends CharacterBody2D
 
 var hp = 120
+var bleed = 0
 @onready var collision = $CollisionShape2D3
 @onready var dead = $dead
 @onready var alive = $alive
 @onready var audio = $audio
 @onready var eyes_ray = $eyes
 @onready var hp_man = $hp
+@onready var agent = $NavigationAgent2D
+@onready var goal_node = $goal_node
 
+@onready var timer_nav = $NavigationAgent2D/nav_timer
+@onready var timer_sound = $audio/randi_sound
+
+var goal = null
 var player
 
 
 
 enum states {
 	CALM,
-	CROWD,
+	WANDER,
 	RUN,
 	ATTACK
 }
@@ -46,8 +53,12 @@ func _process(_delta:float):
 func state():
 	match state_cur:
 		states.CALM:
-			#print("calm")
+			await get_tree().create_timer(1).timeout
+			state()
+		states.WANDER:
 			pass
+		states.RUN:
+			goal = goal_node
 	
 
 func skins(num):
@@ -73,3 +84,10 @@ func die():
 	alive.hide()
 	dead.rotation_degrees = randf_range(0,360)
 	dead.show()
+
+
+func _on_nav_timer_timeout() -> void:
+	if agent.target_position != goal.global_position:
+		agent.target_position = goal.global_position
+
+	timer_nav.start()

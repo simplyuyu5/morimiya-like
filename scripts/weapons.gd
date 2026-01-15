@@ -16,6 +16,8 @@ var sound = 0
 var style = 0 
 var shell = 0
 
+var bleed_max = 10
+
 var chance_hit :int = 100
 var chance_max = 100
 
