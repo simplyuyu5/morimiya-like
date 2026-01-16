@@ -21,15 +21,6 @@ func _process(_delta:float):
 	hp = parent.hp 
 
 func hp_func():
-	#if hp != hp_saved and bleed != 0:
-		#parent.add_child(blood)
-		#print("blood1")
-		#blood.position = parent.local_position - Vector2(10,0)
-		#bleed = randi_range(0,2)
-	#else:# hp != hp_saved and bleed >= 1:
-		#print("blood2")
-		#bleed -=1
-
 	if bleed > 0 and is_bleeding == false:
 		bleeding()
 		await get_tree().create_timer(2 - bleed/2).timeout
@@ -52,7 +43,7 @@ func bleeding():
 
 		blood.position = parent.position + Vector2(randi_range(-20,20),randi_range(-20,20))
 		blood.rotation = randi_range(0,360)
-		get_parent().add_sibling(blood)
+		add_sibling(blood)
 
 		print(bleed, " bleed!")
 	else:

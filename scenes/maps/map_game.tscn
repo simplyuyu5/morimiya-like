@@ -16,7 +16,7 @@ metadata/_edit_lock_ = true
 
 [node name="tpo_npc" parent="." instance=ExtResource("4_e5gab")]
 visibility_layer = 2
-position = Vector2(499.99994, 269.00006)
+position = Vector2(624.99994, 925.99994)
 rotation = 1.5621265
 motion_mode = 1
 

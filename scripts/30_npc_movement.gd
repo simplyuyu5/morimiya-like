@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 var hp = 120
 var bleed = 0
+var acceleration = 1
 @onready var collision = $CollisionShape2D3
 @onready var dead = $dead
 @onready var alive = $alive
@@ -15,8 +16,6 @@ var bleed = 0
 @onready var timer_sound = $audio/randi_sound
 
 var goal = null
-var player
-
 
 
 enum states {
@@ -25,7 +24,7 @@ enum states {
 	RUN,
 	ATTACK
 }
-var state_cur
+var state_cur = states.CALM
 
 var persons = {
 	"Null":{
@@ -39,16 +38,20 @@ var persons = {
 @export var personality = persons["Agressive"]
 
 func _ready() -> void:
-	state_cur = states.CALM
 	skins(randi_range(0,3))
 
 func _process(_delta:float):
+	var nav_point_dir = (agent.get_next_path_position() - global_position).normalized()
+	velocity = velocity.lerp(nav_point_dir * hp, acceleration)
+	rotation = velocity.angle() #npc rotates where he goes
+
 	if hp_man.is_dead == false:
 		hp_man.hp_func()
 		eyes()
 		state()
 	else:
 		pass
+	move_and_slide()
 
 func state():
 	match state_cur:
@@ -56,17 +59,19 @@ func state():
 			await get_tree().create_timer(1).timeout
 			state()
 		states.WANDER:
-			pass
+			goal_node.position = global_position + Vector2(randi_range(-10,10),randi_range(-10,10))
 		states.RUN:
-			goal = goal_node
-	
+			pass
+		states.ATTACK:
+			pass
+
 
 func skins(num):
 	dead.frame = num
 	alive.frame = num
 
 func eyes():
-	player= $"/root/Node2D/CharacterBody2D"
+	var player= $"/root/Node2D/CharacterBody2D"
 
 	eyes_ray.enabled = true
 	var target = eyes_ray.get_collider()
@@ -82,12 +87,13 @@ func die():
 	hp_man.is_dead = true
 	collision.disabled = true
 	alive.hide()
+
 	dead.rotation_degrees = randf_range(0,360)
 	dead.show()
 
 
 func _on_nav_timer_timeout() -> void:
-	if agent.target_position != goal.global_position:
-		agent.target_position = goal.global_position
+	if agent.target_position != goal_node.global_position:
+		agent.target_position = goal_node.global_position
 
 	timer_nav.start()
