@@ -73,7 +73,10 @@ script = ExtResource("3_168wh")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_postprocessing = 1
 avoidance_enabled = true
+avoidance_layers = 17
+avoidance_mask = 17
 debug_enabled = true
+debug_path_custom_color = Color(0.36862746, 0, 1, 1)
 
 [node name="nav_timer" type="Timer" parent="NavigationAgent2D"]
 wait_time = 0.5
@@ -115,7 +118,7 @@ stream = SubResource("AudioStream_kyfuo")
 
 [node name="goal_node" type="Node2D" parent="."]
 top_level = true
-position = Vector2(-278, -89)
+position = Vector2(7, -20)
 
 [connection signal="timeout" from="NavigationAgent2D/nav_timer" to="." method="_on_nav_timer_timeout"]
 [connection signal="timeout" from="audio/randi_sound" to="sounds" method="_on_randi_sound_timeout"]

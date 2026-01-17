@@ -41,9 +41,13 @@ func _ready() -> void:
 	skins(randi_range(0,3))
 
 func _process(_delta:float):
+
+	if hp <= -1:
+		hp = 0
+
 	var nav_point_dir = (agent.get_next_path_position() - global_position).normalized()
 	velocity = velocity.lerp(nav_point_dir * hp, acceleration)
-	rotation = velocity.angle() #npc rotates where he goes
+	alive.rotation = velocity.angle() #npc rotates where he goes
 
 	if hp_man.is_dead == false:
 		hp_man.hp_func()
