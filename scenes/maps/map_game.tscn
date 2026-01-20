@@ -15,14 +15,14 @@ metadata/_edit_lock_ = true
 
 [node name="npcs" type="Node" parent="."]
 
-[node name="tpo_npc" parent="npcs" instance=ExtResource("4_e5gab")]
-visibility_layer = 2
-position = Vector2(204, 714.99994)
-rotation = 1.5621265
-scale = Vector2(0.9999997, 0.9999997)
-motion_mode = 1
-
 [node name="CharacterBody2D" parent="." instance=ExtResource("2_ropr1")]
 visibility_layer = 2
 position = Vector2(95.00003, 948.9999)
 scale = Vector2(3.4999995, 3.4999995)
+
+[node name="tpo_npc" parent="." instance=ExtResource("4_e5gab")]
+visibility_layer = 2
+position = Vector2(204, 714.99994)
+rotation = 1.5621265
+scale = Vector2(0.99999964, 0.99999964)
+motion_mode = 1

@@ -72,7 +72,7 @@ func shoot():
 			if randf_range(0,100.0) <= float(weapon.chance_hit):
 				target.hp -=weapon.damage
 				target.bleed += randi_range(0,weapon.bleed_max)
-				print(target.bleed)
+				#print(target.bleed)
 			else:
 				print("miss lol")
 		recoil()

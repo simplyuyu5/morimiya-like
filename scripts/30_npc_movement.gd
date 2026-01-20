@@ -15,7 +15,7 @@ var acceleration = 1
 @onready var timer_nav = $NavigationAgent2D/nav_timer
 @onready var timer_sound = $audio/randi_sound
 
-var goal = null
+var goal = goal_node
 
 
 enum states {
@@ -39,6 +39,7 @@ var persons = {
 
 func _ready() -> void:
 	skins(randi_range(0,3))
+	goal = goal_node.position
 
 func _process(_delta:float):
 
@@ -48,6 +49,7 @@ func _process(_delta:float):
 	var nav_point_dir = (agent.get_next_path_position() - global_position).normalized()
 	velocity = velocity.lerp(nav_point_dir * hp, acceleration)
 	alive.rotation = velocity.angle() #npc rotates where he goes
+	agent.target_position = goal.position
 
 	if hp_man.is_dead == false:
 		hp_man.hp_func()
@@ -58,6 +60,9 @@ func _process(_delta:float):
 	move_and_slide()
 
 func state():
+
+	var player= $"/root/Node2D/CharacterBody2D"
+
 	match state_cur:
 		states.CALM:
 			await get_tree().create_timer(1).timeout
@@ -65,7 +70,8 @@ func state():
 		states.WANDER:
 			goal_node.position = global_position + Vector2(randi_range(-10,10),randi_range(-10,10))
 		states.RUN:
-			pass
+			goal_node.position = position.direction_to(player.position)
+			goal = goal_node
 		states.ATTACK:
 			pass
 

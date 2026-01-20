@@ -23,7 +23,7 @@ func _process(_delta:float):
 func hp_func():
 	if bleed > 0 and is_bleeding == false:
 		bleeding()
-		await get_tree().create_timer(2 - bleed/2).timeout
+		await get_tree().create_timer(2 - bleed/10).timeout
 		is_bleeding = false
 	else:
 		pass
@@ -41,9 +41,7 @@ func bleeding():
 		hp_saved = hp
 		parent.bleed -=1
 
-		blood.position = parent.position + Vector2(randi_range(-20,20),randi_range(-20,20))
-		blood.rotation = randi_range(0,360)
-		add_sibling(blood)
+		parent.decal_bleed()
 
 		print(bleed, " bleed!")
 	else:

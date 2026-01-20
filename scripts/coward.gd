@@ -41,12 +41,8 @@ func _process(_delta: float) -> void:
 	#velocity = nav_point_dir * (help.hp)
 	help.rotation = velocity.angle()
 	that_guy_who_i_hate.rotation = velocity.angle() #npc rotates where he goes
-	
+
 	move_and_slide()
-
-
-	#walk()
-
 
 func walk():
 	pass
