@@ -68,6 +68,8 @@ func shoot():
 
 		if ray.is_colliding() and target.is_in_group("wall"):
 			ray.enabled = false
+		else:
+			pass
 		if ray.is_colliding() and target.is_in_group("living"):
 			if randf_range(0,100.0) <= float(weapon.chance_hit):
 				target.hp -=weapon.damage
@@ -159,8 +161,8 @@ func shell_eject(shell):
 	var shell_inst = shells.instantiate()
 	shell_inst.shell_look = shell
 
-	shell_inst.position = pos.global_position;
-	shell_inst.global_transform = pos.global_transform;
+	shell_inst.global_transform = pos.global_transform
+	shell_inst.position = pos.global_position + Vector2(randi_range(-5,5),randi_range(-5,5));
 	shell_inst.rotation_degrees = pos.rotation_degrees
 	shell_inst.rotation_degrees += randi_range(0,70)
 

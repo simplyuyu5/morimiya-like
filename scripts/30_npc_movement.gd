@@ -39,7 +39,8 @@ var persons = {
 
 func _ready() -> void:
 	skins(randi_range(0,3))
-	goal = goal_node.position
+	goal = goal_node
+	agent.target_position = goal.global_position
 
 func _process(_delta:float):
 
@@ -69,6 +70,8 @@ func state():
 			state()
 		states.WANDER:
 			goal_node.position = global_position + Vector2(randi_range(-10,10),randi_range(-10,10))
+			goal_node.position = Vector2i(randi_range(-300,300),randi_range(-200,200)) + Vector2i(position)
+			goal = goal_node
 		states.RUN:
 			goal_node.position = position.direction_to(player.position)
 			goal = goal_node
@@ -101,6 +104,12 @@ func die():
 	dead.rotation_degrees = randf_range(0,360)
 	dead.show()
 
+
+
+func decal_bleed():
+	hp_man.blood.position = position + Vector2(randi_range(-20,20),randi_range(-20,20))
+	hp_man.blood.rotation = randi_range(0,360)
+	add_sibling(hp_man.blood)
 
 func _on_nav_timer_timeout() -> void:
 	if agent.target_position != goal_node.global_position:
