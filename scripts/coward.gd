@@ -28,7 +28,7 @@ var speed = 100
 
 func _ready() -> void:
 	states()
-	#goal = idle_goal
+	goal = idle_goal
 	agent.target_position = goal.global_position
 
 func _process(_delta: float) -> void:

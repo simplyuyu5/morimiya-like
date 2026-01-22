@@ -16,8 +16,8 @@ func _ready():
 
 func _process(_delta:float):
 	bleed = parent.bleed
-	if hp <= 0:
-		hp = 0
+	if parent.hp <= 0:
+		parent.hp = 0
 	hp = parent.hp 
 
 func hp_func():

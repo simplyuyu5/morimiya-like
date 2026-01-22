@@ -3,6 +3,7 @@ extends CharacterBody2D
 var hp = 120
 var bleed = 0
 var acceleration = 1
+var walking := false
 @onready var collision = $CollisionShape2D3
 @onready var dead = $dead
 @onready var alive = $alive
@@ -15,7 +16,7 @@ var acceleration = 1
 @onready var timer_nav = $NavigationAgent2D/nav_timer
 @onready var timer_sound = $audio/randi_sound
 
-var goal = goal_node
+var goal# = goal_node
 
 
 enum states {
@@ -44,13 +45,9 @@ func _ready() -> void:
 
 func _process(_delta:float):
 
-	if hp <= -1:
-		hp = 0
-
 	var nav_point_dir = (agent.get_next_path_position() - global_position).normalized()
 	velocity = velocity.lerp(nav_point_dir * hp, acceleration)
-	alive.rotation = velocity.angle() #npc rotates where he goes
-	agent.target_position = goal.position
+	alive.rotation = velocity.angle()
 
 	if hp_man.is_dead == false:
 		hp_man.hp_func()
@@ -58,6 +55,7 @@ func _process(_delta:float):
 		state()
 	else:
 		pass
+
 	move_and_slide()
 
 func state():
@@ -69,15 +67,26 @@ func state():
 			await get_tree().create_timer(1).timeout
 			state()
 		states.WANDER:
-			goal_node.position = global_position + Vector2(randi_range(-10,10),randi_range(-10,10))
-			goal_node.position = Vector2i(randi_range(-300,300),randi_range(-200,200)) + Vector2i(position)
-			goal = goal_node
+			if walking == false and agent.is_target_reachable() == true:
+				goal_randi()
+				walking = true
+				await get_tree().create_timer(3).timeout
+				if agent.is_target_reached() == true:
+					walking = false
+					#state()
+				else:
+					pass
+			elif agent.is_target_reachable() == false:
+				goal_randi()
 		states.RUN:
-			goal_node.position = position.direction_to(player.position)
+			#goal_node.position = position.direction_to(player.position)
 			goal = goal_node
 		states.ATTACK:
 			pass
 
+func goal_randi():
+	goal_node.position = Vector2i(randi_range(-300,300),randi_range(-200,200)) + Vector2i(position)
+	goal = goal_node
 
 func skins(num):
 	dead.frame = num
@@ -92,11 +101,11 @@ func eyes():
 	if eyes_ray.is_colliding() and target.is_in_group("wall"):
 		eyes_ray.enabled = false
 	elif eyes_ray.is_colliding() and target.is_in_group("danger"):
-		state_cur = states.RUN
+		state_cur = states.WANDER
 
 func die():
 	eyes_ray.enabled = false
-	eyes_ray.target_position = Vector2(0,0)
+	eyes_ray.target_position = Vector2i(0,0)
 	hp_man.is_dead = true
 	collision.disabled = true
 	alive.hide()
@@ -107,9 +116,10 @@ func die():
 
 
 func decal_bleed():
+	var blood = preload("res://scenes/blood_decal_shot.tscn").instantiate()
 	hp_man.blood.position = position + Vector2(randi_range(-20,20),randi_range(-20,20))
 	hp_man.blood.rotation = randi_range(0,360)
-	add_sibling(hp_man.blood)
+	add_sibling(blood)
 
 func _on_nav_timer_timeout() -> void:
 	if agent.target_position != goal_node.global_position:
