@@ -23,7 +23,7 @@ func _process(_delta:float):
 func hp_func():
 	if bleed > 0 and is_bleeding == false:
 		bleeding()
-		await get_tree().create_timer(2 - bleed/10).timeout
+		await get_tree().create_timer(5 - bleed/10).timeout
 		is_bleeding = false
 	else:
 		pass

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dxgaqwnsyvxs0"]
+[gd_scene load_steps=19 format=3 uid="uid://dxgaqwnsyvxs0"]
 
 [ext_resource type="Texture2D" uid="uid://dobf1uhek57hj" path="res://images/living/corpses/dead-01.png" id="1_4xgab"]
 [ext_resource type="Script" uid="uid://ct3giwk67767l" path="res://scripts/30_npc_movement.gd" id="1_i76qr"]
@@ -61,6 +61,26 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_168wh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_k73aa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_aqwbi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_kbm7u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_rk3wh")
+}],
+"loop": true,
+"name": &"down",
+"speed": 5.0
+}]
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bn6rf"]
 radius = 18.000002
 height = 36.000004
@@ -113,7 +133,15 @@ rotation = 1.5707964
 scale = Vector2(4.999999, 4.999999)
 sprite_frames = SubResource("SpriteFrames_ojvar")
 animation = &"bodies"
-frame = 2
+offset = Vector2(-0.0033444103, -1.4788249)
+
+[node name="down" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(-5.9604645e-07, -2.3283064e-09)
+rotation = 1.5707964
+scale = Vector2(4.999999, 4.999999)
+sprite_frames = SubResource("SpriteFrames_168wh")
+animation = &"down"
 offset = Vector2(-0.0033444103, -1.4788249)
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="."]

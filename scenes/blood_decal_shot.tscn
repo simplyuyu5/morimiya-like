@@ -1,20 +1,62 @@
-[gd_scene load_steps=5 format=3 uid="uid://cr3vo1oy4bne2"]
+[gd_scene load_steps=11 format=3 uid="uid://cr3vo1oy4bne2"]
 
 [ext_resource type="Script" uid="uid://b3mwf6oqetcn4" path="res://scenes/blood_decal_shot.gd" id="1_dwlrt"]
 [ext_resource type="Texture2D" uid="uid://bdrqfldiw72kt" path="res://images/decals_n_effects/blood20x20.png" id="1_egyfw"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_sjj1r"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_dwlrt"]
 atlas = ExtResource("1_egyfw")
 region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lyc7w"]
+atlas = ExtResource("1_egyfw")
+region = Rect2(20, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tn4jc"]
+atlas = ExtResource("1_egyfw")
+region = Rect2(40, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v3euk"]
+atlas = ExtResource("1_egyfw")
+region = Rect2(60, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pbo3a"]
+atlas = ExtResource("1_egyfw")
+region = Rect2(80, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mnoaw"]
+atlas = ExtResource("1_egyfw")
+region = Rect2(0, 20, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pcbh0"]
+atlas = ExtResource("1_egyfw")
+region = Rect2(20, 20, 20, 20)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0pnj1"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_sjj1r")
+"texture": SubResource("AtlasTexture_dwlrt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lyc7w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tn4jc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v3euk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pbo3a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mnoaw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pcbh0")
 }],
-"loop": true,
-"name": &"default",
+"loop": false,
+"name": &"bleed",
 "speed": 5.0
 }]
 
@@ -23,5 +65,9 @@ show_behind_parent = true
 scale = Vector2(5, 5)
 script = ExtResource("1_dwlrt")
 
-[node name="blood_decal_shot" type="AnimatedSprite2D" parent="."]
+[node name="bleed" type="AnimatedSprite2D" parent="."]
+visible = false
+visibility_layer = 12
+z_index = -2
 sprite_frames = SubResource("SpriteFrames_0pnj1")
+animation = &"bleed"

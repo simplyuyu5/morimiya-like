@@ -67,6 +67,7 @@ func state():
 			await get_tree().create_timer(1).timeout
 			state()
 		states.WANDER:
+			#print(velocity, " ", walking)
 			if walking == false and agent.is_target_reachable() == true:
 				goal_randi()
 				walking = true
@@ -79,7 +80,7 @@ func state():
 			elif agent.is_target_reachable() == false:
 				goal_randi()
 		states.RUN:
-			#goal_node.position = position.direction_to(player.position)
+			goal_node.position = position.direction_to(player.position)
 			goal = goal_node
 		states.ATTACK:
 			pass
@@ -117,8 +118,10 @@ func die():
 
 func decal_bleed():
 	var blood = preload("res://scenes/blood_decal_shot.tscn").instantiate()
-	hp_man.blood.position = position + Vector2(randi_range(-20,20),randi_range(-20,20))
-	hp_man.blood.rotation = randi_range(0,360)
+	blood.position = position + Vector2(randi_range(-30,30),randi_range(-30,30))
+	blood.rotation = randi_range(0,360)
+	blood.type = "bleed"
+	blood.fram = randi_range(0,6)
 	add_sibling(blood)
 
 func _on_nav_timer_timeout() -> void:
