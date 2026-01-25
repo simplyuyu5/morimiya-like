@@ -39,7 +39,7 @@ var persons = {
 @export var personality = persons["Agressive"]
 
 func _ready() -> void:
-	skins(randi_range(0,3))
+	skins(randi_range(0,4))
 	goal = goal_node
 	agent.target_position = goal.global_position
 

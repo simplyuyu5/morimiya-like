@@ -1,12 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://dxgaqwnsyvxs0"]
+[gd_scene load_steps=27 format=3 uid="uid://dxgaqwnsyvxs0"]
 
-[ext_resource type="Texture2D" uid="uid://dobf1uhek57hj" path="res://images/living/corpses/dead-01.png" id="1_4xgab"]
 [ext_resource type="Script" uid="uid://ct3giwk67767l" path="res://scripts/30_npc_movement.gd" id="1_i76qr"]
 [ext_resource type="Script" uid="uid://cfhiihppfx3jj" path="res://scripts/30_npc_area.gd" id="2_i76qr"]
-[ext_resource type="Texture2D" uid="uid://3v45xq2out8" path="res://images/living/corpses/dead-02.png" id="2_kyfuo"]
 [ext_resource type="Script" uid="uid://dctjjv8s7j4es" path="res://scripts/sounds.gd" id="3_168wh"]
-[ext_resource type="Texture2D" uid="uid://degybtofviknl" path="res://images/living/corpses/dead-03.png" id="3_i76qr"]
-[ext_resource type="Texture2D" uid="uid://bjem2g437f1ub" path="res://images/living/corpses/dead-04.png" id="4_168wh"]
+[ext_resource type="Texture2D" uid="uid://cecdnh2t8e4wd" path="res://images/living/corpses/dead_list.png" id="4_kyfuo"]
+[ext_resource type="Texture2D" uid="uid://b6oyr1hf1j4si" path="res://images/living/npc_list.png" id="5_i76qr"]
 [ext_resource type="Texture2D" uid="uid://c6qcwyyd1rjbd" path="res://images/living/npc-01.png" id="5_k73aa"]
 [ext_resource type="Texture2D" uid="uid://5r3jknl314v6" path="res://images/living/npc-02.png" id="6_aqwbi"]
 [ext_resource type="Texture2D" uid="uid://5dtal3bbveej" path="res://images/living/npc-03.png" id="7_kbm7u"]
@@ -21,40 +19,86 @@ gradient = SubResource("Gradient_168wh")
 width = 10
 height = 10
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_168wh"]
+atlas = ExtResource("4_kyfuo")
+region = Rect2(0, 0, 15, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k73aa"]
+atlas = ExtResource("4_kyfuo")
+region = Rect2(15, 0, 15, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aqwbi"]
+atlas = ExtResource("4_kyfuo")
+region = Rect2(30, 0, 15, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kbm7u"]
+atlas = ExtResource("4_kyfuo")
+region = Rect2(45, 0, 15, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rk3wh"]
+atlas = ExtResource("4_kyfuo")
+region = Rect2(60, 0, 15, 25)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_gxeka"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_4xgab")
+"texture": SubResource("AtlasTexture_168wh")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_kyfuo")
+"texture": SubResource("AtlasTexture_k73aa")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_i76qr")
+"texture": SubResource("AtlasTexture_aqwbi")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_168wh")
+"texture": SubResource("AtlasTexture_kbm7u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rk3wh")
 }],
 "loop": true,
 "name": &"dead",
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_bn6rf"]
+atlas = ExtResource("5_i76qr")
+region = Rect2(0, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gxeka"]
+atlas = ExtResource("5_i76qr")
+region = Rect2(10, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ojvar"]
+atlas = ExtResource("5_i76qr")
+region = Rect2(20, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_otks3"]
+atlas = ExtResource("5_i76qr")
+region = Rect2(30, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0mefl"]
+atlas = ExtResource("5_i76qr")
+region = Rect2(40, 0, 10, 10)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_ojvar"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_k73aa")
+"texture": SubResource("AtlasTexture_bn6rf")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_aqwbi")
+"texture": SubResource("AtlasTexture_gxeka")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_kbm7u")
+"texture": SubResource("AtlasTexture_ojvar")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_rk3wh")
+"texture": SubResource("AtlasTexture_otks3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0mefl")
 }],
 "loop": true,
 "name": &"bodies",
