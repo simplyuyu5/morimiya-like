@@ -130,6 +130,8 @@ func equip_ult():
 		equip_weapon()
 	if ray_pick.is_colliding() and target.is_in_group("weapons_desk"):
 		store.init()
+	if ray_pick.is_colliding() and target.is_in_group("interactable"):
+		target.interaction()
 
 func equip_weapon():
 	var target = ray_pick.get_collider()

@@ -71,14 +71,17 @@ func state():
 			if walking == false and agent.is_target_reachable() == true:
 				goal_randi()
 				walking = true
-				await get_tree().create_timer(3).timeout
-				if agent.is_target_reached() == true:
-					walking = false
-					#state()
-				else:
-					pass
 			elif agent.is_target_reachable() == false:
 				goal_randi()
+			else:
+				pass
+			#await get_tree().create_timer(3).timeout
+			if agent.is_target_reached() == true:
+				walking = false
+				#state()
+			else:
+				pass
+			
 		states.RUN:
 			goal_node.position = position.direction_to(player.position)
 			goal = goal_node
