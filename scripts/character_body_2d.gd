@@ -8,10 +8,12 @@ extends CharacterBody2D
 @onready var audio_shoot = $sounds/shoot
 @onready var audio_reload = $sounds/reload
 @onready var audio = $sounds/sounds_misc
+@onready var gui = $gui
 var shells = preload("res://scenes/shells.tscn")#.instantiate()
 var shell_look :int = 0
 var can_shoot := true
 var reloading := true
+var movable := true
 
 @onready var pew = $ray_long/pew
 @onready var store = $store
@@ -30,13 +32,14 @@ func _ready() -> void:
 	#preload("res://scenes/shells.tscn")
 
 func _process(_delta: float) -> void:
+	if movable == true:
 		move()
 		move_anim()
-		if gui_show == true:gui()
-		else:pass
+	else: pass
+	
+	if gui_show == true:gui.gui()
+	else:pass
 
-#func _input(_event: InputEvent) -> void:
-	#pass
 
 func _physics_process(_delta: float) -> void:
 	equip_ult()
@@ -44,7 +47,7 @@ func _physics_process(_delta: float) -> void:
 	shoot()
 	reload()
 
-	look_at(get_global_mouse_position())
+
 	move_and_slide()
 
 func shoot():
@@ -61,7 +64,6 @@ func shoot():
 			weapon.bank.rounds_sec = weapon.rounds
 		can_shoot = false
 		await get_tree().create_timer(weapon.delay).timeout
-		#print("u can pew")
 		can_shoot = true
 
 
@@ -74,7 +76,6 @@ func shoot():
 			if randf_range(0,100.0) <= float(weapon.chance_hit):
 				target.hp -=weapon.damage
 				target.bleed += randi_range(0,weapon.bleed_max)
-				#print(target.bleed)
 			else:
 				print("miss lol")
 		recoil()
@@ -83,6 +84,7 @@ func reload():
 	if Input.is_action_just_pressed("r"):
 		reloading = true
 		audio_reload.play(1)
+		gui.gui_reload(weapon.reload_time)
 		await get_tree().create_timer(weapon.reload_time).timeout
 		if weapon.in_hands == weapon.current_prim:
 			weapon.bank.mags_prim = weapon.mags - 1
@@ -121,8 +123,6 @@ func change():
 	if Input.is_action_just_pressed("3"):
 		weapon.in_hands = weapon.current_melee
 		weapon.weapon_change(3)
-#i tried to use match but idk how to do it so die idc
-
 
 func equip_ult():
 	var target = ray_pick.get_collider()
@@ -154,6 +154,7 @@ func equip_weapon():
 
 
 func move_anim():
+	look_at(get_global_mouse_position())
 	if Input.is_action_pressed("moving"):
 		body.play("walk")
 	else:
@@ -177,16 +178,6 @@ func gun_smoke(style):
 		2:pew.play("pew_big")
 		5:pew.play("slash")
 
-@onready var label_rou = $gui/rounds
-@onready var label_mag = $gui/mags
-@onready var label_chance = $gui/chance
-@onready var weapon_icon = $gui/weapon
-
-func gui():
-	label_rou.text = str(weapon.rounds) + " rounds"
-	label_mag.text = str(weapon.mags) + " mags"
-	label_chance.text = str(weapon.chance_hit) +" %"
-	weapon_icon.play(weapon.in_hands)
 #func _on_pick_range_area_entered(area: Area2D):
 	#if area.is_in_group("weapon_pick"):
 		#print(area.name)
