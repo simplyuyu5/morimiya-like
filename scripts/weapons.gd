@@ -56,7 +56,7 @@ var primaries = {
 		"sdamage":90,
 		"srounds_max":20,
 		"smags_max":4,
-		"sdelay":0,
+		"sdelay":0.1,
 		"rel_time":3,
 		"sshots":1,
 		"sstyle":1,
@@ -213,6 +213,7 @@ var grenades = {
 	}
 }
 #ADD GRENADES !!!!!!!!!
+#Added :3
 
 var current_sec = "g17"
 var current_prim = "m14"

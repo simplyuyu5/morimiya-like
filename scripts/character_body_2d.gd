@@ -23,6 +23,7 @@ var weapon_under :bool = false
 var pickup_under :bool = false
 var under_name
 var gui_show:bool = true
+var homicidin:bool = false
 
 var health = 200
 var speed_fin = 300
@@ -38,14 +39,16 @@ func _process(_delta: float) -> void:
 	else: pass
 	
 	if gui_show == true:gui.gui()
-	else:pass
+	else:gui.hide()
 
 
 func _physics_process(_delta: float) -> void:
 	equip_ult()
-	change()
-	shoot()
-	reload()
+	if homicidin == true:
+		change()
+		shoot()
+		reload()
+	
 
 
 	move_and_slide()
@@ -66,18 +69,14 @@ func shoot():
 		await get_tree().create_timer(weapon.delay).timeout
 		can_shoot = true
 
-
-
 		if ray.is_colliding() and target.is_in_group("wall"):
 			ray.enabled = false
-		else:
-			pass
-		if ray.is_colliding() and target.is_in_group("living"):
+		elif ray.is_colliding() and target.is_in_group("living"):
 			if randf_range(0,100.0) <= float(weapon.chance_hit):
 				target.hp -=weapon.damage
 				target.bleed += randi_range(0,weapon.bleed_max)
-			else:
-				print("miss lol")
+		else:
+			print("miss lol")
 		recoil()
 
 func reload():

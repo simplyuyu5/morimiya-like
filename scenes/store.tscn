@@ -82,7 +82,23 @@ button_mask = 2
 text = "buy primary weapons"
 metadata/_edit_use_anchors_ = true
 
-[node name="equip prim" type="Button" parent="Panel"]
+[node name="buy sec" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4644097
+anchor_top = 0.021604938
+anchor_right = 0.6606771
+anchor_bottom = 0.14722222
+offset_right = 96.900024
+offset_bottom = 10.599998
+scale = Vector2(0.7, 0.7)
+theme_override_font_sizes/font_size = 30
+button_mask = 2
+text = "buy secondary
+ weapons"
+metadata/_edit_use_anchors_ = true
+
+[node name="equip" type="Button" parent="Panel"]
 layout_mode = 0
 anchor_left = 0.6640625
 anchor_top = 0.15432099
@@ -93,7 +109,7 @@ offset_bottom = 22.5
 scale = Vector2(0.7, 0.7)
 theme_override_font_sizes/font_size = 30
 button_mask = 2
-text = "equip primary weapons"
+text = "equip weapons"
 metadata/_edit_use_anchors_ = true
 
 [node name="Button" type="Button" parent="Panel"]
@@ -345,7 +361,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.44705883)
 
-[node name="prim_equip" type="Panel" parent="Panel/weapons_shop"]
+[node name="equip" type="Panel" parent="Panel/weapons_shop"]
 layout_mode = 0
 anchor_left = 9.0
 anchor_top = -4.425
@@ -354,7 +370,7 @@ anchor_bottom = 11.775
 theme_override_styles/panel = ExtResource("2_atuvt")
 metadata/_edit_use_anchors_ = true
 
-[node name="itemlist_eq" type="ItemList" parent="Panel/weapons_shop/prim_equip"]
+[node name="itemlist_eq" type="ItemList" parent="Panel/weapons_shop/equip"]
 layout_mode = 0
 offset_left = -265.0
 offset_top = 10.0
@@ -362,7 +378,7 @@ offset_bottom = 638.0
 theme_override_font_sizes/font_size = 30
 allow_rmb_select = true
 
-[node name="subButton2" type="Button" parent="Panel/weapons_shop/prim_equip"]
+[node name="subButton2" type="Button" parent="Panel/weapons_shop/equip"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.9418472
@@ -381,7 +397,7 @@ autowrap_trim_flags = 0
 icon_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="equip" type="Button" parent="Panel/weapons_shop/prim_equip"]
+[node name="equip" type="Button" parent="Panel/weapons_shop/equip"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -399,13 +415,13 @@ autowrap_mode = 2
 autowrap_trim_flags = 0
 icon_alignment = 1
 
-[node name="equipicon" type="AnimatedSprite2D" parent="Panel/weapons_shop/prim_equip"]
+[node name="equipicon" type="AnimatedSprite2D" parent="Panel/weapons_shop/equip"]
 position = Vector2(241, 88)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_phafb")
 animation = &"m14"
 
-[node name="damage" type="Label" parent="Panel/weapons_shop/prim_equip"]
+[node name="damage" type="Label" parent="Panel/weapons_shop/equip"]
 layout_mode = 0
 offset_left = 18.0
 offset_top = 169.0
@@ -414,7 +430,7 @@ offset_bottom = 204.0
 theme_override_font_sizes/font_size = 25
 text = "damage - 50"
 
-[node name="prog" type="TextureProgressBar" parent="Panel/weapons_shop/prim_equip/damage"]
+[node name="prog" type="TextureProgressBar" parent="Panel/weapons_shop/equip/damage"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -433,7 +449,7 @@ nine_patch_stretch = true
 texture_under = ExtResource("7_tmp5q")
 texture_progress = ExtResource("8_phafb")
 
-[node name="roundsmax" type="Label" parent="Panel/weapons_shop/prim_equip"]
+[node name="roundsmax" type="Label" parent="Panel/weapons_shop/equip"]
 layout_mode = 0
 offset_left = 18.0
 offset_top = 203.0
@@ -442,7 +458,7 @@ offset_bottom = 238.0
 theme_override_font_sizes/font_size = 25
 text = "mag size - 30"
 
-[node name="prog" type="TextureProgressBar" parent="Panel/weapons_shop/prim_equip/roundsmax"]
+[node name="prog" type="TextureProgressBar" parent="Panel/weapons_shop/equip/roundsmax"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -460,7 +476,7 @@ nine_patch_stretch = true
 texture_under = ExtResource("7_tmp5q")
 texture_progress = ExtResource("8_phafb")
 
-[node name="mags" type="Label" parent="Panel/weapons_shop/prim_equip"]
+[node name="mags" type="Label" parent="Panel/weapons_shop/equip"]
 layout_mode = 0
 offset_left = 18.0
 offset_top = 236.0
@@ -469,7 +485,7 @@ offset_bottom = 271.0
 theme_override_font_sizes/font_size = 25
 text = "mags - 4"
 
-[node name="reloadtype" type="Label" parent="Panel/weapons_shop/prim_equip"]
+[node name="reloadtype" type="Label" parent="Panel/weapons_shop/equip"]
 layout_mode = 0
 offset_left = 18.0
 offset_top = 266.0
@@ -478,7 +494,7 @@ offset_bottom = 301.0
 theme_override_font_sizes/font_size = 25
 text = "reload type - mag"
 
-[node name="recoil" type="Label" parent="Panel/weapons_shop/prim_equip"]
+[node name="recoil" type="Label" parent="Panel/weapons_shop/equip"]
 layout_mode = 0
 offset_left = 19.0
 offset_top = 300.0
@@ -487,7 +503,7 @@ offset_bottom = 335.0
 theme_override_font_sizes/font_size = 25
 text = "recoil - 3"
 
-[node name="prog" type="TextureProgressBar" parent="Panel/weapons_shop/prim_equip/recoil"]
+[node name="prog" type="TextureProgressBar" parent="Panel/weapons_shop/equip/recoil"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -506,7 +522,7 @@ nine_patch_stretch = true
 texture_under = ExtResource("7_tmp5q")
 texture_progress = ExtResource("8_phafb")
 
-[node name="description" type="Label" parent="Panel/weapons_shop/prim_equip"]
+[node name="description" type="Label" parent="Panel/weapons_shop/equip"]
 layout_mode = 0
 offset_left = 9.0
 offset_top = 371.0
@@ -517,7 +533,7 @@ text = "ar 15 - popular base for a lot of weapons, widely spread among
 civilians of usa"
 horizontal_alignment = 1
 
-[node name="ColorRect" type="ColorRect" parent="Panel/weapons_shop/prim_equip/description"]
+[node name="ColorRect" type="ColorRect" parent="Panel/weapons_shop/equip/description"]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = -1
@@ -530,12 +546,12 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.44705883)
 
 [connection signal="pressed" from="Panel/buy prim" to="." method="_on_buy_prim_pressed"]
-[connection signal="pressed" from="Panel/equip prim" to="." method="_on_equip_prim_pressed"]
+[connection signal="pressed" from="Panel/equip" to="." method="_on_equip_prim_pressed"]
 [connection signal="pressed" from="Panel/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Panel/skills_shop/subButton" to="." method="_on_sub_button_pressed"]
 [connection signal="item_selected" from="Panel/weapons_shop/prim_buy/itemlist_prim" to="." method="_on_itemlist_prim_item_selected"]
 [connection signal="pressed" from="Panel/weapons_shop/prim_buy/subButton2" to="." method="_on_sub_button_pressed"]
 [connection signal="pressed" from="Panel/weapons_shop/prim_buy/buy_button_shop" to="." method="_on_buy_button_shop_pressed"]
-[connection signal="item_selected" from="Panel/weapons_shop/prim_equip/itemlist_eq" to="." method="_on_itemlist_eq_item_selected"]
-[connection signal="pressed" from="Panel/weapons_shop/prim_equip/subButton2" to="." method="_on_sub_button_pressed"]
-[connection signal="pressed" from="Panel/weapons_shop/prim_equip/equip" to="." method="_on_equip_pressed"]
+[connection signal="item_selected" from="Panel/weapons_shop/equip/itemlist_eq" to="." method="_on_itemlist_eq_item_selected"]
+[connection signal="pressed" from="Panel/weapons_shop/equip/subButton2" to="." method="_on_sub_button_pressed"]
+[connection signal="pressed" from="Panel/weapons_shop/equip/equip" to="." method="_on_equip_pressed"]

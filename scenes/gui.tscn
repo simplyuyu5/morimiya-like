@@ -1,0 +1,110 @@
+[gd_scene load_steps=9 format=3 uid="uid://bhoacu7owtw6m"]
+
+[ext_resource type="Script" uid="uid://dwqegnnb8d4p1" path="res://scripts/gui.gd" id="1_7yii4"]
+[ext_resource type="Texture2D" uid="uid://brmdkm2ix0opo" path="res://images/weapons_portraits/g17_shop.png" id="2_4yt8u"]
+[ext_resource type="Texture2D" uid="uid://dlfu1udpvweav" path="res://images/weapons_portraits/m14_shop.png" id="3_p54wi"]
+[ext_resource type="Texture2D" uid="uid://c4mhgvel1egqo" path="res://images/weapons_portraits/nothing.png" id="4_xki8e"]
+[ext_resource type="Texture2D" uid="uid://dq47xwlg3pwa4" path="res://images/weapons_portraits/ar_shop.png" id="5_v3be1"]
+[ext_resource type="Texture2D" uid="uid://bwtlauc2loalf" path="res://images/effects/progbarreload3.png" id="6_xqxrh"]
+[ext_resource type="Texture2D" uid="uid://cyrhfr2vowgim" path="res://images/effects/progbarreload2.png" id="7_qupqx"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i4ail"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_4yt8u")
+}],
+"loop": true,
+"name": &"g17",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_p54wi")
+}],
+"loop": true,
+"name": &"m14",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_xki8e")
+}],
+"loop": true,
+"name": &"null",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_v3be1")
+}],
+"loop": true,
+"name": &"xm15",
+"speed": 5.0
+}]
+
+[node name="gui" type="CanvasLayer"]
+script = ExtResource("1_7yii4")
+
+[node name="chance" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.4778646
+anchor_right = 0.5
+anchor_bottom = 0.032407407
+offset_right = 25.5
+offset_bottom = 21.0
+grow_horizontal = 2
+scale = Vector2(0.5, 0.5)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 30
+text = "100"
+
+[node name="rounds" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.012152778
+anchor_top = 0.6805556
+anchor_right = 0.065972224
+anchor_bottom = 0.7453704
+offset_top = -3.0517578e-05
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 30
+text = "23hi"
+metadata/_edit_use_anchors_ = true
+
+[node name="mags" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.011284722
+anchor_top = 0.7484568
+anchor_right = 0.078125
+anchor_bottom = 0.8132716
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 30
+text = "mags"
+metadata/_edit_use_anchors_ = true
+
+[node name="weapon" type="AnimatedSprite2D" parent="."]
+position = Vector2(130, 580)
+scale = Vector2(1.6, 1.6)
+sprite_frames = SubResource("SpriteFrames_i4ail")
+animation = &"xm15"
+
+[node name="reloadbar" type="TextureProgressBar" parent="."]
+visible = false
+anchors_preset = -1
+anchor_left = 0.0034722222
+anchor_top = 0.46141976
+anchor_right = 0.090277776
+anchor_bottom = 0.6157407
+offset_right = -50.0
+offset_bottom = -49.99997
+scale = Vector2(2, 2)
+step = 0.5
+fill_mode = 4
+texture_under = ExtResource("6_xqxrh")
+texture_progress = ExtResource("7_qupqx")

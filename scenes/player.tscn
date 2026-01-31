@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://blhcllsye5ckw"]
+[gd_scene load_steps=31 format=3 uid="uid://blhcllsye5ckw"]
 
 [ext_resource type="Script" uid="uid://dddqbgfrxouwf" path="res://scripts/character_body_2d.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://cbewdwsj8ik5q" path="res://images/mc/girl/mc1.png" id="2_fulsm"]
@@ -19,13 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://d3t714un82r0v" path="res://images/effects/pews/pew_small3.png" id="12_qfm1y"]
 [ext_resource type="Texture2D" uid="uid://lmwqgbetvt4e" path="res://images/effects/pews/pew_small5.png" id="14_4r5pv"]
 [ext_resource type="PackedScene" uid="uid://bjc3oepe17a24" path="res://scenes/store.tscn" id="18_4r5pv"]
-[ext_resource type="Texture2D" uid="uid://dq47xwlg3pwa4" path="res://images/weapons_portraits/ar_shop.png" id="18_60mlk"]
-[ext_resource type="Script" uid="uid://dwqegnnb8d4p1" path="res://scripts/gui.gd" id="18_wqfne"]
-[ext_resource type="Texture2D" uid="uid://brmdkm2ix0opo" path="res://images/weapons_portraits/g17_shop.png" id="19_4ni07"]
-[ext_resource type="Texture2D" uid="uid://dlfu1udpvweav" path="res://images/weapons_portraits/m14_shop.png" id="19_i4ail"]
-[ext_resource type="Texture2D" uid="uid://c4mhgvel1egqo" path="res://images/weapons_portraits/nothing.png" id="20_a38lo"]
-[ext_resource type="Texture2D" uid="uid://bwtlauc2loalf" path="res://images/effects/progbarreload3.png" id="22_dt7fs"]
-[ext_resource type="Texture2D" uid="uid://cyrhfr2vowgim" path="res://images/effects/progbarreload2.png" id="23_wqfne"]
+[ext_resource type="PackedScene" uid="uid://bhoacu7owtw6m" path="res://scenes/gui.tscn" id="18_l71n6"]
 [ext_resource type="Script" uid="uid://djnyv8evdqlq3" path="res://scripts/saved_data.gd" id="24_l71n6"]
 [ext_resource type="AudioStream" uid="uid://qhyhjivd356h" path="res://sounds/loud_sounds_idk/shooting/xm15_indoors.wav" id="25_ke2ow"]
 [ext_resource type="AudioStream" uid="uid://om1pwr6o5ecx" path="res://sounds/loud_sounds_idk/shooting/reloading1.mp3" id="25_ujl30"]
@@ -130,41 +124,6 @@ animations = [{
 radius = 4.0
 height = 10.0
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_i4ail"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("19_4ni07")
-}],
-"loop": true,
-"name": &"g17",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("19_i4ail")
-}],
-"loop": true,
-"name": &"m14",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("20_a38lo")
-}],
-"loop": true,
-"name": &"null",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("18_60mlk")
-}],
-"loop": true,
-"name": &"xm15",
-"speed": 5.0
-}]
-
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_l71n6"]
 random_pitch = 1.1
 random_volume_offset_db = 0.3
@@ -224,69 +183,7 @@ hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
 
-[node name="gui" type="CanvasLayer" parent="."]
-script = ExtResource("18_wqfne")
-
-[node name="chance" type="Label" parent="gui"]
-anchors_preset = -1
-anchor_left = 0.4778646
-anchor_right = 0.5
-anchor_bottom = 0.032407407
-offset_right = 25.5
-offset_bottom = 21.0
-grow_horizontal = 2
-scale = Vector2(0.5, 0.5)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-theme_override_font_sizes/font_size = 30
-text = "100"
-
-[node name="rounds" type="Label" parent="gui"]
-anchors_preset = -1
-anchor_left = 0.012152778
-anchor_top = 0.6805556
-anchor_right = 0.065972224
-anchor_bottom = 0.7453704
-offset_top = -3.0517578e-05
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-theme_override_font_sizes/font_size = 30
-text = "23hi"
-metadata/_edit_use_anchors_ = true
-
-[node name="mags" type="Label" parent="gui"]
-anchors_preset = -1
-anchor_left = 0.011284722
-anchor_top = 0.7484568
-anchor_right = 0.078125
-anchor_bottom = 0.8132716
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-theme_override_font_sizes/font_size = 30
-text = "mags"
-metadata/_edit_use_anchors_ = true
-
-[node name="weapon" type="AnimatedSprite2D" parent="gui"]
-position = Vector2(130, 580)
-scale = Vector2(1.6, 1.6)
-sprite_frames = SubResource("SpriteFrames_i4ail")
-animation = &"xm15"
-
-[node name="reloadbar" type="TextureProgressBar" parent="gui"]
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -25.0
-offset_right = 50.0
-offset_bottom = 25.0
-grow_vertical = 2
-step = 0.5
-fill_mode = 4
-texture_under = ExtResource("22_dt7fs")
-texture_progress = ExtResource("23_wqfne")
+[node name="gui" parent="." instance=ExtResource("18_l71n6")]
 
 [node name="store" parent="." instance=ExtResource("18_4r5pv")]
 

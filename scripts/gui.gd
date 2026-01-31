@@ -8,22 +8,26 @@ extends CanvasLayer
 @onready var weapon = $"/root/Node2D/CharacterBody2D/weapons"
 
 var progress_reload
+var hidet := false
+
 
 #func _process(_delta: float):
-	
 
 func gui():
 	label_rou.text = str(weapon.rounds) + " rounds"
 	label_mag.text = str(weapon.mags) + " mags"
 	label_chance.text = str(weapon.chance_hit) +" %"
 	weapon_icon.play(weapon.in_hands)
-
-	#progress_reload; #unfinished, must tween here
-	#reloadbar.value = progress_reload
+	
+	if reloadbar.value >= 100:
+		reloadbar.value = 0
+		reloadbar.hide()
+	else:
+		pass
 
 func gui_reload(time):
-	var progress = 0
-	var goal_prog = 100
+	hidet = false
+	var tween = create_tween()
 	reloadbar.show()
-	reloadbar.value = progress
-	#lerp()
+	tween.tween_property(reloadbar,"value",100,time)
+	
