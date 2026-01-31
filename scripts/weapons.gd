@@ -199,6 +199,19 @@ var secondaries = {
 	}
 }
 
+
+var grenades = {
+	"pipemedium" = {
+		"damage_rad":80,
+		"damage_shat":30,
+		"radius":15,
+		"shatter":true,
+		"shatter_amount_min":2,
+		"shatter_amount_max":7,
+		"shatter_dist_min":50,
+		"shatter_dist_max":150,
+	}
+}
 #ADD GRENADES !!!!!!!!!
 
 var current_sec = "g17"

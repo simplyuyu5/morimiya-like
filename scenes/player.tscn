@@ -20,7 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://lmwqgbetvt4e" path="res://images/effects/pews/pew_small5.png" id="14_4r5pv"]
 [ext_resource type="PackedScene" uid="uid://bjc3oepe17a24" path="res://scenes/store.tscn" id="18_4r5pv"]
 [ext_resource type="Texture2D" uid="uid://dq47xwlg3pwa4" path="res://images/weapons_portraits/ar_shop.png" id="18_60mlk"]
-[ext_resource type="Script" uid="uid://dwqegnnb8d4p1" path="res://scenes/gui.gd" id="18_wqfne"]
+[ext_resource type="Script" uid="uid://dwqegnnb8d4p1" path="res://scripts/gui.gd" id="18_wqfne"]
 [ext_resource type="Texture2D" uid="uid://brmdkm2ix0opo" path="res://images/weapons_portraits/g17_shop.png" id="19_4ni07"]
 [ext_resource type="Texture2D" uid="uid://dlfu1udpvweav" path="res://images/weapons_portraits/m14_shop.png" id="19_i4ail"]
 [ext_resource type="Texture2D" uid="uid://c4mhgvel1egqo" path="res://images/weapons_portraits/nothing.png" id="20_a38lo"]
@@ -33,22 +33,17 @@
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_31cv2"]
 animations = [{
-"frames": [],
-"loop": true,
-"name": &"IDLE",
-"speed": 5.0
-}, {
-"frames": [],
-"loop": true,
-"name": &"WALK",
-"speed": 5.0
-}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_fulsm")
 }],
 "loop": true,
 "name": &"idle",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"idle1",
 "speed": 5.0
 }, {
 "frames": [{
@@ -82,6 +77,11 @@ animations = [{
 "loop": false,
 "name": &"walk",
 "speed": 10.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"walk1",
+"speed": 5.0
 }]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_oprun"]
@@ -207,7 +207,7 @@ metadata/_edit_lock_ = true
 [node name="pew" type="AnimatedSprite2D" parent="ray_long"]
 position = Vector2(10, 2)
 sprite_frames = SubResource("SpriteFrames_oprun")
-animation = &"nothing"
+animation = &"pew_small"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 0)
@@ -297,13 +297,6 @@ script = ExtResource("3_qhqgy")
 
 [node name="saved_data" type="Node" parent="weapons"]
 script = ExtResource("24_l71n6")
-
-[node name="Area2D" type="Area2D" parent="." groups=["danger"]]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-1, 0)
-shape = SubResource("CapsuleShape2D_g2els")
-disabled = true
 
 [node name="shell_pos" type="Node2D" parent="."]
 position = Vector2(6, 3)

@@ -125,7 +125,8 @@ func decal_bleed():
 	blood.rotation = randi_range(0,360)
 	blood.type = "bleed"
 	blood.fram = randi_range(0,6)
-	add_sibling(blood)
+	#add_sibling(blood)
+	get_tree().current_scene.add_child(blood)
 
 func _on_nav_timer_timeout() -> void:
 	if agent.target_position != goal_node.global_position:

@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://cr3vo1oy4bne2"]
 
-[ext_resource type="Script" uid="uid://b3mwf6oqetcn4" path="res://scenes/blood_decal_shot.gd" id="1_dwlrt"]
+[ext_resource type="Script" uid="uid://b3mwf6oqetcn4" path="res://scripts/blood_decal_shot.gd" id="1_dwlrt"]
 [ext_resource type="Texture2D" uid="uid://bdrqfldiw72kt" path="res://images/decals_n_effects/blood20x20.png" id="1_egyfw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dwlrt"]

@@ -1,0 +1,94 @@
+[gd_scene load_steps=15 format=3 uid="uid://degqfxo5q6iba"]
+
+[ext_resource type="Script" uid="uid://bimtyconhyxj5" path="res://scripts/grenade.gd" id="1_cvyik"]
+[ext_resource type="Texture2D" uid="uid://ddo2f8fmrxsve" path="res://images/decals_n_effects/throwables/pipebomb_mid1.png" id="2_w6nk6"]
+[ext_resource type="Texture2D" uid="uid://b3xm1u4sqrttg" path="res://images/decals_n_effects/throwables/pipebomb_mid2.png" id="3_enph7"]
+[ext_resource type="Texture2D" uid="uid://bbu44ygucnq64" path="res://images/nothing.png" id="4_qj1y5"]
+[ext_resource type="Texture2D" uid="uid://bsbidsrf8yt2t" path="res://images/decals_n_effects/thrash/grenade parts/pipebomb-mid1.png" id="5_p88er"]
+[ext_resource type="Texture2D" uid="uid://col6ujp3ab8ff" path="res://images/decals_n_effects/thrash/grenade parts/pipebomb-mid2.png" id="6_g2dys"]
+[ext_resource type="Texture2D" uid="uid://cvamsfur42y3w" path="res://images/decals_n_effects/thrash/grenade parts/pipebomb-mid3.png" id="7_u1ydx"]
+[ext_resource type="Texture2D" uid="uid://bh74hfaow02p0" path="res://images/decals_n_effects/thrash/grenade parts/pipebomb-mid4.png" id="8_gd6t7"]
+[ext_resource type="Texture2D" uid="uid://b1mdqy5j66e26" path="res://images/decals_n_effects/thrash/grenade parts/pipebomb-mid5.png" id="9_bpfxd"]
+[ext_resource type="Texture2D" uid="uid://cs35ofasjlf7c" path="res://images/decals_n_effects/thrash/grenade parts/pipebomb-mid6.png" id="10_uk07r"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cmp73"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_w6nk6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_enph7")
+}],
+"loop": true,
+"name": &"pipe-mid",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_apdl7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_qj1y5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_p88er")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_g2dys")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_u1ydx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_gd6t7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_bpfxd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_uk07r")
+}],
+"loop": true,
+"name": &"pipe-mid",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_okstn"]
+radius = 50.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w6nk6"]
+radius = 70.0
+
+[node name="grenade" type="Node2D"]
+script = ExtResource("1_cvyik")
+
+[node name="grenade_sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_cmp73")
+animation = &"pipe-mid"
+metadata/_edit_lock_ = true
+
+[node name="grenade_shatter" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_apdl7")
+metadata/_edit_lock_ = true
+
+[node name="shatter_ray" type="RayCast2D" parent="."]
+position = Vector2(0, -1)
+collision_mask = 18
+
+[node name="dmg_rad" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="dmg_rad"]
+shape = SubResource("CircleShape2D_okstn")
+
+[node name="danger_area" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="danger_area"]
+shape = SubResource("CircleShape2D_w6nk6")
+debug_color = Color(0.9882353, 0, 0.2901961, 0.16078432)
