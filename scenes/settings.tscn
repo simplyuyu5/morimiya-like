@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dgf4dq62robvc"]
+
+[ext_resource type="Script" uid="uid://65rgw6o8tutp" path="res://scripts/settings.gd" id="1_5p8wc"]
+
+[node name="settings" type="Node"]
+script = ExtResource("1_5p8wc")
+move = true

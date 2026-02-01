@@ -12,7 +12,7 @@ extends CharacterBody2D
 var shells = preload("res://scenes/shells.tscn")#.instantiate()
 var shell_look :int = 0
 var can_shoot := true
-var reloading := true
+var can_reload := true
 var movable := true
 
 @onready var pew = $ray_long/pew
@@ -80,8 +80,9 @@ func shoot():
 		recoil()
 
 func reload():
-	if Input.is_action_just_pressed("r"):
-		reloading = true
+	print(weapon.mags," ", can_reload)
+	if Input.is_action_just_pressed("r") and weapon.mags >= 1 and can_reload == true:
+		can_reload = false
 		audio_reload.play(1)
 		gui.gui_reload(weapon.reload_time)
 		await get_tree().create_timer(weapon.reload_time).timeout
@@ -89,10 +90,22 @@ func reload():
 			weapon.bank.mags_prim = weapon.mags - 1
 		elif weapon.in_hands == weapon.current_sec:
 			weapon.bank.mags_sec = weapon.mags - 1
-		reloading = false
-		if weapon.mags > 0:
-			weapon.mags -=1
-			weapon.rounds = weapon.rounds_max
+		reloading_types()
+	else:pass
+
+func reloading_types():
+	can_reload = true
+	match weapon.reload_type:
+		"mag":
+			if weapon.mags > 0:
+				weapon.mags -=1
+				weapon.rounds = weapon.rounds_max
+		"pump":
+			if weapon.mags > 0 and weapon.rounds <= weapon.rounds:
+				weapon.mags -=1
+				weapon.rounds += 1
+
+
 
 func recoil():
 	spread = true

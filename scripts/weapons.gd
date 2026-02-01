@@ -95,7 +95,7 @@ var primaries = {
 		"sdelay":0.7,
 		"rel_time":1,
 		"sshots":1,
-		"sstyle":1,
+		"sstyle":2,
 		"ssound":4,
 		"srecoil":22,
 		"sshell":1,
