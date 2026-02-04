@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://blhcllsye5ckw"]
+[gd_scene load_steps=36 format=3 uid="uid://blhcllsye5ckw"]
 
 [ext_resource type="Script" uid="uid://dddqbgfrxouwf" path="res://scripts/character_body_2d.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://cbewdwsj8ik5q" path="res://images/mc/girl/mc1.png" id="2_fulsm"]
@@ -141,6 +141,9 @@ animations = [{
 "speed": 50.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pf23h"]
+size = Vector2(2, 2)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
 radius = 4.0
 height = 10.0
@@ -162,7 +165,9 @@ stream_1/stream = ExtResource("25_ujl30")
 random_pitch = 1.1
 random_volume_offset_db = 0.3
 
-[node name="player" type="CharacterBody2D" groups=["danger"]]
+[node name="player" type="CharacterBody2D" groups=["danger", "player"]]
+visibility_layer = 2
+z_index = 2
 collision_layer = 2
 collision_mask = 18
 motion_mode = 1
@@ -188,6 +193,14 @@ metadata/_edit_lock_ = true
 position = Vector2(10, 2)
 sprite_frames = SubResource("SpriteFrames_oprun")
 animation = &"pew_big"
+
+[node name="nothin" type="CharacterBody2D" parent="ray_long" groups=["nothing"]]
+position = Vector2(290, 0)
+motion_mode = 1
+slide_on_ceiling = false
+
+[node name="collisn" type="CollisionShape2D" parent="ray_long/nothin"]
+shape = SubResource("RectangleShape2D_pf23h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 0)
@@ -236,3 +249,5 @@ playback_type = 1
 stream = SubResource("AudioStreamRandomizer_pf23h")
 max_polyphony = 2
 playback_type = 1
+
+[node name="game_data" type="Node" parent="."]

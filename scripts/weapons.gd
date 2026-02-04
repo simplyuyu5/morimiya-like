@@ -3,32 +3,33 @@ extends Node
 @onready var parent = get_parent()
 @onready var bank = $saved_data
 
-var reload_type = "mag" 
-var shots = 1 #for burst fire?
-var damage = 0
-var recoil = 0
-var description :String = ""
-var reload_time = 1 #time needed to reload in s 
-var delay = 0 #delay between shots #P.S. morimiya's BS3, KS25 and many other shotguns are reason for adding this
+var reload_type:String = "mag" 
+var shots:int = 1 #for burst fire?
+var damage:int = 0
+var recoil:int = 0
+var description:String = ""
+var reload_time:float = 1 #time needed to reload in s 
+var delay:float = 0 #delay between shots #P.S. morimiya's BS3, KS25 and many other shotguns are reason for adding this
+var dist:int = 300 #effective distantion
 var sound = 0
 #^ 0-5 loudness ig. 4 for shotguns 5 is supah loud
 
 var style = 0 
 var shell = 0
 
-var bleed_max = 40
+var bleed_max:float = 40
 
-var chance_hit :int = 100
-var chance_max = 100
+var chance_hit:int = 100
+var chance_max:int = 100
 
-var max_angle = 20
-var angle = 0
-var min_angle = -20
+#var max_angle = 20
+#var angle = 0
+#var min_angle = -20
 
-var rounds_max = 0
-var mags_max = 0
-var rounds = 0
-var mags = 0
+var rounds_max:int = 0
+var mags_max:int = 0
+var rounds:int = 0
+var mags:int = 0
 
 
 
@@ -38,6 +39,7 @@ var primaries = {
 		"sdamage":50,
 		"srounds_max":30,
 		"smags_max":4,
+		"sdist":300,
 		"sdelay":0,
 		"rel_time":1.5,
 		"sshots":1,
@@ -56,6 +58,7 @@ var primaries = {
 		"sdamage":90,
 		"srounds_max":20,
 		"smags_max":4,
+		"sdist":400,
 		"sdelay":0.1,
 		"rel_time":3,
 		"sshots":1,
@@ -74,6 +77,7 @@ var primaries = {
 		"sdamage":80,
 		"srounds_max":5,
 		"smags_max":5,
+		"sdist":200,
 		"sdelay":0.4,
 		"rel_time":1.3,
 		"sshots":1,
@@ -92,6 +96,7 @@ var primaries = {
 		"sdamage":110,
 		"srounds_max":8,
 		"smags_max":24,
+		"sdist":200,
 		"sdelay":0.7,
 		"rel_time":1,
 		"sshots":1,
@@ -110,6 +115,7 @@ var primaries = {
 		"sdamage":45,
 		"srounds_max":40,
 		"smags_max":4,
+		"sdist":300,
 		"sdelay":0,
 		"rel_time":3,
 		"sshots":1,
@@ -128,6 +134,7 @@ var primaries = {
 		"sdamage":1000,
 		"srounds_max":3,
 		"smags_max":10,
+		"sdist":400,
 		"sdelay":1,
 		"rel_time":2,
 		"sshots":1,
@@ -147,6 +154,7 @@ var primaries = {
 		"sdamage":50,
 		"srounds_max":40,
 		"smags_max":4,
+		"sdist":300,
 		"sdelay":0,
 		"rel_time":2,
 		"sshots":1,
@@ -167,8 +175,9 @@ var secondaries = {
 		"sdamage":30,
 		"srounds_max":17,
 		"smags_max":4,
+		"sdist":100,
 		"sdelay":0,
-		"rel_time":1,
+		"rel_time":1.5,
 		"sshots":1,
 		"sstyle":0,
 		"ssound":0,
@@ -185,7 +194,8 @@ var secondaries = {
 		"sdamage":55,
 		"srounds_max":8,
 		"smags_max":2,
-		"sdelay":0,
+		"sdist":100,
+		"sdelay":0.1,
 		"rel_time":2,
 		"sshots":1,
 		"sstyle":0,
@@ -194,7 +204,7 @@ var secondaries = {
 		"sshell":2,
 		"sdesc":"description placeholder",
 		"sbought":false,
-		"cost":10,
+		"cost":1000,
 		"special":false
 	}
 }
@@ -202,27 +212,48 @@ var secondaries = {
 
 var grenades = {
 	"pipemedium" = {
-		"damage_rad":80,
-		"damage_shat":30,
-		"radius":15,
-		"shatter":true,
+		"sdamage_rad":80,
+		"sdamage_shat":30,
+		"sradius":20,
+		"sfuse":2,
+		"sfuse_rand":true,
+		"sshatter":true,
 		"shatter_amount_min":2,
 		"shatter_amount_max":7,
-		"shatter_dist_min":50,
-		"shatter_dist_max":150,
+		"shatter_dist_min":20,
+		"shatter_dist_max":120,
+		"samount_max":4,
+		"bought":true,
+		"cost":0,
+		"special":false
 	}
 }
+
+#stats for gren
+var damage_rad:int
+var damage_shat:int
+var radius:int
+var fuse:float
+var fuse_rand:bool
+var shatter:bool
+var shatter_amt_min:int
+var shatter_amt_max:int
+var shatter_dst_min:int
+var shatter_dst_max:int
+var amt_max:int
+
 #ADD GRENADES !!!!!!!!!
 #Added :3
 
 var current_sec = "g17"
 var current_prim = "m14"
 var current_melee = "null"
-var current_gren = "null"
+var current_gren = "pipemedium"
 var in_hands = "m14"
 
 func _ready() -> void:
 	weapon_change(1)
+	gren_change()
 
 
 func assign_weapon_rounds(num):
@@ -255,6 +286,7 @@ func weapon_change(num):
 					damage = primaries[current_prim]["sdamage"]
 					rounds_max = primaries[current_prim]["srounds_max"]
 					mags_max = primaries[current_prim]["smags_max"]
+					dist = primaries[current_prim]["sdist"]
 					shots = primaries[current_prim]["sshots"]
 					style = primaries[current_prim]["sstyle"]
 					sound = primaries[current_prim]["ssound"]
@@ -273,6 +305,7 @@ func weapon_change(num):
 					damage = secondaries[current_sec]["sdamage"]
 					rounds_max = secondaries[current_sec]["srounds_max"]
 					mags_max = secondaries[current_sec]["smags_max"]
+					dist = secondaries[current_sec]["sdist"]
 					shots = secondaries[current_sec]["sshots"]
 					style = secondaries[current_sec]["sstyle"]
 					sound = secondaries[current_sec]["ssound"]
@@ -287,6 +320,19 @@ func weapon_change(num):
 	#else:
 		#print("null")
 		#in_hands = "null"
+
+func gren_change():
+	damage_rad = grenades[current_gren]["sdamage_rad"]
+	damage_shat = grenades[current_gren]["sdamage_shat"]
+	radius = grenades[current_gren]["sradius"]
+	fuse = grenades[current_gren]["sfuse"]
+	fuse_rand = grenades[current_gren]["sfuse_rand"]
+	shatter = grenades[current_gren]["sshatter"]
+	shatter_amt_min = grenades[current_gren]["shatter_amount_min"]
+	shatter_amt_max = grenades[current_gren]["shatter_amount_max"]
+	shatter_dst_min = grenades[current_gren]["shatter_dist_min"]
+	shatter_dst_max = grenades[current_gren]["shatter_dist_max"]
+	amt_max = grenades[current_gren]["samount_max"]
 
 func recoil_regen():
 	if parent.spread == false:

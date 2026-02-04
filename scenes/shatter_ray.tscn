@@ -1,0 +1,60 @@
+[gd_scene load_steps=10 format=3 uid="uid://ljjl0sd75mgg"]
+
+[ext_resource type="Script" uid="uid://b6ndkjre5xtd6" path="res://scripts/gren_shatter_ray.gd" id="1_p4s5v"]
+[ext_resource type="Texture2D" uid="uid://bbu44ygucnq64" path="res://images/nothing.png" id="2_4joiw"]
+[ext_resource type="Texture2D" uid="uid://bsbidsrf8yt2t" path="res://images/decals_n_effects/thrash/grenade parts/pipebomb-mid1.png" id="3_r06er"]
+[ext_resource type="Texture2D" uid="uid://col6ujp3ab8ff" path="res://images/decals_n_effects/thrash/grenade parts/pipebomb-mid2.png" id="4_6marl"]
+[ext_resource type="Texture2D" uid="uid://cvamsfur42y3w" path="res://images/decals_n_effects/thrash/grenade parts/pipebomb-mid3.png" id="5_tm81y"]
+[ext_resource type="Texture2D" uid="uid://bh74hfaow02p0" path="res://images/decals_n_effects/thrash/grenade parts/pipebomb-mid4.png" id="6_irlh5"]
+[ext_resource type="Texture2D" uid="uid://b1mdqy5j66e26" path="res://images/decals_n_effects/thrash/grenade parts/pipebomb-mid5.png" id="7_bsyc5"]
+[ext_resource type="Texture2D" uid="uid://cs35ofasjlf7c" path="res://images/decals_n_effects/thrash/grenade parts/pipebomb-mid6.png" id="8_1bjl7"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_apdl7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_4joiw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_r06er")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_6marl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_tm81y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_irlh5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_bsyc5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_1bjl7")
+}],
+"loop": true,
+"name": &"pipemedium",
+"speed": 5.0
+}]
+
+[node name="shatter_ray" type="RayCast2D"]
+scale = Vector2(5, 5)
+enabled = false
+collision_mask = 18
+script = ExtResource("1_p4s5v")
+
+[node name="grenade_shatter" type="AnimatedSprite2D" parent="."]
+visible = false
+top_level = true
+light_mask = 64
+visibility_layer = 64
+position = Vector2(0, 1)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_apdl7")
+animation = &"pipemedium"

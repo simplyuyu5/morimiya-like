@@ -49,12 +49,9 @@ func _process(_delta:float):
 	velocity = velocity.lerp(nav_point_dir * hp, acceleration)
 	alive.rotation = velocity.angle()
 
-	if hp_man.is_dead == false:
-		hp_man.hp_func()
-		eyes()
-		state()
-	else:
-		pass
+	hp_man.hp_func()
+	eyes()
+	state()
 
 	move_and_slide()
 
@@ -105,13 +102,13 @@ func eyes():
 	if eyes_ray.is_colliding() and target.is_in_group("wall"):
 		eyes_ray.enabled = false
 	elif eyes_ray.is_colliding() and target.is_in_group("danger"):
-		state_cur = states.WANDER
+		state_cur = states.RUN
 
 func die():
 	eyes_ray.enabled = false
-	eyes_ray.target_position = Vector2i(0,0)
+	eyes_ray.queue_free()#target_position = Vector2i(0,0)
 	hp_man.is_dead = true
-	collision.disabled = true
+	collision.queue_free()#disabled = true
 	alive.hide()
 
 	dead.rotation_degrees = randf_range(0,360)

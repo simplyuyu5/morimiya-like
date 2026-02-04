@@ -62,12 +62,13 @@ animations = [{
 
 [node name="blood_decal" type="Node2D"]
 show_behind_parent = true
+visibility_layer = 128
 scale = Vector2(5, 5)
 script = ExtResource("1_dwlrt")
 
 [node name="bleed" type="AnimatedSprite2D" parent="."]
 visible = false
-visibility_layer = 12
-z_index = -2
+visibility_layer = 128
+z_index = -1
 sprite_frames = SubResource("SpriteFrames_0pnj1")
 animation = &"bleed"

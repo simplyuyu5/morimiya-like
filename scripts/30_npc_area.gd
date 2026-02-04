@@ -31,6 +31,8 @@ func hp_func():
 
 	if hp <= 1 and is_dead != true:
 		parent.die()
+		parent.set_process(!is_processing())
+		queue_free()
 
 
 
@@ -42,7 +44,5 @@ func bleeding():
 		parent.bleed -=1
 
 		parent.decal_bleed()
-
-		print(bleed, " bleed!")
 	else:
 		bleed = 0

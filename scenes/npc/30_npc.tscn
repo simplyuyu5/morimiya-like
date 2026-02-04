@@ -132,6 +132,7 @@ height = 36.000004
 [sub_resource type="AudioStream" id="AudioStream_kyfuo"]
 
 [node name="tpo_npc" type="CharacterBody2D" groups=["living"]]
+visibility_layer = 4
 collision_layer = 2
 collision_mask = 16
 script = ExtResource("1_i76qr")
@@ -168,11 +169,13 @@ autostart = true
 
 [node name="dead" type="AnimatedSprite2D" parent="."]
 visible = false
+visibility_layer = 16
 scale = Vector2(4.999999, 4.999999)
 sprite_frames = SubResource("SpriteFrames_gxeka")
 animation = &"dead"
 
 [node name="alive" type="AnimatedSprite2D" parent="."]
+visibility_layer = 4
 position = Vector2(-5.9604645e-07, -2.3283064e-09)
 rotation = 1.5707964
 scale = Vector2(4.999999, 4.999999)
@@ -182,6 +185,7 @@ offset = Vector2(-0.0033444103, -1.4788249)
 
 [node name="down" type="AnimatedSprite2D" parent="."]
 visible = false
+visibility_layer = 16
 position = Vector2(-5.9604645e-07, -2.3283064e-09)
 rotation = 1.5707964
 scale = Vector2(4.999999, 4.999999)

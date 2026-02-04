@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3 uid="uid://bd1vmxqkbi2us"]
+
+[ext_resource type="Texture2D" uid="uid://bbu44ygucnq64" path="res://images/nothing.png" id="1_r37ad"]
+[ext_resource type="Texture2D" uid="uid://6mm240xflsyw" path="res://images/decals_n_effects/decals_floor/explosion-decal.png" id="2_jgdop"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nhqbc"]
+atlas = ExtResource("2_jgdop")
+region = Rect2(0, 0, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eymxt"]
+atlas = ExtResource("2_jgdop")
+region = Rect2(30, 0, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vmepg"]
+atlas = ExtResource("2_jgdop")
+region = Rect2(60, 0, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ikxt"]
+atlas = ExtResource("2_jgdop")
+region = Rect2(90, 0, 30, 30)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6abbl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_r37ad")
+}],
+"loop": true,
+"name": &"nothin",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nhqbc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eymxt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vmepg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ikxt")
+}],
+"loop": true,
+"name": &"set1",
+"speed": 5.0
+}]
+
+[node name="kabom" type="AnimatedSprite2D"]
+show_behind_parent = true
+light_mask = 256
+visibility_layer = 256
+z_index = -2
+sprite_frames = SubResource("SpriteFrames_6abbl")
+animation = &"set1"

@@ -117,6 +117,15 @@ moving={
 
 [layer_names]
 
+2d_render/layer_1="walls"
+2d_render/layer_2="player"
+2d_render/layer_3="alive creatures"
+2d_render/layer_4="furniture"
+2d_render/layer_5="corpses"
+2d_render/layer_7="thrash(shells and etc)"
+2d_render/layer_8="blood decals"
+2d_render/layer_9="explosion decals etc"
+2d_render/layer_10="floor tiles"
 2d_navigation/layer_2="npc, player"
 2d_physics/layer_5="walls"
 2d_navigation/layer_5="walls"

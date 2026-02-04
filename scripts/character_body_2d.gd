@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @onready var ray = $ray_long
+@onready var nothing_body = $ray_long/nothin
 @onready var weapon = $weapons
 @onready var ray_pick = $pickup_ray
 @onready var body = $Mc
@@ -10,6 +11,7 @@ extends CharacterBody2D
 @onready var audio = $sounds/sounds_misc
 @onready var gui = $gui
 var shells = preload("res://scenes/shells.tscn")#.instantiate()
+var gren = preload("res://scenes/grenade.tscn")
 var shell_look :int = 0
 var can_shoot := true
 var can_reload := true
@@ -27,6 +29,7 @@ var homicidin:bool = false
 
 var health = 200
 var speed_fin = 300
+var strength = 20
 
 func _ready() -> void:
 	pew.play("nothing")
@@ -48,6 +51,7 @@ func _physics_process(_delta: float) -> void:
 		change()
 		shoot()
 		reload()
+		grenade()
 	
 
 
@@ -57,6 +61,8 @@ func shoot():
 	ray.enabled = true
 	var target = ray.get_collider()
 	if Input.is_action_just_pressed("lmb") and weapon.rounds >= 1 and can_shoot == true:
+		ray.target_position.x = weapon.dist
+		nothing_body.position.x = weapon.dist
 		audio_shoot.play()
 		gun_smoke(weapon.style)
 		shell_eject(weapon.shell)
@@ -75,12 +81,14 @@ func shoot():
 			if randf_range(0,100.0) <= float(weapon.chance_hit):
 				target.hp -=weapon.damage
 				target.bleed += randi_range(0,weapon.bleed_max)
+		elif ray.is_colliding() and target.is_in_group("nothing"):
+			ray.enabled = false
 		else:
-			print("miss lol")
+			#print("miss lol")
+			pass
 		recoil()
 
 func reload():
-	print(weapon.mags," ", can_reload)
 	if Input.is_action_just_pressed("r") and weapon.mags >= 1 and can_reload == true:
 		can_reload = false
 		audio_reload.play(1)
@@ -93,6 +101,18 @@ func reload():
 		reloading_types()
 	else:pass
 
+func grenade():
+	var gren_inst = gren.instantiate()
+	if Input.is_action_just_pressed("g"):
+		gren_inst.global_transform = pos.global_transform
+		gren_inst.scale = Vector2(1,1)
+		gren_inst.velocity_throw = strength
+		#gren_inst.throw(weapon.current_gren)
+		 
+		add_sibling(gren_inst)
+
+
+
 func reloading_types():
 	can_reload = true
 	match weapon.reload_type:
@@ -104,8 +124,6 @@ func reloading_types():
 			if weapon.mags > 0 and weapon.rounds <= weapon.rounds:
 				weapon.mags -=1
 				weapon.rounds += 1
-
-
 
 func recoil():
 	spread = true

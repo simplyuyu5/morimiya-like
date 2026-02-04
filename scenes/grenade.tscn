@@ -1,18 +1,24 @@
-[gd_scene load_steps=15 format=3 uid="uid://degqfxo5q6iba"]
+[gd_scene load_steps=18 format=3 uid="uid://degqfxo5q6iba"]
 
 [ext_resource type="Script" uid="uid://bimtyconhyxj5" path="res://scripts/grenade.gd" id="1_cvyik"]
 [ext_resource type="Texture2D" uid="uid://ddo2f8fmrxsve" path="res://images/decals_n_effects/throwables/pipebomb_mid1.png" id="2_w6nk6"]
 [ext_resource type="Texture2D" uid="uid://b3xm1u4sqrttg" path="res://images/decals_n_effects/throwables/pipebomb_mid2.png" id="3_enph7"]
 [ext_resource type="Texture2D" uid="uid://bbu44ygucnq64" path="res://images/nothing.png" id="4_qj1y5"]
-[ext_resource type="Texture2D" uid="uid://bsbidsrf8yt2t" path="res://images/decals_n_effects/thrash/grenade parts/pipebomb-mid1.png" id="5_p88er"]
-[ext_resource type="Texture2D" uid="uid://col6ujp3ab8ff" path="res://images/decals_n_effects/thrash/grenade parts/pipebomb-mid2.png" id="6_g2dys"]
-[ext_resource type="Texture2D" uid="uid://cvamsfur42y3w" path="res://images/decals_n_effects/thrash/grenade parts/pipebomb-mid3.png" id="7_u1ydx"]
-[ext_resource type="Texture2D" uid="uid://bh74hfaow02p0" path="res://images/decals_n_effects/thrash/grenade parts/pipebomb-mid4.png" id="8_gd6t7"]
-[ext_resource type="Texture2D" uid="uid://b1mdqy5j66e26" path="res://images/decals_n_effects/thrash/grenade parts/pipebomb-mid5.png" id="9_bpfxd"]
-[ext_resource type="Texture2D" uid="uid://cs35ofasjlf7c" path="res://images/decals_n_effects/thrash/grenade parts/pipebomb-mid6.png" id="10_uk07r"]
+[ext_resource type="PackedScene" uid="uid://ljjl0sd75mgg" path="res://scenes/shatter_ray.tscn" id="5_t0o0f"]
+[ext_resource type="Texture2D" uid="uid://ddf0d3ju6rkbw" path="res://images/effects/explosion/explosions_set.png" id="11_enph7"]
+
+[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_w6nk6"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_cmp73"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_qj1y5")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_w6nk6")
@@ -20,75 +26,129 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("3_enph7")
 }],
-"loop": true,
-"name": &"pipe-mid",
-"speed": 5.0
-}]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_apdl7"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("4_qj1y5")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("5_p88er")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_g2dys")
-}, {
-"duration": 1.0,
-"texture": ExtResource("7_u1ydx")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_gd6t7")
-}, {
-"duration": 1.0,
-"texture": ExtResource("9_bpfxd")
-}, {
-"duration": 1.0,
-"texture": ExtResource("10_uk07r")
-}],
-"loop": true,
-"name": &"pipe-mid",
+"loop": false,
+"name": &"pipemedium",
 "speed": 5.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_okstn"]
 radius = 50.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_qj1y5"]
+atlas = ExtResource("11_enph7")
+region = Rect2(0, 0, 25, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p88er"]
+atlas = ExtResource("11_enph7")
+region = Rect2(25, 0, 25, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2dys"]
+atlas = ExtResource("11_enph7")
+region = Rect2(50, 0, 25, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u1ydx"]
+atlas = ExtResource("11_enph7")
+region = Rect2(75, 0, 25, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gd6t7"]
+atlas = ExtResource("11_enph7")
+region = Rect2(100, 0, 25, 25)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bpfxd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qj1y5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p88er")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g2dys")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u1ydx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gd6t7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_qj1y5")
+}],
+"loop": false,
+"name": &"1",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_qj1y5")
+}],
+"loop": true,
+"name": &"empty",
+"speed": 5.0
+}]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_w6nk6"]
 radius = 70.0
 
-[node name="grenade" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_enph7"]
+size = Vector2(12, 24)
+
+[node name="grenade" type="RigidBody2D"]
+z_index = -2
+collision_layer = 0
+collision_mask = 16
+mass = 0.001
+gravity_scale = 0.0
+linear_damp = 10.0
+angular_damp_mode = 1
+angular_damp = 20.0
 script = ExtResource("1_cvyik")
 
+[node name="boom" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamPlaylist_w6nk6")
+max_distance = 520.0
+
 [node name="grenade_sprite" type="AnimatedSprite2D" parent="."]
+visibility_layer = 64
+scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_cmp73")
-animation = &"pipe-mid"
-metadata/_edit_lock_ = true
+animation = &"pipemedium"
 
-[node name="grenade_shatter" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_apdl7")
-metadata/_edit_lock_ = true
-
-[node name="shatter_ray" type="RayCast2D" parent="."]
+[node name="shatter_ray" parent="." instance=ExtResource("5_t0o0f")]
 position = Vector2(0, -1)
-collision_mask = 18
 
 [node name="dmg_rad" type="Area2D" parent="."]
+scale = Vector2(5, 5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="dmg_rad"]
 shape = SubResource("CircleShape2D_okstn")
+disabled = true
+
+[node name="explosin" type="AnimatedSprite2D" parent="dmg_rad"]
+visibility_layer = 32
+z_index = 1
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_bpfxd")
+animation = &"empty"
 
 [node name="danger_area" type="Area2D" parent="."]
 visible = false
+scale = Vector2(5, 5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="danger_area"]
 shape = SubResource("CircleShape2D_w6nk6")
+disabled = true
 debug_color = Color(0.9882353, 0, 0.2901961, 0.16078432)
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+one_shot = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_enph7")
+debug_color = Color(0.5814875, 0.5517842, 0, 0.41960785)
+
+[connection signal="body_entered" from="dmg_rad" to="." method="_on_dmg_rad_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
