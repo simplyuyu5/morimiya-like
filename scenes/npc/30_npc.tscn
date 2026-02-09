@@ -134,7 +134,7 @@ height = 36.000004
 [node name="tpo_npc" type="CharacterBody2D" groups=["living"]]
 visibility_layer = 4
 collision_layer = 2
-collision_mask = 16
+collision_mask = 18
 script = ExtResource("1_i76qr")
 
 [node name="hp" type="Node" parent="." node_paths=PackedStringArray("parent_help")]
@@ -149,7 +149,6 @@ top_level = true
 position = Vector2(-198, -53)
 
 [node name="Sprite2D" type="Sprite2D" parent="goal_node"]
-visible = false
 texture = SubResource("GradientTexture2D_k73aa")
 metadata/_edit_lock_ = true
 
@@ -157,10 +156,11 @@ metadata/_edit_lock_ = true
 path_desired_distance = 15.0
 target_desired_distance = 3.0
 path_max_distance = 150.0
-path_postprocessing = 2
+simplify_path = true
+simplify_epsilon = 0.303
 avoidance_enabled = true
-avoidance_layers = 17
-avoidance_mask = 17
+avoidance_layers = 2
+avoidance_mask = 2
 debug_enabled = true
 
 [node name="nav_timer" type="Timer" parent="NavigationAgent2D"]
@@ -170,6 +170,7 @@ autostart = true
 [node name="dead" type="AnimatedSprite2D" parent="."]
 visible = false
 visibility_layer = 16
+z_index = -5
 scale = Vector2(4.999999, 4.999999)
 sprite_frames = SubResource("SpriteFrames_gxeka")
 animation = &"dead"

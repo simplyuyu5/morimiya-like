@@ -1,5 +1,4 @@
 extends RigidBody2D
-
 @onready var weapons = $"/root/Node2D/CharacterBody2D/weapons"
 
 #@onready var shat_sprite = $shatter_ray/grenade_shatter
@@ -10,6 +9,7 @@ var dec_boom = preload("res://scenes/explosio_decal.tscn")
 
 @onready var shatter_ray = $shatter_ray
 @onready var damage_radius = $dmg_rad
+
 @onready var danger_area = $danger_area
 @onready var ticker = $Timer
 @onready var sound = $boom
@@ -22,7 +22,7 @@ var scan = 360
 func _ready() -> void:
 	throw(weapons.current_gren)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if velocity_throw <= -1:velocity_throw = 0
 	else:
 		velocity_throw -=1
@@ -72,6 +72,8 @@ func explode_actual():
 	#shatter_ray.enabled = true
 	#shatter_ray.shatter(weapons.radius,weapons.radius,weapons.damage_rad,"default")
 	$dmg_rad/CollisionShape2D.disabled = false
+	#body_rad = damage_radius.overlaps_body(PhysicsBody2D)
+	#print(body_rad)
 
 
 	if weapons.shatter == true:
@@ -85,8 +87,8 @@ func explode_actual():
 	else:pass
 
 
-	await get_tree().create_timer(0.1).timeout
-	queue_free()
+	await get_tree().create_timer(0.2).timeout
+	free()
 
 
 func _on_timer_timeout() -> void:
@@ -94,11 +96,10 @@ func _on_timer_timeout() -> void:
 
 
 func _on_dmg_rad_body_entered(body: CharacterBody2D):
-	print("hi")
 	if body.is_in_group("living"):
 		body.hp -=weapons.damage_rad
-		print("diie")
 	elif body.is_in_group("player"):
 		body.health -= weapons.damage_rad
+		
 	else:
 		pass

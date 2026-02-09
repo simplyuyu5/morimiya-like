@@ -51,6 +51,6 @@ animations = [{
 show_behind_parent = true
 light_mask = 256
 visibility_layer = 256
-z_index = -2
+z_index = -5
 sprite_frames = SubResource("SpriteFrames_6abbl")
 animation = &"set1"

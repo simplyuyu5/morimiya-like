@@ -300,10 +300,8 @@ scale = Vector2(5, 5)
 texture = ExtResource("2_3scp5")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("2_6khdi")]
-visibility_layer = 2
 position = Vector2(1036, 473.99997)
 scale = Vector2(3.5, 3.5)
 
 [node name="settings" parent="." instance=ExtResource("7_pkxii")]
-gui = true
-shoot = true
+equipnu = true

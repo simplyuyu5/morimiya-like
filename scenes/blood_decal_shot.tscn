@@ -63,6 +63,7 @@ animations = [{
 [node name="blood_decal" type="Node2D"]
 show_behind_parent = true
 visibility_layer = 128
+z_index = -1
 scale = Vector2(5, 5)
 script = ExtResource("1_dwlrt")
 

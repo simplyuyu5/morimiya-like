@@ -26,6 +26,7 @@ var pickup_under :bool = false
 var under_name
 var gui_show:bool = true
 var homicidin:bool = false
+var equip:bool = false
 
 var health = 200
 var speed_fin = 300
@@ -36,6 +37,10 @@ func _ready() -> void:
 	#preload("res://scenes/shells.tscn")
 
 func _process(_delta: float) -> void:
+	if health <= -1:
+		health = 0
+	if equip == true:
+		equip_ult()
 	if movable == true:
 		move()
 		move_anim()
@@ -46,7 +51,7 @@ func _process(_delta: float) -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	equip_ult()
+	
 	if homicidin == true:
 		change()
 		shoot()
@@ -62,10 +67,22 @@ func shoot():
 	var target = ray.get_collider()
 	if Input.is_action_just_pressed("lmb") and weapon.rounds >= 1 and can_shoot == true:
 		ray.target_position.x = weapon.dist
-		nothing_body.position.x = weapon.dist
+		nothing_body.position.x = weapon.dist - 1
 		audio_shoot.play()
 		gun_smoke(weapon.style)
 		shell_eject(weapon.shell)
+
+		if ray.is_colliding() and target.is_in_group("wall"):
+			ray.enabled = false
+		elif ray.is_colliding() and target.is_in_group("living"):
+			if randf_range(0,100.0) <= float(weapon.chance_hit):
+				target.hp -=weapon.damage
+				target.bleed += randi_range(0,weapon.bleed_max)
+		else:
+			#print("miss lol")
+			pass
+		recoil()
+
 		weapon.rounds -= weapon.shots
 		if weapon.in_hands == weapon.current_prim:
 			weapon.bank.rounds_prim = weapon.rounds
@@ -75,18 +92,6 @@ func shoot():
 		await get_tree().create_timer(weapon.delay).timeout
 		can_shoot = true
 
-		if ray.is_colliding() and target.is_in_group("wall"):
-			ray.enabled = false
-		elif ray.is_colliding() and target.is_in_group("living"):
-			if randf_range(0,100.0) <= float(weapon.chance_hit):
-				target.hp -=weapon.damage
-				target.bleed += randi_range(0,weapon.bleed_max)
-		elif ray.is_colliding() and target.is_in_group("nothing"):
-			ray.enabled = false
-		else:
-			#print("miss lol")
-			pass
-		recoil()
 
 func reload():
 	if Input.is_action_just_pressed("r") and weapon.mags >= 1 and can_reload == true:
@@ -170,7 +175,7 @@ func equip_weapon():
 			weapon.in_hands = target.name
 			#print("picked up weapon! ", weapon.in_hands)
 			weapon.weapon_change()
-			target.queue_free()
+			target.free()
 			ray_pick.enabled = false
 			await get_tree().create_timer(1.0).timeout
 			ray_pick.enabled = true
