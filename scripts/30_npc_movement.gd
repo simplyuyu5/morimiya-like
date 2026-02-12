@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 var hp = 120
 var bleed = 0
-var acceleration = 1
+var acceleration = 0.5
 var walking := false
 var direction = Vector2(0,0)
 
@@ -21,7 +21,7 @@ var direction = Vector2(0,0)
 @onready var timer_nav = $NavigationAgent2D/nav_timer
 @onready var timer_sound = $audio/randi_sound
 
-var goal# = goal_node
+var goal
 var danger
 
 
@@ -46,8 +46,8 @@ var persons = {
 
 func _ready() -> void:
 	skins(randi_range(0,4))
-	goal = goal_node
-	agent.target_position = goal.global_position
+	goal_reset()
+	state_cur = states.WANDER
 
 func _process(_delta:float):
 
@@ -69,48 +69,58 @@ func state():
 		states.CALM:
 			await get_tree().create_timer(1).timeout
 			state()
+
 		states.WANDER:
-			if walking == false and agent.is_target_reachable() == true:
-				goal_randi()
-				walking = true
-			elif agent.is_target_reachable() == false:
-				goal_randi()
-			else:
-				pass
+			acceleration = 0.5
+			match walking:
+				true:pass
+				false:
+					if agent.is_target_reachable() == true:
+						goal_randi()
+					else:
+						goal_reset()
+						walking = false
+
 			if agent.is_target_reached() == true:
 				walking = false
-			else:
-				pass
-			
+				goal_randi()
+			else:pass
+
+
 		states.RUN:
 
-			if walking == false and agent.is_target_reachable() == true:
-				goal_player_away()
-				walking = true
-			elif agent.is_target_reachable() == false:
-				goal_reset()
-				walking = false
-			else:
-				pass
+			acceleration = 1
+			match walking:
+				true:pass
+				false:
+					if agent.is_target_reachable() == true:
+						goal_player_away()
+					else:
+						goal_reset()
+						walking = false
 
 			if agent.is_target_reached() == true:
 				walking = false
+				goal_player_away()
 			else:
 				pass
+
+			await get_tree().create_timer(10).timeout
+			state_cur = states.WANDER
 
 		states.ATTACK:
 			goal_node.position = player.position
 
 func goal_randi():
-	goal_node.position = Vector2i(randi_range(-300,300),randi_range(-200,200)) + Vector2i(position)
+	goal_node.position = Vector2(randi_range(-100,100),randi_range(-100,100))
 	goal = goal_node
 
 func goal_player_away():
-	goal_node.position -= direction*5 + Vector2(randf_range(-1,1),randf_range(-1,1))
+	goal_node.position -= direction
 	goal = goal_node
 
 func goal_reset():
-	goal_node.position = Vector2(0,0)
+	goal_node.position = self.global_position
 	goal = goal_node 
 
 func skins(num):
@@ -125,7 +135,7 @@ func eyes():
 		eyes_ray.enabled = false
 	elif eyes_ray.is_colliding() and target.is_in_group("danger"):
 		danger = target
-		state_cur = states.RUN
+		#state_cur = states.RUN
 
 
 func die():
@@ -145,7 +155,6 @@ func decal_bleed():
 	blood.rotation = randi_range(0,360)
 	blood.type = "bleed"
 	blood.fram = randi_range(0,6)
-	#add_sibling(blood)
 	get_tree().current_scene.add_child(blood)
 
 func _on_nav_timer_timeout() -> void:

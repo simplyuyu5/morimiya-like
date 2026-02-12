@@ -29,7 +29,7 @@ var homicidin:bool = false
 var equip:bool = false
 
 var health = 200
-var speed_fin = 300
+var speed_fin = 225
 var strength = 20
 
 func _ready() -> void:

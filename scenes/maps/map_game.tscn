@@ -22,43 +22,7 @@ position = Vector2(95.00003, 948.9999)
 scale = Vector2(3.4999995, 3.4999995)
 
 [node name="tpo_npc" parent="." instance=ExtResource("4_e5gab")]
-position = Vector2(343.99982, -162.00006)
-rotation = 1.5621265
-scale = Vector2(0.99999964, 0.99999964)
-motion_mode = 1
-
-[node name="tpo_npc6" parent="." instance=ExtResource("4_e5gab")]
-position = Vector2(1424, -673.0001)
-rotation = 1.5621265
-scale = Vector2(0.99999964, 0.99999964)
-motion_mode = 1
-
-[node name="tpo_npc7" parent="." instance=ExtResource("4_e5gab")]
-position = Vector2(-628.0001, -795)
-rotation = 1.5621265
-scale = Vector2(0.99999964, 0.99999964)
-motion_mode = 1
-
-[node name="tpo_npc2" parent="." instance=ExtResource("4_e5gab")]
-position = Vector2(-478.00006, -665.0001)
-rotation = 1.5621265
-scale = Vector2(0.99999964, 0.99999964)
-motion_mode = 1
-
-[node name="tpo_npc3" parent="." instance=ExtResource("4_e5gab")]
-position = Vector2(-854.00037, -859.99994)
-rotation = 1.5621265
-scale = Vector2(0.99999964, 0.99999964)
-motion_mode = 1
-
-[node name="tpo_npc4" parent="." instance=ExtResource("4_e5gab")]
-position = Vector2(-460.00015, -777.99994)
-rotation = 1.5621265
-scale = Vector2(0.99999964, 0.99999964)
-motion_mode = 1
-
-[node name="tpo_npc5" parent="." instance=ExtResource("4_e5gab")]
-position = Vector2(1890.0001, -1423.0001)
+position = Vector2(368.99997, 596.00006)
 rotation = 1.5621265
 scale = Vector2(0.99999964, 0.99999964)
 motion_mode = 1
