@@ -63,7 +63,6 @@ func _process(_delta:float):
 	move_and_slide()
 
 func state():
-
 	match state_cur:
 		
 		states.CALM:
@@ -71,7 +70,6 @@ func state():
 			state()
 
 		states.WANDER:
-			acceleration = 0.5
 			match walking:
 				true:pass
 				false:
@@ -89,7 +87,6 @@ func state():
 
 		states.RUN:
 
-			acceleration = 1
 			match walking:
 				true:pass
 				false:
@@ -112,7 +109,7 @@ func state():
 			goal_node.position = player.position
 
 func goal_randi():
-	goal_node.position = Vector2(randi_range(-100,100),randi_range(-100,100))
+	goal_node.position = Vector2(randi_range(-200,200),randi_range(-200,200))
 	goal = goal_node
 
 func goal_player_away():
@@ -135,7 +132,7 @@ func eyes():
 		eyes_ray.enabled = false
 	elif eyes_ray.is_colliding() and target.is_in_group("danger"):
 		danger = target
-		#state_cur = states.RUN
+		state_cur = states.RUN
 
 
 func die():

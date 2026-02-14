@@ -4,7 +4,8 @@ extends CharacterBody2D
 @onready var nothing_body = $ray_long/nothin
 @onready var weapon = $weapons
 @onready var ray_pick = $pickup_ray
-@onready var body = $Mc
+@onready var body_top = $"Mc-top"
+@onready var body_bot = $"Mc-bottom"
 @onready var pos = $shell_pos
 @onready var audio_shoot = $sounds/shoot
 @onready var audio_reload = $sounds/reload
@@ -16,6 +17,7 @@ var shell_look :int = 0
 var can_shoot := true
 var can_reload := true
 var movable := true
+var base_anim:String
 
 @onready var pew = $ray_long/pew
 @onready var store = $store
@@ -109,6 +111,8 @@ func reload():
 func grenade():
 	var gren_inst = gren.instantiate()
 	if Input.is_action_just_pressed("g"):
+		anims("throw",0)
+		await get_tree().create_timer(0.2).timeout
 		gren_inst.global_transform = pos.global_transform
 		gren_inst.scale = Vector2(1,1)
 		gren_inst.velocity_throw = strength
@@ -150,10 +154,12 @@ func change():
 	if Input.is_action_just_pressed("1"):
 		weapon.in_hands = weapon.current_prim
 		#weapon.assign_weapon_rounds(1)
+		anims("prim",0)
 		weapon.weapon_change(1)
 	if Input.is_action_just_pressed("2"):
 		weapon.in_hands = weapon.current_sec
 		#weapon.assign_weapon_rounds(2)
+		anims("sec",0)
 		weapon.weapon_change(2)
 	if Input.is_action_just_pressed("3"):
 		weapon.in_hands = weapon.current_melee
@@ -191,9 +197,29 @@ func equip_weapon():
 func move_anim():
 	look_at(get_global_mouse_position())
 	if Input.is_action_pressed("moving"):
-		body.play("walk")
+		body_bot.play("walk")
 	else:
-		body.play("idle")
+		body_bot.play("idle")
+
+func anims(anim:String,_type):
+	match anim:
+		"peace":
+			body_top.play("idle-peace")
+			base_anim = body_top.animation
+		"prim":
+			body_top.play("idle-prim")
+			base_anim = body_top.animation
+		"sec":
+			body_top.play("idle-sec")
+			base_anim = body_top.animation
+		"throw":
+			body_top.play("throw")
+			await get_tree().create_timer(0.5).timeout
+			body_top.play(base_anim)
+			print(base_anim)
+		"run":
+			body_top.play("run")
+	
 
 func shell_eject(shell):
 	var shell_inst = shells.instantiate()

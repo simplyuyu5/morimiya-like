@@ -149,6 +149,7 @@ top_level = true
 position = Vector2(44, -4)
 
 [node name="Sprite2D" type="Sprite2D" parent="goal_node"]
+visible = false
 texture = SubResource("GradientTexture2D_k73aa")
 metadata/_edit_lock_ = true
 
