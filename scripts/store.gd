@@ -15,9 +15,9 @@ var inder = 0
 
 
 func init():
+	
 	if Input.is_action_just_pressed("p") and open == false:
 		open = true
-		Input.mouse_mode =Input.MOUSE_MODE_VISIBLE
 		$Panel.show()
 		populate_shop()
 		populate_equip()

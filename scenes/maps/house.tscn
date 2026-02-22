@@ -219,7 +219,7 @@ tile_set = SubResource("TileSet_rntoh")
 
 [node name="Node" type="Node" parent="base"]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="base/Node" groups=["ineractable"]]
+[node name="StaticBody2D" type="StaticBody2D" parent="base/Node" groups=["interactable"]]
 position = Vector2(1043, 270)
 collision_layer = 16
 collision_mask = 2
@@ -321,7 +321,7 @@ position = Vector2(30, 174)
 collision_layer = 18
 collision_mask = 2
 
-[node name="Area2D" type="Area2D" parent="base/exit" groups=["ineractable"]]
+[node name="Area2D" type="Area2D" parent="base/exit" groups=["interactable"]]
 collision_layer = 16
 collision_mask = 2
 metadata/_edit_lock_ = true

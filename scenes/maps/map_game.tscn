@@ -1,9 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://ckawym3tsfqf7"]
+[gd_scene load_steps=3 format=3 uid="uid://ckawym3tsfqf7"]
 
 [ext_resource type="PackedScene" uid="uid://drq70gpb1g2w3" path="res://scenes/maps/map.tscn" id="1_5owsa"]
 [ext_resource type="PackedScene" uid="uid://blhcllsye5ckw" path="res://scenes/player.tscn" id="2_ropr1"]
-[ext_resource type="PackedScene" uid="uid://dgf4dq62robvc" path="res://scenes/settings.tscn" id="4_33ep3"]
-[ext_resource type="PackedScene" uid="uid://dxgaqwnsyvxs0" path="res://scenes/npc/30_npc.tscn" id="4_e5gab"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -20,13 +18,3 @@ visibility_layer = 4
 z_index = 4
 position = Vector2(95.00003, 948.9999)
 scale = Vector2(3.4999995, 3.4999995)
-
-[node name="tpo_npc" parent="." instance=ExtResource("4_e5gab")]
-position = Vector2(421.99997, 49.999878)
-rotation = 1.5621265
-scale = Vector2(0.99999964, 0.99999964)
-motion_mode = 1
-
-[node name="settings" parent="." instance=ExtResource("4_33ep3")]
-gui = true
-shoot = true

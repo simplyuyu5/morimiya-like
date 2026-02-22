@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bhoacu7owtw6m"]
+[gd_scene load_steps=11 format=3 uid="uid://bhoacu7owtw6m"]
 
 [ext_resource type="Script" uid="uid://dwqegnnb8d4p1" path="res://scripts/gui.gd" id="1_7yii4"]
 [ext_resource type="Texture2D" uid="uid://brmdkm2ix0opo" path="res://images/weapons_portraits/g17_shop.png" id="2_4yt8u"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://dq47xwlg3pwa4" path="res://images/weapons_portraits/ar_shop.png" id="5_v3be1"]
 [ext_resource type="Texture2D" uid="uid://bwtlauc2loalf" path="res://images/effects/progbarreload3.png" id="6_xqxrh"]
 [ext_resource type="Texture2D" uid="uid://cyrhfr2vowgim" path="res://images/effects/progbarreload2.png" id="7_qupqx"]
+[ext_resource type="Texture2D" uid="uid://pqg5irp4tf24" path="res://images/objects/ui-counter.png" id="8_4yt8u"]
+[ext_resource type="FontFile" uid="uid://6yu123i5kmnw" path="res://Merchant Copy.ttf" id="9_p54wi"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_i4ail"]
 animations = [{
@@ -48,18 +50,20 @@ script = ExtResource("1_7yii4")
 
 [node name="chance" type="Label" parent="."]
 anchors_preset = -1
-anchor_left = 0.4778646
-anchor_right = 0.5
-anchor_bottom = 0.032407407
-offset_right = 25.5
-offset_bottom = 21.0
+anchor_left = 0.47569445
+anchor_right = 0.51521575
+anchor_bottom = 0.036728393
+offset_right = 15.900024
+offset_bottom = 10.200001
 grow_horizontal = 2
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.7, 0.7)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
-theme_override_font_sizes/font_size = 30
+theme_override_fonts/font = ExtResource("9_p54wi")
+theme_override_font_sizes/font_size = 50
 text = "100"
+metadata/_edit_use_anchors_ = true
 
 [node name="rounds" type="Label" parent="."]
 anchors_preset = -1
@@ -71,8 +75,10 @@ offset_top = -3.0517578e-05
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
-theme_override_font_sizes/font_size = 30
+theme_override_fonts/font = ExtResource("9_p54wi")
+theme_override_font_sizes/font_size = 40
 text = "23hi"
+vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="mags" type="Label" parent="."]
@@ -84,8 +90,10 @@ anchor_bottom = 0.8132716
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
-theme_override_font_sizes/font_size = 30
+theme_override_fonts/font = ExtResource("9_p54wi")
+theme_override_font_sizes/font_size = 40
 text = "mags"
+vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="weapon" type="AnimatedSprite2D" parent="."]
@@ -108,3 +116,55 @@ step = 0.5
 fill_mode = 4
 texture_under = ExtResource("6_xqxrh")
 texture_progress = ExtResource("7_qupqx")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 276.0
+offset_top = 3.0
+offset_right = 476.0
+offset_bottom = 93.0
+grow_horizontal = 2
+scale = Vector2(1.75, 1.75)
+texture = ExtResource("8_4yt8u")
+
+[node name="killed" type="Label" parent="TextureRect"]
+layout_mode = 0
+offset_left = 13.142847
+offset_top = 5.714286
+offset_right = 328.14285
+offset_bottom = 46.714287
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("9_p54wi")
+theme_override_font_sizes/font_size = 60
+text = "Killed : 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="injujred" type="Label" parent="TextureRect"]
+layout_mode = 0
+offset_left = 23.999994
+offset_top = 34.285713
+offset_right = 317.2857
+offset_bottom = 75.28571
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("9_p54wi")
+theme_override_font_sizes/font_size = 60
+text = "Injured : 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="fleed" type="Label" parent="TextureRect"]
+layout_mode = 0
+offset_left = 32.571404
+offset_top = 65.71428
+offset_right = 309.14282
+offset_bottom = 106.71428
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("9_p54wi")
+theme_override_font_sizes/font_size = 60
+text = "Fleed : 1"
+horizontal_alignment = 1
+vertical_alignment = 1

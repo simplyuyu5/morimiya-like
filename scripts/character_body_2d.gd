@@ -177,9 +177,7 @@ func equip_ult():
 func equip_weapon():
 	var target = ray_pick.get_collider()
 	if Input.is_action_just_pressed("p"):
-			#print(target.name, " target")
 			weapon.in_hands = target.name
-			#print("picked up weapon! ", weapon.in_hands)
 			weapon.weapon_change()
 			target.free()
 			ray_pick.enabled = false
@@ -216,7 +214,6 @@ func anims(anim:String,_type):
 			body_top.play("throw")
 			await get_tree().create_timer(0.5).timeout
 			body_top.play(base_anim)
-			print(base_anim)
 		"run":
 			body_top.play("run")
 	
