@@ -1,13 +1,15 @@
 extends Node
 
 @export var parent_help:CharacterBody2D
-var blood = preload("res://scenes/blood_decal_shot.tscn").instantiate(PackedScene.GEN_EDIT_STATE_DISABLED)
+var blood := preload("res://scenes/blood_decal_shot.tscn").instantiate(PackedScene.GEN_EDIT_STATE_DISABLED)
 @onready var parent = get_parent()
 var hp = 120
-var bleed = 0
+var bleed := 0
 var is_bleeding:bool= false
 var is_dead:bool= false
 var hp_saved = 120
+var hp_max = 120
+var injured := false
 
 func _ready():
 	parent.hp = hp_saved
@@ -19,6 +21,10 @@ func _process(_delta:float):
 	if parent.hp <= 0:
 		parent.hp = 0
 	hp = parent.hp 
+	if hp != hp_max and injured != true:
+		injured = true
+		parent.game_data.temp_injured +=1
+	else: pass
 
 func hp_func():
 	if bleed > 0 and is_bleeding == false:

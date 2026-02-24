@@ -11,6 +11,7 @@ extends CharacterBody2D
 @onready var audio_reload = $sounds/reload
 @onready var audio = $sounds/sounds_misc
 @onready var gui = $gui
+@onready var stats = $game_data
 var shells = preload("res://scenes/shells.tscn")#.instantiate()
 var gren = preload("res://scenes/grenade.tscn")
 var shell_look :int = 0
@@ -59,7 +60,8 @@ func _physics_process(_delta: float) -> void:
 		shoot()
 		reload()
 		grenade()
-	
+	else:
+		$gui/stats.hide()
 
 
 	move_and_slide()
@@ -68,11 +70,12 @@ func shoot():
 	ray.enabled = true
 	var target = ray.get_collider()
 	if Input.is_action_just_pressed("lmb") and weapon.rounds >= 1 and can_shoot == true:
-		ray.target_position.x = weapon.dist
-		nothing_body.position.x = weapon.dist - 1
+		#ray.target_position.x = weapon.dist
+		#nothing_body.position.x = weapon.dist - 1
 		audio_shoot.play()
 		gun_smoke(weapon.style)
 		shell_eject(weapon.shell)
+		stats.temp_shots += weapon.shots
 
 		if ray.is_colliding() and target.is_in_group("wall"):
 			ray.enabled = false
@@ -116,8 +119,9 @@ func grenade():
 		gren_inst.global_transform = pos.global_transform
 		gren_inst.scale = Vector2(1,1)
 		gren_inst.velocity_throw = strength
+		stats.temp_throws += 1
 		#gren_inst.throw(weapon.current_gren)
-		 
+
 		add_sibling(gren_inst)
 
 

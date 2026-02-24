@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
-var hp = 120
-var bleed = 0
-var acceleration = 0.5
+var hp := 120
+var bleed := 0
+var acceleration := 0.5
 var walking := false
 var direction = Vector2(0,0)
 
@@ -15,6 +15,7 @@ var direction = Vector2(0,0)
 @onready var hp_man = $hp
 @onready var agent = $NavigationAgent2D
 @onready var goal_node = $goal_node
+@onready var game_data = $"/root/Node2D/CharacterBody2D/game_data"
 
 @onready var player= $"/root/Node2D/CharacterBody2D"
 
@@ -136,6 +137,9 @@ func eyes():
 
 
 func die():
+	game_data.temp_injured += -1
+	game_data.temp_killed += 1
+	hp_man.injured = false
 	eyes_ray.enabled = false
 	eyes_ray.queue_free()
 	hp_man.is_dead = true

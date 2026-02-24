@@ -118,19 +118,20 @@ texture_under = ExtResource("6_xqxrh")
 texture_progress = ExtResource("7_qupqx")
 metadata/_edit_use_anchors_ = true
 
-[node name="TextureRect" type="TextureRect" parent="."]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = 276.0
-offset_top = 3.0
-offset_right = 476.0
-offset_bottom = 93.0
+[node name="stats" type="TextureRect" parent="."]
+anchors_preset = -1
+anchor_left = 0.7395833
+anchor_top = -0.0015432095
+anchor_right = 1.0434028
+anchor_bottom = 0.24151234
+offset_right = -150.0
+offset_bottom = -67.5
 grow_horizontal = 2
 scale = Vector2(1.75, 1.75)
 texture = ExtResource("8_4yt8u")
+metadata/_edit_use_anchors_ = true
 
-[node name="killed" type="Label" parent="TextureRect"]
+[node name="killed" type="Label" parent="stats"]
 layout_mode = 0
 offset_left = 13.142847
 offset_top = 5.714286
@@ -143,7 +144,7 @@ text = "Killed : 1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="injujred" type="Label" parent="TextureRect"]
+[node name="injured" type="Label" parent="stats"]
 layout_mode = 0
 offset_left = 23.999994
 offset_top = 34.285713
@@ -156,7 +157,7 @@ text = "Injured : 1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="fleed" type="Label" parent="TextureRect"]
+[node name="fleed" type="Label" parent="stats"]
 layout_mode = 0
 offset_left = 32.571404
 offset_top = 65.71428

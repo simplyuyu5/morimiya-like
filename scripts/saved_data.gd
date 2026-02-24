@@ -1,7 +1,7 @@
 extends Node
 
-var mags_prim = 5
-var mags_sec = 0
+var mags_prim = 4
+var mags_sec = 2
 
 var grens = 0
 

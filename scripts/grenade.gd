@@ -7,6 +7,7 @@ extends RigidBody2D
 var dec_boom = preload("res://scenes/explosio_decal.tscn")
 @onready var expl_sprite = $dmg_rad/explosin
 
+@onready var shatter = $"shatter_ray/grenade_shatter"
 @onready var shatter_ray = $shatter_ray
 @onready var damage_radius = $dmg_rad
 
