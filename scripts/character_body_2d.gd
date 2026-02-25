@@ -89,10 +89,11 @@ func shoot():
 		recoil()
 
 		weapon.rounds -= weapon.shots
-		if weapon.in_hands == weapon.current_prim:
-			weapon.bank.rounds_prim = weapon.rounds
-		elif weapon.in_hands == weapon.current_sec:
-			weapon.bank.rounds_sec = weapon.rounds
+		match weapon.in_hands:
+			weapon.current_prim:
+				weapon.bank.rounds_prim = weapon.rounds
+			weapon.current_sec:
+				weapon.bank.rounds_sec = weapon.rounds
 		can_shoot = false
 		await get_tree().create_timer(weapon.delay).timeout
 		can_shoot = true
@@ -104,10 +105,16 @@ func reload():
 		audio_reload.play(1)
 		gui.gui_reload(weapon.reload_time)
 		await get_tree().create_timer(weapon.reload_time).timeout
-		if weapon.in_hands == weapon.current_prim:
-			weapon.bank.mags_prim = weapon.mags - 1
-		elif weapon.in_hands == weapon.current_sec:
-			weapon.bank.mags_sec = weapon.mags - 1
+		match weapon.in_hands: 
+			weapon.current_prim:
+				weapon.bank.mags_prim = weapon.mags - 1
+			weapon.current_sec:
+				weapon.bank.mags_sec = weapon.mags - 1
+		match weapon.in_hands:
+			weapon.current_prim:
+				weapon.bank.rounds_prim = weapon.rounds
+			weapon.current_sec:
+				weapon.bank.rounds_sec = weapon.rounds
 		reloading_types()
 	else:pass
 
@@ -249,3 +256,7 @@ func gun_smoke(style):
 			#weapon.current = area.name
 			#print(weapon.current)
 			#area.queue_free()
+
+
+func _on_run_timer_timeout() -> void:
+	pass # Replace with function body.

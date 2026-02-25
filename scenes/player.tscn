@@ -18,7 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://bq47gubxg04sp" path="res://images/effects/pews/pew_big4.png" id="15_wnwbv"]
 [ext_resource type="PackedScene" uid="uid://bjc3oepe17a24" path="res://scenes/store.tscn" id="18_4r5pv"]
 [ext_resource type="PackedScene" uid="uid://bhoacu7owtw6m" path="res://scenes/gui.tscn" id="18_l71n6"]
-[ext_resource type="Script" uid="uid://dqrrytkhty5gw" path="res://scenes/game_data.gd" id="23_4ni07"]
+[ext_resource type="Script" uid="uid://dqrrytkhty5gw" path="res://scripts/game_data.gd" id="23_4ni07"]
 [ext_resource type="Script" uid="uid://djnyv8evdqlq3" path="res://scripts/saved_data.gd" id="24_l71n6"]
 [ext_resource type="AudioStream" uid="uid://qhyhjivd356h" path="res://sounds/loud_sounds_idk/shooting/xm15_indoors.wav" id="25_ke2ow"]
 [ext_resource type="AudioStream" uid="uid://om1pwr6o5ecx" path="res://sounds/loud_sounds_idk/shooting/reloading1.mp3" id="25_ujl30"]

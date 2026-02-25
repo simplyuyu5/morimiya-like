@@ -367,5 +367,7 @@ texture = ExtResource("2_3scp5")
 position = Vector2(1036, 473.99997)
 scale = Vector2(3.5, 3.5)
 
-[node name="settings" parent="." instance=ExtResource("7_pkxii")]
-equipnu = true
+[node name="settings" parent="." node_paths=PackedStringArray("player") instance=ExtResource("7_pkxii")]
+player = NodePath("../CharacterBody2D")
+gui = false
+shoot = false

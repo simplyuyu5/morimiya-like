@@ -4,4 +4,7 @@
 
 [node name="settings" type="Node"]
 script = ExtResource("1_5p8wc")
+gui = true
+shoot = true
 move = true
+equipnu = true

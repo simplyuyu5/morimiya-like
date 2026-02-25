@@ -139,6 +139,7 @@ func eyes():
 func die():
 	game_data.temp_injured += -1
 	game_data.temp_killed += 1
+	print(game_data.temp_injured)
 	hp_man.injured = false
 	eyes_ray.enabled = false
 	eyes_ray.queue_free()

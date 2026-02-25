@@ -124,10 +124,11 @@ anchor_left = 0.7395833
 anchor_top = -0.0015432095
 anchor_right = 1.0434028
 anchor_bottom = 0.24151234
-offset_right = -150.0
+offset_left = 3.0
+offset_right = -147.0
 offset_bottom = -67.5
 grow_horizontal = 2
-scale = Vector2(1.75, 1.75)
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("8_4yt8u")
 metadata/_edit_use_anchors_ = true
 

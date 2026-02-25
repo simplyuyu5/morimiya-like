@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://drq70gpb1g2w3" path="res://scenes/maps/map.tscn" id="1_5owsa"]
 [ext_resource type="PackedScene" uid="uid://blhcllsye5ckw" path="res://scenes/player.tscn" id="2_ropr1"]
-[ext_resource type="PackedScene" uid="uid://dgf4dq62robvc" path="res://scenes/settings.tscn" id="3_ropr1"]
+[ext_resource type="Script" uid="uid://65rgw6o8tutp" path="res://scripts/settings.gd" id="3_33ep3"]
 [ext_resource type="PackedScene" uid="uid://dxgaqwnsyvxs0" path="res://scenes/npc/30_npc.tscn" id="4_33ep3"]
 
 [node name="Node2D" type="Node2D"]
@@ -21,10 +21,22 @@ z_index = 4
 position = Vector2(95.00003, 948.9999)
 scale = Vector2(3.4999995, 3.4999995)
 
-[node name="settings" parent="." instance=ExtResource("3_ropr1")]
+[node name="settings" type="Node" parent="." node_paths=PackedStringArray("player")]
+process_mode = 4
+physics_interpolation_mode = 2
+auto_translate_mode = 2
+script = ExtResource("3_33ep3")
+player = NodePath("../CharacterBody2D")
 gui = true
 shoot = true
+move = true
 
 [node name="tpo_npc" parent="." instance=ExtResource("4_33ep3")]
 position = Vector2(394, -155)
 rotation = 1.5707964
+
+[node name="Run_timer" type="Timer" parent="."]
+wait_time = 180.0
+one_shot = true
+
+[connection signal="timeout" from="Run_timer" to="CharacterBody2D" method="_on_run_timer_timeout"]
