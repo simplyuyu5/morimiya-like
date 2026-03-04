@@ -156,6 +156,9 @@ func recoil():
 	await get_tree().create_timer(3).timeout
 	spread = false
 
+func run():
+	pass
+
 func move():
 	var input_dir := Input.get_vector("a", "d", "w", "s")
 	var direction := (transform.determinant() * Vector2(input_dir.x, input_dir.y)).normalized()
@@ -267,14 +270,10 @@ func end_game():
 		#if Input.is_action_just_pressed("p"):
 			#weapon.current = area.name
 			#print(weapon.current)
-			#area.queue_free()
-
 
 func _on_run_timer_timeout() -> void:
 	end_game()
 
-
+@onready var changer = $"/root/Node2D/Scene_change"
 func _on_proceed_pressed() -> void:
-	preload("res://scenes/maps/house.tscn")
-	$end_screen.hide()
-	get_tree().change_scene_to_file("res://scenes/maps/house.tscn")
+	changer.change("res://scenes/maps/house.tscn")
