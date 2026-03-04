@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://blhcllsye5ckw"]
+[gd_scene load_steps=46 format=3 uid="uid://blhcllsye5ckw"]
 
 [ext_resource type="Script" uid="uid://dddqbgfrxouwf" path="res://scripts/character_body_2d.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://dqi2shiekr02c" path="res://images/mc/girl/top-sheet.png" id="2_a38lo"]
@@ -19,7 +19,9 @@
 [ext_resource type="PackedScene" uid="uid://bjc3oepe17a24" path="res://scenes/store.tscn" id="18_4r5pv"]
 [ext_resource type="PackedScene" uid="uid://bhoacu7owtw6m" path="res://scenes/gui.tscn" id="18_l71n6"]
 [ext_resource type="Script" uid="uid://dqrrytkhty5gw" path="res://scripts/game_data.gd" id="23_4ni07"]
+[ext_resource type="StyleBox" uid="uid://ckr0q3ajn27kr" path="res://style_temp.tres" id="24_ke2ow"]
 [ext_resource type="Script" uid="uid://djnyv8evdqlq3" path="res://scripts/saved_data.gd" id="24_l71n6"]
+[ext_resource type="FontFile" uid="uid://6yu123i5kmnw" path="res://Merchant Copy.ttf" id="25_31cv2"]
 [ext_resource type="AudioStream" uid="uid://qhyhjivd356h" path="res://sounds/loud_sounds_idk/shooting/xm15_indoors.wav" id="25_ke2ow"]
 [ext_resource type="AudioStream" uid="uid://om1pwr6o5ecx" path="res://sounds/loud_sounds_idk/shooting/reloading1.mp3" id="25_ujl30"]
 [ext_resource type="AudioStream" uid="uid://ls8h27ftweah" path="res://sounds/loud_sounds_idk/shooting/reloading2.mp3" id="26_31cv2"]
@@ -302,6 +304,7 @@ position = Vector2(1, 0)
 shape = SubResource("CapsuleShape2D_g2els")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+enabled = false
 position_smoothing_enabled = true
 rotation_smoothing_speed = 1.0
 
@@ -347,3 +350,176 @@ playback_type = 1
 
 [node name="game_data" type="Node" parent="."]
 script = ExtResource("23_4ni07")
+
+[node name="end_screen" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Panel" type="Panel" parent="end_screen"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("24_ke2ow")
+metadata/_edit_use_anchors_ = true
+
+[node name="points" type="RichTextLabel" parent="end_screen/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.013020833
+anchor_top = 0.027777778
+anchor_right = 0.3125
+anchor_bottom = 0.08950617
+offset_top = 2.0
+offset_bottom = 2.0
+theme_override_fonts/normal_font = ExtResource("25_31cv2")
+theme_override_font_sizes/normal_font_size = 50
+text = "Points earned:"
+scroll_active = false
+metadata/_edit_lock_ = true
+metadata/_edit_use_anchors_ = true
+
+[node name="stats" type="RichTextLabel" parent="end_screen/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.013020833
+anchor_top = 0.23148148
+anchor_right = 0.3125
+anchor_bottom = 0.29320988
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("25_31cv2")
+theme_override_font_sizes/normal_font_size = 50
+text = "Statistics:"
+scroll_active = false
+autowrap_trim_flags = 64
+metadata/_edit_lock_ = true
+metadata/_edit_use_anchors_ = true
+
+[node name="stats_texts" type="Control" parent="end_screen/Panel"]
+anchors_preset = 0
+anchor_left = 0.011284722
+anchor_top = 0.2824074
+anchor_right = 0.046006944
+anchor_bottom = 0.3441358
+metadata/_edit_lock_ = true
+metadata/_edit_use_anchors_ = true
+
+[node name="kill" type="RichTextLabel" parent="end_screen/Panel/stats_texts"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.25
+anchor_right = 9.125
+anchor_bottom = 1.25
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("25_31cv2")
+theme_override_font_sizes/normal_font_size = 50
+text = "Killed -"
+scroll_active = false
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="inj" type="RichTextLabel" parent="end_screen/Panel/stats_texts"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.5
+anchor_right = 9.125
+anchor_bottom = 2.5
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("25_31cv2")
+theme_override_font_sizes/normal_font_size = 50
+text = "Injured -"
+scroll_active = false
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="flee" type="RichTextLabel" parent="end_screen/Panel/stats_texts"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 2.75
+anchor_right = 9.125
+anchor_bottom = 3.75
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("25_31cv2")
+theme_override_font_sizes/normal_font_size = 50
+text = "Fleed -"
+scroll_active = false
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="special" type="RichTextLabel" parent="end_screen/Panel/stats_texts"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.75
+anchor_top = 4.0
+anchor_right = 9.375
+anchor_bottom = 5.0
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("25_31cv2")
+theme_override_font_sizes/normal_font_size = 50
+text = "Special -"
+scroll_active = false
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="info" type="Control" parent="end_screen/Panel"]
+layout_mode = 1
+anchor_left = 0.4826389
+anchor_right = 0.5173611
+anchor_bottom = 0.061728396
+grow_horizontal = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="info" type="RichTextLabel" parent="end_screen/Panel/info"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.25
+anchor_top = 0.5
+anchor_right = 11.25
+anchor_bottom = 1.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("25_31cv2")
+theme_override_font_sizes/normal_font_size = 50
+text = "Run info:"
+scroll_active = false
+metadata/_edit_use_anchors_ = true
+
+[node name="weap" type="RichTextLabel" parent="end_screen/Panel/info"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.25
+anchor_top = 1.975
+anchor_right = 11.25
+anchor_bottom = 6.525
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("25_31cv2")
+theme_override_font_sizes/normal_font_size = 50
+text = "weapon primary:
+
+weapon secondary:
+
+grenades:
+
+"
+scroll_active = false
+metadata/_edit_use_anchors_ = true
+
+[node name="proceed" type="Button" parent="end_screen/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.7118056
+anchor_top = 0.81790125
+anchor_right = 0.9722222
+anchor_bottom = 0.95679015
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("25_31cv2")
+theme_override_font_sizes/font_size = 40
+text = "Continue"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="end_screen/Panel/proceed" to="." method="_on_proceed_pressed"]

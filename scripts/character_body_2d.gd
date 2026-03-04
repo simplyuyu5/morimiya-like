@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+@onready var cam = $Camera2D
 @onready var ray = $ray_long
 @onready var nothing_body = $ray_long/nothin
 @onready var weapon = $weapons
@@ -23,6 +24,8 @@ var base_anim:String
 @onready var pew = $ray_long/pew
 @onready var store = $store
 
+@onready var settings = $"/root/Node2D/settings"
+
 var spread :bool = false
 var weapon_under :bool = false
 var pickup_under :bool = false
@@ -37,6 +40,8 @@ var strength = 20
 
 func _ready() -> void:
 	pew.play("nothing")
+	settings.translate()
+	cam.enabled = true
 	#preload("res://scenes/shells.tscn")
 
 func _process(_delta: float) -> void:
@@ -247,6 +252,13 @@ func gun_smoke(style):
 		2:pew.play("pew_big")
 		5:pew.play("slash")
 
+func end_game():
+	settings.gui = false
+	settings.shoot = false
+	settings.move = false
+	settings.translate()
+	$end_screen.show()
+
 #func _on_pick_range_area_entered(area: Area2D):
 	#if area.is_in_group("weapon_pick"):
 		#print(area.name)
@@ -259,4 +271,10 @@ func gun_smoke(style):
 
 
 func _on_run_timer_timeout() -> void:
-	pass # Replace with function body.
+	end_game()
+
+
+func _on_proceed_pressed() -> void:
+	preload("res://scenes/maps/house.tscn")
+	$end_screen.hide()
+	get_tree().change_scene_to_file("res://scenes/maps/house.tscn")

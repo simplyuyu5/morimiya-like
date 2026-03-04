@@ -9,8 +9,8 @@ var inder = 0
 @onready var list_equip = $Panel/weapons_shop/equip/itemlist_eq
 @onready var list_buy_prim = $Panel/weapons_shop/prim_buy/itemlist_prim
 @onready var weapons = $"/root/Node2D/CharacterBody2D/weapons"
-@onready var prim = weapons.primaries
-@onready var sec = weapons.secondaries
+@onready var prim# = weapons.primaries
+@onready var sec #= weapons.secondaries
 
 
 
@@ -18,6 +18,8 @@ func init():
 	
 	if Input.is_action_just_pressed("p") and open == false:
 		open = true
+		prim = weapons.primaries
+		sec = weapons.secondaries
 		$Panel.show()
 		populate_shop()
 		populate_equip()
