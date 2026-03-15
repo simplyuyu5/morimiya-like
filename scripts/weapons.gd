@@ -194,7 +194,7 @@ var secondaries = {
 		"sdamage":55,
 		"srounds_max":8,
 		"smags_max":2,
-		"sdist":100,
+		"sdist":60,
 		"sdelay":0.1,
 		"rel_time":2,
 		"sshots":1,
@@ -204,7 +204,25 @@ var secondaries = {
 		"sshell":2,
 		"sdesc":"description placeholder",
 		"sbought":false,
-		"cost":1000,
+		"cost":1300,
+		"special":false
+	},
+	"m1911":{
+		"sreload_type":"mag",
+		"sdamage":45,
+		"srounds_max":7,
+		"smags_max":2,
+		"sdist":70,
+		"sdelay":0.1,
+		"rel_time":1.6,
+		"sshots":1,
+		"sstyle":0,
+		"ssound":0,
+		"srecoil":1.5,
+		"sshell":2,
+		"sdesc":"colt M1911!",
+		"sbought":false,
+		"cost":900,
 		"special":false
 	}
 }

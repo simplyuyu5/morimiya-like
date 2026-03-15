@@ -36,7 +36,7 @@ var total_shots:int = 0
 var total_throws:int = 0
 var deaths:int = 0
 
-var total_points:int = 0
+var total_points:int = 10000
 
 func save():
 	pass

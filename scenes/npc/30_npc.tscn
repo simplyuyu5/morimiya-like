@@ -1,23 +1,10 @@
-[gd_scene load_steps=27 format=3 uid="uid://dxgaqwnsyvxs0"]
+[gd_scene load_steps=25 format=3 uid="uid://dxgaqwnsyvxs0"]
 
 [ext_resource type="Script" uid="uid://ct3giwk67767l" path="res://scripts/30_npc_movement.gd" id="1_i76qr"]
 [ext_resource type="Script" uid="uid://cfhiihppfx3jj" path="res://scripts/30_npc_area.gd" id="2_i76qr"]
 [ext_resource type="Script" uid="uid://dctjjv8s7j4es" path="res://scripts/sounds.gd" id="3_168wh"]
 [ext_resource type="Texture2D" uid="uid://cecdnh2t8e4wd" path="res://images/living/corpses/dead_list.png" id="4_kyfuo"]
 [ext_resource type="Texture2D" uid="uid://b6oyr1hf1j4si" path="res://images/living/npc_list.png" id="5_i76qr"]
-[ext_resource type="Texture2D" uid="uid://c6qcwyyd1rjbd" path="res://images/living/npc-01.png" id="5_k73aa"]
-[ext_resource type="Texture2D" uid="uid://5r3jknl314v6" path="res://images/living/npc-02.png" id="6_aqwbi"]
-[ext_resource type="Texture2D" uid="uid://5dtal3bbveej" path="res://images/living/npc-03.png" id="7_kbm7u"]
-[ext_resource type="Texture2D" uid="uid://dmdm8e0fpabe2" path="res://images/living/npc-04.png" id="8_rk3wh"]
-
-[sub_resource type="Gradient" id="Gradient_168wh"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(1, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_k73aa"]
-gradient = SubResource("Gradient_168wh")
-width = 10
-height = 10
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_168wh"]
 atlas = ExtResource("4_kyfuo")
@@ -62,63 +49,75 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bn6rf"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ymru"]
 atlas = ExtResource("5_i76qr")
-region = Rect2(0, 0, 10, 10)
+region = Rect2(0, 0, 10, 11)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_gxeka"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_mbqj5"]
 atlas = ExtResource("5_i76qr")
-region = Rect2(10, 0, 10, 10)
+region = Rect2(10, 0, 10, 11)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ojvar"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_btcon"]
 atlas = ExtResource("5_i76qr")
-region = Rect2(20, 0, 10, 10)
+region = Rect2(20, 0, 10, 11)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_otks3"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_4xgab"]
 atlas = ExtResource("5_i76qr")
-region = Rect2(30, 0, 10, 10)
+region = Rect2(30, 0, 10, 11)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0mefl"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_kyfuo"]
 atlas = ExtResource("5_i76qr")
-region = Rect2(40, 0, 10, 10)
+region = Rect2(40, 0, 10, 11)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ojvar"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_bn6rf")
+"texture": SubResource("AtlasTexture_3ymru")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_gxeka")
+"texture": SubResource("AtlasTexture_mbqj5")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ojvar")
+"texture": SubResource("AtlasTexture_btcon")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_otks3")
+"texture": SubResource("AtlasTexture_4xgab")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_0mefl")
+"texture": SubResource("AtlasTexture_kyfuo")
 }],
 "loop": true,
 "name": &"bodies",
 "speed": 5.0
 }]
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3ymru"]
+load_path = "res://.godot/imported/npc-01.png-a2f42fef73cfd7a78ddb09e431aaedcf.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mbqj5"]
+load_path = "res://.godot/imported/npc-02.png-9670defab6afe099c5f9834e438d0941.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_btcon"]
+load_path = "res://.godot/imported/npc-03.png-690b60f160e61006f9074f4d0befb286.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4xgab"]
+load_path = "res://.godot/imported/npc-04.png-cce633f0c35bf4d4e1dbd4d59291927e.ctex"
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_168wh"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_k73aa")
+"texture": SubResource("CompressedTexture2D_3ymru")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_aqwbi")
+"texture": SubResource("CompressedTexture2D_mbqj5")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_kbm7u")
+"texture": SubResource("CompressedTexture2D_btcon")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_rk3wh")
+"texture": SubResource("CompressedTexture2D_4xgab")
 }],
 "loop": true,
 "name": &"down",
@@ -147,11 +146,6 @@ script = ExtResource("3_168wh")
 [node name="goal_node" type="Node2D" parent="."]
 top_level = true
 position = Vector2(44, -4)
-
-[node name="Sprite2D" type="Sprite2D" parent="goal_node"]
-visible = false
-texture = SubResource("GradientTexture2D_k73aa")
-metadata/_edit_lock_ = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 10.0

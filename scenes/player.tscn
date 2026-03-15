@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://dddqbgfrxouwf" path="res://scripts/character_body_2d.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://dqi2shiekr02c" path="res://images/mc/girl/top-sheet.png" id="2_a38lo"]
-[ext_resource type="Texture2D" uid="uid://cbewdwsj8ik5q" path="res://images/mc/girl/mc1.png" id="2_fulsm"]
 [ext_resource type="Script" uid="uid://2nns71jjfnmc" path="res://scripts/weapons.gd" id="3_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://bbu44ygucnq64" path="res://images/nothing.png" id="3_y4r1p"]
 [ext_resource type="Texture2D" uid="uid://cwd1xonwjc7i1" path="res://images/effects/pews/pew_medium2.png" id="4_y4r1p"]
@@ -86,15 +85,19 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_l71n6"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ke2ow"]
 atlas = ExtResource("2_a38lo")
 region = Rect2(19, 0, 19, 19)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ke2ow"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ujl30"]
+atlas = ExtResource("2_a38lo")
+region = Rect2(0, 0, 19, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jc3p3"]
 atlas = ExtResource("2_a38lo")
 region = Rect2(38, 0, 19, 19)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ujl30"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_hax0n"]
 atlas = ExtResource("2_a38lo")
 region = Rect2(57, 0, 19, 19)
 
@@ -114,11 +117,15 @@ region = Rect2(38, 19, 19, 19)
 atlas = ExtResource("2_a38lo")
 region = Rect2(57, 19, 19, 19)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_l71n6"]
+atlas = ExtResource("2_a38lo")
+region = Rect2(19, 0, 19, 19)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_31cv2"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_l71n6")
+"texture": SubResource("AtlasTexture_ke2ow")
 }],
 "loop": false,
 "name": &"idle-peace",
@@ -126,7 +133,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_fulsm")
+"texture": SubResource("AtlasTexture_ujl30")
 }],
 "loop": false,
 "name": &"idle-prim",
@@ -134,7 +141,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ke2ow")
+"texture": SubResource("AtlasTexture_jc3p3")
 }],
 "loop": false,
 "name": &"idle-sec",
@@ -142,7 +149,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ujl30")
+"texture": SubResource("AtlasTexture_hax0n")
 }],
 "loop": false,
 "name": &"run",
@@ -228,9 +235,6 @@ animations = [{
 "speed": 50.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pf23h"]
-size = Vector2(2, 2)
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
 radius = 4.0
 height = 10.0
@@ -289,15 +293,6 @@ metadata/_edit_lock_ = true
 position = Vector2(10, 2)
 sprite_frames = SubResource("SpriteFrames_oprun")
 animation = &"pew_big"
-
-[node name="nothin" type="CharacterBody2D" parent="ray_long" groups=["nothing"]]
-visible = false
-position = Vector2(290, 0)
-motion_mode = 1
-slide_on_ceiling = false
-
-[node name="collisn" type="CollisionShape2D" parent="ray_long/nothin"]
-shape = SubResource("RectangleShape2D_pf23h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 0)

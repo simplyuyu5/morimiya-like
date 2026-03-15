@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @onready var cam = $Camera2D
 @onready var ray = $ray_long
-@onready var nothing_body = $ray_long/nothin
+#@onready var nothing_body = $ray_long/nothin
 @onready var weapon = $weapons
 @onready var ray_pick = $pickup_ray
 @onready var body_top = $"Mc-top"
@@ -24,7 +24,7 @@ var base_anim:String
 @onready var pew = $ray_long/pew
 @onready var store = $store
 
-@onready var settings = $"/root/Node2D/settings"
+#@onready var settings = $settings
 
 var spread :bool = false
 var weapon_under :bool = false
@@ -40,7 +40,7 @@ var strength = 20
 
 func _ready() -> void:
 	pew.play("nothing")
-	settings.translate()
+	setup()
 	cam.enabled = true
 	#preload("res://scenes/shells.tscn")
 
@@ -256,11 +256,30 @@ func gun_smoke(style):
 		5:pew.play("slash")
 
 func end_game():
-	settings.gui = false
-	settings.shoot = false
-	settings.move = false
-	settings.translate()
+	#settings.gui = false
+	#settings.shoot = false
+	#settings.move = false
+	#settings.translate()
+	gui_he = false
+	shoot_he = false
+	move_he = false
+	setup()
 	$end_screen.show()
+
+
+
+@export var gui_he:bool
+@export var shoot_he:bool
+@export var move_he:bool
+@export var equipnu:bool
+
+
+func setup():
+	gui_show = gui_he
+	homicidin = shoot_he
+	movable = move_he
+	equip = equipnu
+
 
 #func _on_pick_range_area_entered(area: Area2D):
 	#if area.is_in_group("weapon_pick"):
@@ -274,6 +293,7 @@ func end_game():
 func _on_run_timer_timeout() -> void:
 	end_game()
 
-@onready var changer = $"/root/Node2D/Scene_change"
+#@onready var changer = $"/root/Node2D/Scene_change"
 func _on_proceed_pressed() -> void:
+	var changer = $"/root/Node2D/Scene_change"
 	changer.change("res://scenes/maps/house.tscn")
