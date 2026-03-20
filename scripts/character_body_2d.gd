@@ -191,7 +191,7 @@ func equip_ult():
 	if ray_pick.is_colliding() and target.is_in_group("weapons_desk"):
 		store.init()
 	if ray_pick.is_colliding() and target.is_in_group("interactable"):
-		target.interaction()
+		target.interaction(self)
 
 func equip_weapon():
 	var target = ray_pick.get_collider()
@@ -256,15 +256,15 @@ func gun_smoke(style):
 		5:pew.play("slash")
 
 func end_game():
-	#settings.gui = false
-	#settings.shoot = false
-	#settings.move = false
-	#settings.translate()
 	gui_he = false
 	shoot_he = false
 	move_he = false
 	setup()
 	$end_screen.show()
+
+func proceed():
+	gui._on_close_loadout_pressed()
+	get_tree().change_scene_to_file("res://scenes/maps/map_game.tscn")
 
 
 
@@ -293,7 +293,6 @@ func setup():
 func _on_run_timer_timeout() -> void:
 	end_game()
 
-#@onready var changer = $"/root/Node2D/Scene_change"
 func _on_proceed_pressed() -> void:
 	var changer = $"/root/Node2D/Scene_change"
 	changer.change("res://scenes/maps/house.tscn")

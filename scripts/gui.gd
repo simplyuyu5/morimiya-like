@@ -8,9 +8,13 @@ extends CanvasLayer
 @onready var killed = $stats/killed
 @onready var injured = $stats/injured
 @onready var fleed = $stats/fleed
+@onready var parent = $"/root/Node2D/CharacterBody2D"
 @onready var weapon = $"/root/Node2D/CharacterBody2D/weapons"
 @onready var base = $"/root/Node2D/CharacterBody2D"
 @onready var stats = $"/root/Node2D/CharacterBody2D/game_data"
+
+@onready var loadout_scr = $loadout_screen
+@onready var weapons_load = $loadout_screen/Panel/weapons
 
 
 var progress_reload
@@ -38,4 +42,15 @@ func gui_reload(time):
 	var tween = create_tween()
 	reloadbar.show()
 	tween.tween_property(reloadbar,"value",100,time)
-	
+
+func loadout():
+	weapons_load.text = "Primary: " +str(weapon.current_prim)+ "\nSecondary: " +str(weapon.current_sec)+ "\nMeelee: " +str(weapon.current_melee)+ "\nExplosives: " + str(weapon.current_gren)
+	loadout_scr.show()
+
+
+func _on_close_loadout_pressed():
+	loadout_scr.hide()
+
+
+func _on_proceed_pressed() -> void:
+	parent.proceed()

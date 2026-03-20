@@ -70,11 +70,12 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_4r5pv")
 metadata/_edit_use_anchors_ = true
 
 [node name="buy prim" type="Button" parent="Panel"]
-layout_mode = 0
-anchor_left = 0.6805556
-anchor_top = 0.021604938
-anchor_right = 0.8768229
-anchor_bottom = 0.102623455
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.6814236
+anchor_top = 0.2669753
+anchor_right = 0.877691
+anchor_bottom = 0.3479938
 offset_right = 96.900024
 offset_bottom = 22.5
 scale = Vector2(0.7, 0.7)
@@ -86,10 +87,10 @@ metadata/_edit_use_anchors_ = true
 [node name="buy sec" type="Button" parent="Panel"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.4644097
-anchor_top = 0.021604938
-anchor_right = 0.6606771
-anchor_bottom = 0.14722222
+anchor_left = 0.6814236
+anchor_top = 0.3564815
+anchor_right = 0.877691
+anchor_bottom = 0.48209876
 offset_right = 96.900024
 offset_bottom = 10.599998
 scale = Vector2(0.7, 0.7)
@@ -758,6 +759,18 @@ offset_right = 3.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.44705883)
+
+[node name="points2" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 899.0
+offset_top = 17.0
+offset_right = 1098.0
+offset_bottom = 70.0
+theme_override_fonts/font = ExtResource("2_phafb")
+theme_override_font_sizes/font_size = 35
+text = "points: 10000"
+horizontal_alignment = 1
+clip_text = true
 
 [connection signal="pressed" from="Panel/buy prim" to="." method="_on_buy_prim_pressed"]
 [connection signal="pressed" from="Panel/buy sec" to="." method="_on_buy_sec_pressed"]

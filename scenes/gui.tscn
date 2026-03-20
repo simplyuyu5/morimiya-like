@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bhoacu7owtw6m"]
+[gd_scene load_steps=12 format=3 uid="uid://bhoacu7owtw6m"]
 
 [ext_resource type="Script" uid="uid://dwqegnnb8d4p1" path="res://scripts/gui.gd" id="1_7yii4"]
 [ext_resource type="Texture2D" uid="uid://brmdkm2ix0opo" path="res://images/weapons_portraits/g17_shop.png" id="2_4yt8u"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cyrhfr2vowgim" path="res://images/effects/progbarreload2.png" id="7_qupqx"]
 [ext_resource type="Texture2D" uid="uid://pqg5irp4tf24" path="res://images/objects/ui-counter.png" id="8_4yt8u"]
 [ext_resource type="FontFile" uid="uid://6yu123i5kmnw" path="res://Merchant Copy.ttf" id="9_p54wi"]
+[ext_resource type="StyleBox" uid="uid://ckr0q3ajn27kr" path="res://style_temp.tres" id="10_xki8e"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_i4ail"]
 animations = [{
@@ -120,13 +121,12 @@ metadata/_edit_use_anchors_ = true
 
 [node name="stats" type="TextureRect" parent="."]
 anchors_preset = -1
-anchor_left = 0.7395833
+anchor_left = 0.7421875
 anchor_top = -0.0015432095
-anchor_right = 1.0434028
-anchor_bottom = 0.24151234
-offset_left = 3.0
-offset_right = -147.0
-offset_bottom = -67.5
+anchor_right = 1.0026041
+anchor_bottom = 0.20679012
+offset_right = -100.0
+offset_bottom = -45.0
 grow_horizontal = 2
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("8_4yt8u")
@@ -134,39 +134,149 @@ metadata/_edit_use_anchors_ = true
 
 [node name="killed" type="Label" parent="stats"]
 layout_mode = 0
-offset_left = 13.142847
-offset_top = 5.714286
-offset_right = 328.14285
-offset_bottom = 46.714287
+anchor_left = 0.06571423
+anchor_top = 0.06349207
+anchor_right = 0.85321426
+anchor_bottom = 0.29126984
+offset_right = 157.5
+offset_bottom = 20.500002
 scale = Vector2(0.5, 0.5)
 theme_override_fonts/font = ExtResource("9_p54wi")
 theme_override_font_sizes/font_size = 60
 text = "Killed : 1"
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="injured" type="Label" parent="stats"]
 layout_mode = 0
-offset_left = 23.999994
-offset_top = 34.285713
-offset_right = 317.2857
-offset_bottom = 75.28571
+anchor_left = 0.119999975
+anchor_top = 0.38095236
+anchor_right = 0.85321426
+anchor_bottom = 0.60873014
+offset_right = 146.64285
+offset_bottom = 20.5
 scale = Vector2(0.5, 0.5)
 theme_override_fonts/font = ExtResource("9_p54wi")
 theme_override_font_sizes/font_size = 60
 text = "Injured : 1"
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="fleed" type="Label" parent="stats"]
 layout_mode = 0
-offset_left = 32.571404
-offset_top = 65.71428
-offset_right = 309.14282
-offset_bottom = 106.71428
+anchor_left = 0.16285701
+anchor_top = 0.7301587
+anchor_right = 0.8542856
+anchor_bottom = 0.9579364
+offset_right = 138.2857
+offset_bottom = 20.5
 scale = Vector2(0.5, 0.5)
 theme_override_fonts/font = ExtResource("9_p54wi")
 theme_override_font_sizes/font_size = 60
 text = "Fleed : 1"
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="loadout_screen" type="CanvasLayer" parent="."]
+metadata/_edit_use_anchors_ = true
+
+[node name="Panel" type="Panel" parent="loadout_screen"]
+anchors_preset = -1
+anchor_left = 0.022569444
+anchor_top = 0.037037037
+anchor_right = 0.9774306
+anchor_bottom = 0.962963
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("10_xki8e")
+metadata/_edit_use_anchors_ = true
+
+[node name="question" type="Label" parent="loadout_screen/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.03181818
+anchor_top = 0.06349207
+anchor_right = 0.9718182
+anchor_bottom = 0.1944643
+offset_right = 1034.0
+offset_bottom = 78.58332
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("9_p54wi")
+theme_override_font_sizes/font_size = 120
+text = "Start shooting?"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="weapons" type="Label" parent="loadout_screen/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.020909091
+anchor_top = 0.21666667
+anchor_right = 0.6009091
+anchor_bottom = 0.535
+offset_right = 638.0
+offset_bottom = 190.99994
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("9_p54wi")
+theme_override_font_sizes/font_size = 120
+text = "Primary: m14
+Secondary: g17
+Meelee: kitchen knife
+Explosives: pipe bomb"
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="idk" type="Label" parent="loadout_screen/Panel"]
+visible = false
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 43.0
+offset_bottom = 124.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("9_p54wi")
+theme_override_font_sizes/font_size = 120
+text = "Start shooting?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="close_loadout" type="Button" parent="loadout_screen/Panel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -62.0
+offset_top = 21.0
+offset_right = -24.0
+offset_bottom = 60.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("9_p54wi")
+theme_override_font_sizes/font_size = 30
+text = "x"
+
+[node name="proceed" type="Button" parent="loadout_screen/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05818182
+anchor_top = 0.82166666
+anchor_right = 0.28363636
+anchor_bottom = 0.94666666
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("9_p54wi")
+theme_override_font_sizes/font_size = 40
+text = "proceed"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="loadout_screen/Panel/close_loadout" to="." method="_on_close_loadout_pressed"]
+[connection signal="pressed" from="loadout_screen/Panel/proceed" to="." method="_on_proceed_pressed"]

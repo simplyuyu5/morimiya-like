@@ -265,7 +265,7 @@ var amt_max:int
 
 var current_sec = "g17"
 var current_prim = "m14"
-var current_melee = "null"
+var current_melee = "knife"
 var current_gren = "pipemedium"
 var in_hands = "m14"
 

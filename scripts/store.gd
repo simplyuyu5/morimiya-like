@@ -16,6 +16,10 @@ var inder = 0
 @onready var sec = weapons.secondaries
 @onready var saves = $"/root/Node2D/CharacterBody2D/game_data"
 
+@onready var points_label = $Panel/points2
+
+func _input(event: InputEvent) -> void:
+	points_label.text = "points:"+str(saves.total_points)
 
 func init():
 	
