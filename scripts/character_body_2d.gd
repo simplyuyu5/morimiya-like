@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+
 @onready var cam = $Camera2D
 @onready var ray = $ray_long
 #@onready var nothing_body = $ray_long/nothin
@@ -39,6 +40,8 @@ var speed_fin = 225
 var strength = 20
 
 func _ready() -> void:
+	#save_game()
+	load_game()
 	pew.play("nothing")
 	setup()
 	cam.enabled = true
@@ -55,7 +58,7 @@ func _process(_delta: float) -> void:
 	else: pass
 	
 	if gui_show == true:gui.gui()
-	else:gui.hide()
+	else:gui.hide();
 
 
 func _physics_process(_delta: float) -> void:
@@ -65,6 +68,7 @@ func _physics_process(_delta: float) -> void:
 		shoot()
 		reload()
 		grenade()
+		store.set_process(!is_processing())
 	else:
 		$gui/stats.hide()
 
@@ -263,6 +267,7 @@ func end_game():
 	$end_screen.show()
 
 func proceed():
+	save_game()
 	gui._on_close_loadout_pressed()
 	get_tree().change_scene_to_file("res://scenes/maps/map_game.tscn")
 
@@ -281,6 +286,7 @@ func setup():
 	equip = equipnu
 
 
+
 #func _on_pick_range_area_entered(area: Area2D):
 	#if area.is_in_group("weapon_pick"):
 		#print(area.name)
@@ -296,3 +302,29 @@ func _on_run_timer_timeout() -> void:
 func _on_proceed_pressed() -> void:
 	var changer = $"/root/Node2D/Scene_change"
 	changer.change("res://scenes/maps/house.tscn")
+
+func save_game():
+	var save_data = GameData.new()
+	#save_data.total_killed = 0
+	#save_data.total_injured = 0
+	#save_data.total_fleed= 0
+	#save_data.total_shots = 0
+	#save_data.total_throws = 0
+	#save_data.deaths = 0
+	save_data.sec = weapon.current_sec
+	save_data.prim = weapon.current_prim
+	save_data.melee = weapon.current_melee
+	save_data.gren = weapon.current_gren
+	save_data.hands = weapon.in_hands
+	ResourceSaver.save(save_data, "user://savegame.tres")
+	print("saved!")
+
+func load_game():
+	if FileAccess.file_exists("user://savegame.tres"):
+		var save_data = ResourceLoader.load("user://savegame.tres")
+		weapon.current_sec=save_data.sec 
+		weapon.current_prim=save_data.prim 
+		weapon.current_melee=save_data.melee
+		weapon.current_gren=save_data.gren
+		weapon.in_hands=save_data.hands 
+		return save_data

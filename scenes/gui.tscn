@@ -181,6 +181,7 @@ vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="loadout_screen" type="CanvasLayer" parent="."]
+visible = false
 metadata/_edit_use_anchors_ = true
 
 [node name="Panel" type="Panel" parent="loadout_screen"]

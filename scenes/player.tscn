@@ -343,9 +343,6 @@ stream = SubResource("AudioStreamRandomizer_pf23h")
 max_polyphony = 2
 playback_type = 1
 
-[node name="game_data" type="Node" parent="."]
-script = ExtResource("23_4ni07")
-
 [node name="end_screen" type="CanvasLayer" parent="."]
 visible = false
 
@@ -516,5 +513,9 @@ theme_override_fonts/font = ExtResource("25_31cv2")
 theme_override_font_sizes/font_size = 40
 text = "Continue"
 metadata/_edit_use_anchors_ = true
+
+[node name="game_data" type="Node" parent="."]
+script = ExtResource("23_4ni07")
+total_points = 30000
 
 [connection signal="pressed" from="end_screen/Panel/proceed" to="." method="_on_proceed_pressed"]

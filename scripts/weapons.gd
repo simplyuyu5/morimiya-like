@@ -263,11 +263,11 @@ var amt_max:int
 #ADD GRENADES !!!!!!!!!
 #Added :3
 
-var current_sec = "g17"
-var current_prim = "m14"
-var current_melee = "knife"
-var current_gren = "pipemedium"
-var in_hands = "m14"
+var current_sec:String = "g17"
+var current_prim:String= "m14"
+var current_melee:String = "knife"
+var current_gren:String = "pipemedium"
+var in_hands:String = "m14"
 
 func _ready() -> void:
 	weapon_change(1)

@@ -18,7 +18,7 @@ metadata/_edit_lock_ = true
 [node name="CharacterBody2D" parent="." instance=ExtResource("2_ropr1")]
 visibility_layer = 4
 z_index = 4
-position = Vector2(95.00003, 948.9999)
+position = Vector2(389.00003, 933.00006)
 scale = Vector2(3.4999995, 3.4999995)
 gui_he = true
 shoot_he = true

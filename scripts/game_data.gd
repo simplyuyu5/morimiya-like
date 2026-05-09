@@ -1,12 +1,24 @@
 extends Node
 
-@onready var weapon_dat = $"/root/Node2D/CharacterBody2D/weapons"
+#extends Resource
+#class_name GameData
+
+@export var player_hp: int = 100
+@export var player_position: Vector2 = Vector2.ZERO
+@export var inventory: Array = []
+
+
+#@onready var weapon_dat = $"/root/Node2D/CharacterBody2D/weapons"
 
 var file_name:String #save file name ig
+
 #stats for run/temporary:
 var temp_injured:int = 0
 var temp_killed:int = 0
 var temp_fleed:int = 0
+var temp_shots:int = 0
+var temp_throws:int = 0
+var temp_points:int = 0
 
 var injured:bool
 
@@ -16,10 +28,6 @@ var special_npc3:bool
 
 var strange:bool #have to do smth w cultist i guess
 
-var temp_shots:int = 0
-var temp_throws:int = 0
-
-var temp_points:int = 0
 
 enum bonuses {
 	mori, #no suicide
@@ -29,17 +37,17 @@ enum bonuses {
 }
 
 #global statssss:
-var total_killed:int = 0
-var total_injured:int = 0
-var total_fleed:int = 0
-var total_shots:int = 0
-var total_throws:int = 0
-var deaths:int = 0
+@export var total_killed:int = 0
+@export var total_injured:int = 0
+@export var total_fleed:int = 0
+@export var total_shots:int = 0
+@export var total_throws:int = 0
+@export var deaths:int = 0
 
-var total_points:int = 10000
-
-func save():
-	pass
+@export var total_points:int = 10000
+#
+#func save():
+	#pass
 
 func temporary_save():
 	temp_fleed += total_fleed
