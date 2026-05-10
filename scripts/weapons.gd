@@ -230,16 +230,16 @@ var secondaries = {
 
 var grenades = {
 	"pipemedium" = {
-		"sdamage_rad":80,
-		"sdamage_shat":30,
-		"sradius":20,
+		"sdamage_rad":120,
+		"sdamage_shat":70,
+		"sradius":40,
 		"sfuse":2,
 		"sfuse_rand":true,
 		"sshatter":true,
 		"shatter_amount_min":2,
-		"shatter_amount_max":7,
+		"shatter_amount_max":12,
 		"shatter_dist_min":20,
-		"shatter_dist_max":120,
+		"shatter_dist_max":160,
 		"samount_max":4,
 		"bought":true,
 		"cost":0,

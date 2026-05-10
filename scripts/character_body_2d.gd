@@ -317,7 +317,6 @@ func save_game():
 	save_data.gren = weapon.current_gren
 	save_data.hands = weapon.in_hands
 	ResourceSaver.save(save_data, "user://savegame.tres")
-	print("saved!")
 
 func load_game():
 	if FileAccess.file_exists("user://savegame.tres"):

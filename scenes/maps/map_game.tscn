@@ -18,15 +18,11 @@ metadata/_edit_lock_ = true
 [node name="CharacterBody2D" parent="." instance=ExtResource("2_ropr1")]
 visibility_layer = 4
 z_index = 4
-position = Vector2(389.00003, 933.00006)
+position = Vector2(35, 206.99994)
 scale = Vector2(3.4999995, 3.4999995)
 gui_he = true
 shoot_he = true
 move_he = true
-
-[node name="tpo_npc" parent="." instance=ExtResource("4_33ep3")]
-position = Vector2(286, 798)
-rotation = 1.5707964
 
 [node name="Run_timer" type="Timer" parent="."]
 wait_time = 180.0
@@ -35,5 +31,92 @@ autostart = true
 
 [node name="Scene_change" type="Node" parent="."]
 script = ExtResource("5_7ybrp")
+
+[node name="Node2D" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="tpo_npc" parent="Node2D" instance=ExtResource("4_33ep3")]
+position = Vector2(-888, -2378)
+rotation = 1.5707964
+
+[node name="tpo_npc2" parent="Node2D" instance=ExtResource("4_33ep3")]
+position = Vector2(2282, -1257)
+rotation = 1.5707964
+
+[node name="tpo_npc3" parent="Node2D" instance=ExtResource("4_33ep3")]
+position = Vector2(1507, -1126)
+rotation = 1.5707964
+
+[node name="tpo_npc4" parent="Node2D" instance=ExtResource("4_33ep3")]
+position = Vector2(1877, -1233)
+rotation = 1.5707964
+
+[node name="tpo_npc5" parent="Node2D" instance=ExtResource("4_33ep3")]
+position = Vector2(1245, -1317)
+rotation = 1.5707964
+
+[node name="tpo_npc6" parent="Node2D" instance=ExtResource("4_33ep3")]
+position = Vector2(933, -2495)
+rotation = 1.5707964
+
+[node name="tpo_npc7" parent="Node2D" instance=ExtResource("4_33ep3")]
+position = Vector2(113, -1365)
+rotation = 1.5707964
+
+[node name="tpo_npc8" parent="Node2D" instance=ExtResource("4_33ep3")]
+position = Vector2(-495, -1841)
+rotation = 1.5707964
+
+[node name="tpo_npc9" parent="Node2D" instance=ExtResource("4_33ep3")]
+position = Vector2(1996, -2699)
+rotation = 1.5707964
+
+[node name="tpo_npc10" parent="Node2D" instance=ExtResource("4_33ep3")]
+position = Vector2(1924, -3176)
+rotation = 1.5707964
+
+[node name="tpo_npc11" parent="Node2D" instance=ExtResource("4_33ep3")]
+position = Vector2(399, -2413)
+rotation = 1.5707964
+
+[node name="tpo_npc12" parent="Node2D" instance=ExtResource("4_33ep3")]
+position = Vector2(744, -2699)
+rotation = 1.5707964
+
+[node name="tpo_npc13" parent="Node2D" instance=ExtResource("4_33ep3")]
+position = Vector2(-6, -2282)
+rotation = 1.5707964
+
+[node name="tpo_npc14" parent="Node2D" instance=ExtResource("4_33ep3")]
+position = Vector2(-531, -2246)
+rotation = 1.5707964
+
+[node name="tpo_npc15" parent="Node2D" instance=ExtResource("4_33ep3")]
+position = Vector2(765, -1911)
+rotation = 1.5707964
+
+[node name="tpo_npc16" parent="Node2D" instance=ExtResource("4_33ep3")]
+position = Vector2(-741, -1561)
+rotation = 1.5707964
+
+[node name="tpo_npc17" parent="Node2D" instance=ExtResource("4_33ep3")]
+position = Vector2(3492, -1350)
+rotation = 1.5707964
+
+[node name="tpo_npc18" parent="Node2D" instance=ExtResource("4_33ep3")]
+position = Vector2(-846, -1400)
+rotation = 1.5707964
+
+[node name="tpo_npc19" parent="Node2D" instance=ExtResource("4_33ep3")]
+position = Vector2(1897, -1521)
+rotation = 1.5707964
+
+[node name="tpo_npc20" parent="Node2D" instance=ExtResource("4_33ep3")]
+position = Vector2(358, -1358)
+rotation = 1.5707964
+
+[node name="tpo_npc21" parent="Node2D" instance=ExtResource("4_33ep3")]
+position = Vector2(-553, -1138)
+rotation = 1.5707964
 
 [connection signal="timeout" from="Run_timer" to="CharacterBody2D" method="_on_run_timer_timeout"]
