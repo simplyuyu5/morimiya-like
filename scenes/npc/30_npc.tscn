@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dxgaqwnsyvxs0"]
+[gd_scene load_steps=24 format=3 uid="uid://dxgaqwnsyvxs0"]
 
 [ext_resource type="Script" uid="uid://ct3giwk67767l" path="res://scripts/30_npc_movement.gd" id="1_i76qr"]
 [ext_resource type="Script" uid="uid://cfhiihppfx3jj" path="res://scripts/30_npc_area.gd" id="2_i76qr"]
@@ -93,16 +93,12 @@ animations = [{
 }]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3ymru"]
-load_path = "res://.godot/imported/npc-01.png-a2f42fef73cfd7a78ddb09e431aaedcf.ctex"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mbqj5"]
-load_path = "res://.godot/imported/npc-02.png-9670defab6afe099c5f9834e438d0941.ctex"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_btcon"]
-load_path = "res://.godot/imported/npc-03.png-690b60f160e61006f9074f4d0befb286.ctex"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4xgab"]
-load_path = "res://.godot/imported/npc-04.png-cce633f0c35bf4d4e1dbd4d59291927e.ctex"
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_168wh"]
 animations = [{
@@ -128,8 +124,6 @@ animations = [{
 radius = 18.000002
 height = 36.000004
 
-[sub_resource type="AudioStream" id="AudioStream_kyfuo"]
-
 [node name="tpo_npc" type="CharacterBody2D" groups=["living"]]
 visibility_layer = 4
 collision_layer = 2
@@ -141,6 +135,7 @@ script = ExtResource("2_i76qr")
 parent_help = NodePath("..")
 
 [node name="sounds" type="Node" parent="."]
+process_mode = 4
 script = ExtResource("3_168wh")
 
 [node name="goal_node" type="Node2D" parent="."]
@@ -195,19 +190,9 @@ scale = Vector2(0.9999998, 0.9999998)
 shape = SubResource("CapsuleShape2D_bn6rf")
 debug_color = Color(1, 0, 0, 0.19607843)
 
-[node name="ears??" type="Area2D" parent="."]
-scale = Vector2(4.9999995, 4.9999995)
-
 [node name="eyes" type="RayCast2D" parent="."]
 position = Vector2(0, -1)
 target_position = Vector2(500, 0)
 collision_mask = 18
 
-[node name="audio" type="AudioStreamPlayer2D" parent="."]
-scale = Vector2(4.9999995, 4.9999995)
-stream = SubResource("AudioStream_kyfuo")
-
-[node name="randi_sound" type="Timer" parent="audio"]
-
 [connection signal="timeout" from="NavigationAgent2D/nav_timer" to="." method="_on_nav_timer_timeout"]
-[connection signal="timeout" from="audio/randi_sound" to="sounds" method="_on_randi_sound_timeout"]

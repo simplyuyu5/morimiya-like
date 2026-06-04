@@ -1,7 +1,7 @@
 extends Node
 
 #extends Resource
-#class_name GameData
+class_name saveMain
 
 @export var player_hp: int = 100
 @export var player_position: Vector2 = Vector2.ZERO

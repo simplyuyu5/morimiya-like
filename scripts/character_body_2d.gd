@@ -6,6 +6,7 @@ extends CharacterBody2D
 #@onready var nothing_body = $ray_long/nothin
 @onready var weapon = $weapons
 @onready var ray_pick = $pickup_ray
+@onready var ray_door = $door_ray
 @onready var body_top = $"Mc-top"
 @onready var body_bot = $"Mc-bottom"
 @onready var pos = $shell_pos
@@ -52,6 +53,9 @@ func _process(_delta: float) -> void:
 		health = 0
 	if equip == true:
 		equip_ult()
+	if door == true:
+		ray_pick.enabled = true
+		doors()
 	if movable == true:
 		move()
 		move_anim()
@@ -197,6 +201,14 @@ func equip_ult():
 	if ray_pick.is_colliding() and target.is_in_group("interactable"):
 		target.interaction(self)
 
+func doors():
+	
+	var target = ray_door.get_collider()
+	if Input.is_action_just_pressed("e"):
+		if ray_door.is_colliding() and target.is_in_group("door"):
+			target.interact()
+	else:pass
+
 func equip_weapon():
 	var target = ray_pick.get_collider()
 	if Input.is_action_just_pressed("p"):
@@ -277,6 +289,7 @@ func proceed():
 @export var shoot_he:bool
 @export var move_he:bool
 @export var equipnu:bool
+@export var door:bool
 
 
 func setup():

@@ -1,6 +1,6 @@
 extends Node
 
-var sex:String = "man"
+var sex:String = "guy"
 var can_scream := true
 #fem/man/ang
 

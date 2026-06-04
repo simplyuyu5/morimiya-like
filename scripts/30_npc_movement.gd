@@ -20,7 +20,7 @@ var direction = Vector2(0,0)
 @onready var player= $"/root/Node2D/CharacterBody2D"
 
 @onready var timer_nav = $NavigationAgent2D/nav_timer
-@onready var timer_sound = $audio/randi_sound
+#@onready var timer_sound = $audio/randi_sound
 
 var goal
 var danger
