@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://blhcllsye5ckw" path="res://scenes/player.tscn" id="2_ropr1"]
 [ext_resource type="PackedScene" uid="uid://dxgaqwnsyvxs0" path="res://scenes/npc/30_npc.tscn" id="4_33ep3"]
 [ext_resource type="Script" uid="uid://c84rxsxdhxnu8" path="res://scripts/scene_change.gd" id="5_7ybrp"]
-[ext_resource type="PackedScene" uid="uid://bu1rrshvu7xhr" path="res://scenes/npc/npc_40.tscn" id="5_e5gab"]
+[ext_resource type="PackedScene" uid="uid://c71i2mqmbbow3" path="res://scenes/npc/test.tscn" id="5_e5gab"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -24,11 +24,10 @@ scale = Vector2(3.4999995, 3.4999995)
 gui_he = true
 shoot_he = true
 move_he = true
-equipnu = null
 door = true
 
 [node name="Run_timer" type="Timer" parent="."]
-wait_time = 180.0
+wait_time = 155.388
 one_shot = true
 autostart = true
 
@@ -38,12 +37,55 @@ script = ExtResource("5_7ybrp")
 [node name="Node2D" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
 
+[node name="test" parent="Node2D" instance=ExtResource("5_e5gab")]
+position = Vector2(93, -443)
+wanderPointsAmt = 5
+baker_sec = 0.2
+
 [node name="tpo_npc" parent="Node2D" instance=ExtResource("4_33ep3")]
 position = Vector2(-87, -501)
 rotation = 1.5707964
 
-[node name="npc40" parent="Node2D" instance=ExtResource("5_e5gab")]
-position = Vector2(73, -496)
-state_cur = 2
+[node name="tpo_npc" parent="." instance=ExtResource("4_33ep3")]
+position = Vector2(249, -1129)
+
+[node name="tpo_npc2" parent="." instance=ExtResource("4_33ep3")]
+position = Vector2(-423, -1173)
+
+[node name="tpo_npc3" parent="." instance=ExtResource("4_33ep3")]
+position = Vector2(-357, -1466)
+
+[node name="tpo_npc4" parent="." instance=ExtResource("4_33ep3")]
+position = Vector2(-5, -1225)
+
+[node name="tpo_npc5" parent="." instance=ExtResource("4_33ep3")]
+position = Vector2(-786, -2250)
+
+[node name="tpo_npc6" parent="." instance=ExtResource("4_33ep3")]
+position = Vector2(-1017, -2302)
+
+[node name="tpo_npc7" parent="." instance=ExtResource("4_33ep3")]
+position = Vector2(1183, -1279)
+
+[node name="tpo_npc8" parent="." instance=ExtResource("4_33ep3")]
+position = Vector2(583, -1478)
+
+[node name="tpo_npc9" parent="." instance=ExtResource("4_33ep3")]
+position = Vector2(-89, -1522)
+
+[node name="tpo_npc10" parent="." instance=ExtResource("4_33ep3")]
+position = Vector2(-23, -1815)
+
+[node name="tpo_npc11" parent="." instance=ExtResource("4_33ep3")]
+position = Vector2(-692, -1415)
+
+[node name="tpo_npc12" parent="." instance=ExtResource("4_33ep3")]
+position = Vector2(826, -1645)
+
+[node name="tpo_npc13" parent="." instance=ExtResource("4_33ep3")]
+position = Vector2(595, -1697)
+
+[node name="tpo_npc14" parent="." instance=ExtResource("4_33ep3")]
+position = Vector2(1517, -1628)
 
 [connection signal="timeout" from="Run_timer" to="CharacterBody2D" method="_on_run_timer_timeout"]

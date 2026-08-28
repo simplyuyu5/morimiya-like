@@ -28,6 +28,10 @@ window/vsync/vsync_mode=0
 
 movie_writer/disable_vsync=true
 
+[global_group]
+
+help_goal_wander="used to detecting distance between two wander nodes (TEST NPC)"
+
 [input]
 
 a={
@@ -135,6 +139,7 @@ shiftt={
 2d_navigation/layer_2="npc, player"
 2d_physics/layer_5="walls"
 2d_navigation/layer_5="walls"
+2d_physics/layer_8="debug"
 
 [rendering]
 

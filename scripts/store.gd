@@ -12,21 +12,21 @@ var inder = 0
 @onready var list_buy_sec = $Panel/weapons_shop/sec_buy/itemList_sec
 
 #@onready var weapons = $"/root/Node2D/CharacterBody2D/weapons"
-@onready var prim = weapons.primaries
-@onready var sec = weapons.secondaries
-@onready var saves = $"/root/Node2D/CharacterBody2D/game_data"
+#@onready var prim = weapons.primaries
+#@onready var sec = weapons.secondaries
+@onready var saves = saveMain
 
 @onready var points_label = $Panel/points2
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	points_label.text = "points:"+str(saves.total_points)
 
 func init():
 	
 	if Input.is_action_just_pressed("p") and open == false:
 		open = true
-		prim = weapons.primaries
-		sec = weapons.secondaries
+		#prim = weapons.primaries
+		#sec = weapons.secondaries
 		$Panel.show()
 		populate_shop_prim()
 		populate_shop_sec()
@@ -35,23 +35,23 @@ func init():
 
 func populate_shop_prim():
 	list_buy_prim.clear()
-	for i in prim:
-		if i in prim and prim[i]["sbought"] == false and prim[i]["cost"] is int:
+	for i in weapons.primaries:
+		if i in weapons.primaries and weapons.primaries[i]["sbought"] == false and weapons.primaries[i]["cost"] is int:
 			list_buy_prim.add_item(i)
 func populate_shop_sec():
 	list_buy_sec.clear()
-	for i in sec:
-		if i in sec and sec[i]["sbought"] == false and sec[i]["cost"] is int:
+	for i in weapons.secondaries:
+		if i in weapons.secondaries and weapons.secondaries[i]["sbought"] == false and weapons.secondaries[i]["cost"] is int:
 			list_buy_sec.add_item(i)
 
 
 func populate_equip():
 	list_equip.clear()
-	for i in prim:
-		if i in prim and prim[i]["sbought"] == true:
+	for i in weapons.primaries:
+		if i in weapons.primaries and weapons.primaries[i]["sbought"] == true:
 			list_equip.add_item(i)
-	for i in sec:
-		if i in sec and sec[i]["sbought"] == true:
+	for i in weapons.secondaries:
+		if i in weapons.secondaries and weapons.secondaries[i]["sbought"] == true:
 			list_equip.add_item(i)
 
 
@@ -74,18 +74,18 @@ func _on_itemlist_prim_item_selected(index: int) -> void:
 	prim_icon.play(i)
 
 	#text and descr :c
-	$Panel/weapons_shop/prim_buy/damage.text = str("damage - ", prim[i]["sdamage"])
-	$Panel/weapons_shop/prim_buy/roundsmax.text = str("mag size - ", prim[i]["srounds_max"])
-	$Panel/weapons_shop/prim_buy/mags.text = str("mags - ", prim[i]["smags_max"])
-	$Panel/weapons_shop/prim_buy/reloadtype.text = str("reload type - ", prim[i]["sreload_type"])
-	$Panel/weapons_shop/prim_buy/recoil.text = str("recoil - ", prim[i]["srecoil"])
-	$Panel/weapons_shop/prim_buy/description.text = str(prim[i]["sdesc"])
-	$Panel/weapons_shop/prim_buy/cost.text = str(prim[i]["cost"])
+	$Panel/weapons_shop/prim_buy/damage.text = str("damage - ", weapons.primaries[i]["sdamage"])
+	$Panel/weapons_shop/prim_buy/roundsmax.text = str("mag size - ", weapons.primaries[i]["srounds_max"])
+	$Panel/weapons_shop/prim_buy/mags.text = str("mags - ", weapons.primaries[i]["smags_max"])
+	$Panel/weapons_shop/prim_buy/reloadtype.text = str("reload type - ", weapons.primaries[i]["sreload_type"])
+	$Panel/weapons_shop/prim_buy/recoil.text = str("recoil - ", weapons.primaries[i]["srecoil"])
+	$Panel/weapons_shop/prim_buy/description.text = str(weapons.primaries[i]["sdesc"])
+	$Panel/weapons_shop/prim_buy/cost.text = str(weapons.primaries[i]["cost"])
 
 	#omagah progress barsss
-	$Panel/weapons_shop/prim_buy/damage/prog.value = prim[i]["sdamage"]
-	$Panel/weapons_shop/prim_buy/roundsmax/prog.value =prim[i]["srounds_max"]
-	$Panel/weapons_shop/prim_buy/recoil/prog.value =prim[i]["srecoil"]
+	$Panel/weapons_shop/prim_buy/damage/prog.value = weapons.primaries[i]["sdamage"]
+	$Panel/weapons_shop/prim_buy/roundsmax/prog.value =weapons.primaries[i]["srounds_max"]
+	$Panel/weapons_shop/prim_buy/recoil/prog.value =weapons.primaries[i]["srecoil"]
 
 
 func _on_buy_sec_pressed():
@@ -105,9 +105,9 @@ func _on_buy_prim_pressed():
 
 func _on_buy_button_shop_pressed():
 	var i:String = list_buy_prim.get_item_text(inder)
-	if i in prim and saves.total_points >= prim[i]["cost"]:
-		prim[i]["sbought"] = true
-		saves.total_points -= prim[i]["cost"]
+	if i in weapons.primaries and saves.total_points >= weapons.primaries[i]["cost"]:
+		weapons.primaries[i]["sbought"] = true
+		saves.total_points -= weapons.primaries[i]["cost"]
 		print(saves.total_points)
 	else:
 		pass
@@ -116,9 +116,9 @@ func _on_buy_button_shop_pressed():
 
 func _on_buy_button_sec_pressed() -> void:
 	var i:String = list_buy_sec.get_item_text(inder)
-	if i in sec and saves.total_points >= sec[i]["cost"]:
-		sec[i]["sbought"] = true
-		saves.total_points -= sec[i]["cost"]
+	if i in weapons.secondaries and saves.total_points >= weapons.secondaries[i]["cost"]:
+		weapons.secondaries[i]["sbought"] = true
+		saves.total_points -= weapons.secondaries[i]["cost"]
 		print(saves.total_points)
 	else:
 		pass
@@ -127,13 +127,14 @@ func _on_buy_button_sec_pressed() -> void:
 func _on_equip_prim_pressed() -> void:
 	$Panel/weapons_shop.show()
 	$Panel/weapons_shop/prim_buy.hide()
+	$Panel/weapons_shop/sec_buy.hide()
 	$Panel/weapons_shop/equip.show()
 	$Panel/skills_shop.hide()
 	populate_equip()
 
 
 func _on_equip_pressed() -> void:
-	if inder in prim:
+	if inder in weapons.primaries:
 		weapons.current_prim = inder
 		weapons.assign_weapon_rounds(1)
 	elif inder in weapons.secondaries:
@@ -147,32 +148,32 @@ func _on_itemlist_eq_item_selected(index: int) -> void:
 	inder = i
 	equip_icon.play(i)
 
-	if i in prim:
+	if i in weapons.primaries:
 	#text and descr :c
-		$Panel/weapons_shop/equip/damage.text = str("damage - ", prim[i]["sdamage"])
-		$Panel/weapons_shop/equip/roundsmax.text = str("mag size - ", prim[i]["srounds_max"])
-		$Panel/weapons_shop/equip/mags.text = str("mags - ", prim[i]["smags_max"])
-		$Panel/weapons_shop/equip/reloadtype.text = str("reload type - ", prim[i]["sreload_type"])
-		$Panel/weapons_shop/equip/recoil.text = str("recoil - ", prim[i]["srecoil"])
-		$Panel/weapons_shop/equip/description.text = str(prim[i]["sdesc"])
+		$Panel/weapons_shop/equip/damage.text = str("damage - ", weapons.primaries[i]["sdamage"])
+		$Panel/weapons_shop/equip/roundsmax.text = str("mag size - ", weapons.primaries[i]["srounds_max"])
+		$Panel/weapons_shop/equip/mags.text = str("mags - ", weapons.primaries[i]["smags_max"])
+		$Panel/weapons_shop/equip/reloadtype.text = str("reload type - ", weapons.primaries[i]["sreload_type"])
+		$Panel/weapons_shop/equip/recoil.text = str("recoil - ", weapons.primaries[i]["srecoil"])
+		$Panel/weapons_shop/equip/description.text = str(weapons.primaries[i]["sdesc"])
 
 
 		#omagah progress barsss
-		$Panel/weapons_shop/equip/damage/prog.value = prim[i]["sdamage"]
-		$Panel/weapons_shop/equip/roundsmax/prog.value =prim[i]["srounds_max"]
-		$Panel/weapons_shop/equip/recoil/prog.value =prim[i]["srecoil"]
-	elif i in sec:
-		$Panel/weapons_shop/equip/damage.text = str("damage - ", sec[i]["sdamage"])
-		$Panel/weapons_shop/equip/roundsmax.text = str("mag size - ", sec[i]["srounds_max"])
-		$Panel/weapons_shop/equip/mags.text = str("mags - ", sec[i]["smags_max"])
-		$Panel/weapons_shop/equip/reloadtype.text = str("reload type - ", sec[i]["sreload_type"])
-		$Panel/weapons_shop/equip/recoil.text = str("recoil - ", sec[i]["srecoil"])
-		$Panel/weapons_shop/equip/description.text = str(sec[i]["sdesc"])
+		$Panel/weapons_shop/equip/damage/prog.value = weapons.primaries[i]["sdamage"]
+		$Panel/weapons_shop/equip/roundsmax/prog.value =weapons.primaries[i]["srounds_max"]
+		$Panel/weapons_shop/equip/recoil/prog.value =weapons.primaries[i]["srecoil"]
+	elif i in weapons.secondaries:
+		$Panel/weapons_shop/equip/damage.text = str("damage - ", weapons.secondaries[i]["sdamage"])
+		$Panel/weapons_shop/equip/roundsmax.text = str("mag size - ", weapons.secondaries[i]["srounds_max"])
+		$Panel/weapons_shop/equip/mags.text = str("mags - ", weapons.secondaries[i]["smags_max"])
+		$Panel/weapons_shop/equip/reloadtype.text = str("reload type - ", weapons.secondaries[i]["sreload_type"])
+		$Panel/weapons_shop/equip/recoil.text = str("recoil - ", weapons.secondaries[i]["srecoil"])
+		$Panel/weapons_shop/equip/description.text = str(weapons.secondaries[i]["sdesc"])
 
 		#HELP OH MY GOD THIS CODE IS ($1%7$YgkdHU(WH3wd3dxCF>?XFPKvd#R#VasdDsafVGV:(acxcfsefV>jxiq:m@?q<l:3.ef,jvnklw:3IJDfvwmj,ogkn jl
-		$Panel/weapons_shop/equip/damage/prog.value = sec[i]["sdamage"]
-		$Panel/weapons_shop/equip/roundsmax/prog.value =sec[i]["srounds_max"]
-		$Panel/weapons_shop/equip/recoil/prog.value =sec[i]["srecoil"]
+		$Panel/weapons_shop/equip/damage/prog.value = weapons.secondaries[i]["sdamage"]
+		$Panel/weapons_shop/equip/roundsmax/prog.value =weapons.secondaries[i]["srounds_max"]
+		$Panel/weapons_shop/equip/recoil/prog.value =weapons.secondaries[i]["srecoil"]
 
 
 func _on_item_list_sec_item_selected(index: int):
@@ -180,15 +181,15 @@ func _on_item_list_sec_item_selected(index: int):
 	inder = index
 	sec_icon.play(i)
 
-	$Panel/weapons_shop/sec_buy/damage.text = str("damage - ", sec[i]["sdamage"])
-	$Panel/weapons_shop/sec_buy/roundsmax.text = str("mag size - ", sec[i]["srounds_max"])
-	$Panel/weapons_shop/sec_buy/mags.text = str("mags - ", sec[i]["smags_max"])
-	$Panel/weapons_shop/sec_buy/reloadtype.text = str("reload type - ", sec[i]["sreload_type"])
-	$Panel/weapons_shop/sec_buy/recoil.text = str("recoil - ", sec[i]["srecoil"])
-	$Panel/weapons_shop/sec_buy/description.text = str(sec[i]["sdesc"])
-	$Panel/weapons_shop/sec_buy/cost.text = str(sec[i]["cost"])
+	$Panel/weapons_shop/sec_buy/damage.text = str("damage - ", weapons.secondaries[i]["sdamage"])
+	$Panel/weapons_shop/sec_buy/roundsmax.text = str("mag size - ", weapons.secondaries[i]["srounds_max"])
+	$Panel/weapons_shop/sec_buy/mags.text = str("mags - ", weapons.secondaries[i]["smags_max"])
+	$Panel/weapons_shop/sec_buy/reloadtype.text = str("reload type - ", weapons.secondaries[i]["sreload_type"])
+	$Panel/weapons_shop/sec_buy/recoil.text = str("recoil - ", weapons.secondaries[i]["srecoil"])
+	$Panel/weapons_shop/sec_buy/description.text = str(weapons.secondaries[i]["sdesc"])
+	$Panel/weapons_shop/sec_buy/cost.text = str(weapons.secondaries[i]["cost"])
 
 	#omagah progress barsss
-	$Panel/weapons_shop/sec_buy/damage/prog.value = sec[i]["sdamage"]
-	$Panel/weapons_shop/sec_buy/roundsmax/prog.value =sec[i]["srounds_max"]
-	$Panel/weapons_shop/sec_buy/recoil/prog.value =sec[i]["srecoil"]
+	$Panel/weapons_shop/sec_buy/damage/prog.value = weapons.secondaries[i]["sdamage"]
+	$Panel/weapons_shop/sec_buy/roundsmax/prog.value =weapons.secondaries[i]["srounds_max"]
+	$Panel/weapons_shop/sec_buy/recoil/prog.value =weapons.secondaries[i]["srecoil"]

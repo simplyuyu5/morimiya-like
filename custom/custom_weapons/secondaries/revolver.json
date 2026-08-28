@@ -1,0 +1,21 @@
+{
+	"S&W m29":{
+		"sreload_type":"pump", 
+		"sdamage":40,
+		"srounds_max":6,
+		"smags_max":24,
+		"sdist":200,
+		"sdelay":0.3, 
+		"rel_time":2,
+		"sshots":1,
+		"sstyle":1, 
+		"ssound":1, 
+		"srecoil":11,
+		"sshell":0, 
+		"sdesc":"you can put any text here \n cookies!",
+		"sbought":true, 
+		"cost":20,
+		"special":false, 
+		"sicon":"res://custom/weapon_icons/example.png",
+	}
+}

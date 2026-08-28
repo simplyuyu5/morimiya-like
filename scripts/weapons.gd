@@ -6,7 +6,8 @@ extends Resource
 #@onready var parent = get_parent()
 #@onready var bank = $saved_data
 
-static var reload_type:String = "mag" 
+static var icon:String
+static var reload_type:String = "mag" #pump, mag
 static var shots:int = 1 #for burst fire?
 static var damage:int = 0
 static var recoil:int = 0
@@ -14,14 +15,14 @@ static var spread:bool = false
 static var description:String = ""
 static var reload_time:float = 1 #time needed to reload in s 
 static var delay:float = 0 #delay between shots #P.S. morimiya's BS3, KS25 and many other shotguns are reason for adding this
-static var dist:int = 300 #effective distantion
+static var dist:int = 300 #effective range
 static var sound = 0
 #^ 0-5 loudness ig. 4 for shotguns 5 is supah loud
 
 static var style = 0 
 static var shell = 0
 
-static var bleed_max:float = 40
+static var bleed_max:float = 50
 
 static var chance_hit:int = 100
 static var chance_max:int = 100
@@ -54,7 +55,8 @@ static var primaries = {
 		"sdesc":".223 Rem. Semi-automatic rifle with fine recoil and decent damage",
 		"sbought":false,
 		"cost":20000,
-		"special":false
+		"special":false,
+		"sicon":"res://images/weapons_portraits/ar_shop.png",
 	},
 
 	"m14":{
@@ -73,7 +75,8 @@ static var primaries = {
 		"sdesc":"Reliable semi-automatic rifle with high damage and medium recoil",
 		"sbought":true,
 		"cost":0,
-		"special":false
+		"special":false,
+		"sicon":"res://images/weapons_portraits/m14_shop.png",
 	},
 
 	"saiga":{
@@ -92,7 +95,8 @@ static var primaries = {
 		"sdesc":"Mag-fed shotgun, low capacity but faster reload",
 		"sbought":false,
 		"cost":10000,
-		"special":false
+		"special":false,
+		"sicon":"res://images/weapons_portraits/ar_shop.png",
 	},
 
 	"m500":{
@@ -108,10 +112,11 @@ static var primaries = {
 		"ssound":4,
 		"srecoil":22,
 		"sshell":1,
-		"sdesc":"Pump action shotgun to kill them slowly and with style",
+		"sdesc":"Pump action shotgun",
 		"sbought":false,
 		"cost":7000,
-		"special":false
+		"special":false,
+		"sicon":"res://images/weapons_portraits/ar_shop.png",
 	},
 
 	"type95":{
@@ -130,7 +135,8 @@ static var primaries = {
 		"sdesc":"5.8×42mm bullpup rifle",
 		"sbought":false,
 		"cost":15000,
-		"special":false
+		"special":false,
+		"sicon":"res://images/weapons_portraits/ar_shop.png",
 	},
 
 		"anzio":{
@@ -148,8 +154,9 @@ static var primaries = {
 		"sshell":0,
 		"sdesc":"20×102 mm anti-materiel rifle, 2 m long \n weights more than 20 kg",
 		"sbought":false,
-		"cost":"we are not selling that :p",
-		"special":true
+		"cost":0,
+		"special":true,
+		"sicon":"res://images/weapons_portraits/ar_shop.png",
 	},
 
 
@@ -169,7 +176,8 @@ static var primaries = {
 		"sdesc":"5.45x39 rifle with good damage and magazine capacity",
 		"sbought":false,
 		"cost":15000,
-		"special":true
+		"special":true,
+		"sicon":"res://images/weapons_portraits/ar_shop.png",
 	},
 }
 
@@ -187,10 +195,11 @@ static var secondaries = {
 		"ssound":0,
 		"srecoil":2,
 		"sshell":2,
-		"sdesc":"Popular handgun that takes a lot shots to kill someone \n while having a magazine big enough to do so",
+		"sdesc":"Popular handgun with low damage, but high magazine capacity",
 		"sbought":true,
 		"cost":0,
-		"special":false
+		"special":false,
+		"sicon":"res://images/weapons_portraits/g17_shop.png",
 	},
 
 	"tt":{
@@ -209,7 +218,8 @@ static var secondaries = {
 		"sdesc":"description placeholder",
 		"sbought":false,
 		"cost":1300,
-		"special":false
+		"special":false,
+		"sicon":"res://images/weapons_portraits/ar_shop.png",
 	},
 	"m1911":{
 		"sreload_type":"mag",
@@ -224,10 +234,11 @@ static var secondaries = {
 		"ssound":0,
 		"srecoil":1.5,
 		"sshell":2,
-		"sdesc":"colt M1911!",
+		"sdesc":"colt M1911, classic!",
 		"sbought":false,
 		"cost":900,
-		"special":false
+		"special":false,
+		"sicon":"res://images/weapons_portraits/ar_shop.png",
 	}
 }
 
@@ -273,8 +284,8 @@ static var current_melee:String = "knife"
 static var current_gren:String = "pipemedium"
 static var in_hands:String = "m14"
 
-static func _ready():
-	bank.new()
+static func initW():
+	custom_weapons()
 	weapon_change(1)
 	gren_change()
 
@@ -340,7 +351,7 @@ static func weapon_change(num):
 					delay = secondaries[current_sec]["sdelay"]
 					mags = bank.mags_sec
 					rounds = bank.rounds_sec
-					
+			#implement third for melee lmao
 	#else:
 		#print("null")
 		#in_hands = "null"
@@ -374,3 +385,24 @@ static func process(_delta: float) -> void:
 		chance_hit = 0
 	if chance_hit >= chance_max:
 		chance_hit = chance_max
+
+
+static func custom_weapons():
+	#for a in 'res://custom/custom_weapons':
+	var prim_dir = DirAccess.open("res://custom/custom_weapons/primaries/")
+	var sec_dir = DirAccess.open("res://custom/custom_weapons/secondaries/")
+	var path = "res://custom/custom_weapons/"
+	for name in prim_dir.get_files():
+		var file = path + "primaries/" + name
+		var opener = FileAccess.get_file_as_string(file) #open(file,FileAccess.READ)
+		#var content = opener.get_as_text()
+		var full_file = JSON.parse_string(opener)
+		primaries.merge(full_file)
+		
+	for name in sec_dir.get_files():
+		var file = path + "secondaries/" + name
+		var opener = FileAccess.get_file_as_string(file) 
+		var full_file = JSON.parse_string(opener)
+		secondaries.merge(full_file)
+		#print(full_file)
+		#print(secondaries)

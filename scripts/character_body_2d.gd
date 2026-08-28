@@ -14,7 +14,7 @@ extends CharacterBody2D
 @onready var audio_reload = $sounds/reload
 @onready var audio = $sounds/sounds_misc
 @onready var gui = $gui
-@onready var stats = $game_data
+@onready var stats = saveMain
 var shells = preload("res://scenes/shells.tscn")#.instantiate()
 var gren = preload("res://scenes/grenade.tscn")
 var shell_look :int = 0
@@ -41,11 +41,14 @@ var speed_fin = 225
 var strength = 20
 
 func _ready() -> void:
-	#save_game()
+	weapons.initW()
+	gui.icon_populate()
 	load_game()
 	pew.play("nothing")
 	setup()
+	
 	cam.enabled = true
+
 	#preload("res://scenes/shells.tscn")
 
 func _process(_delta: float) -> void:
@@ -80,37 +83,41 @@ func _physics_process(_delta: float) -> void:
 
 	move_and_slide()
 
-func shoot():
-	ray.enabled = true
-	var target = ray.get_collider()
-	if Input.is_action_just_pressed("lmb") and weapon.rounds >= 1 and can_shoot == true:
+func shoot() -> void:
+	if Input.is_action_just_pressed("lmb"):
+		ray.enabled = true
+		var target = ray.get_collider()
+		if weapon.rounds >= 1 and can_shoot == true:
+		#and weapon.rounds >= 1 and can_shoot == true:
 		#ray.target_position.x = weapon.dist
 		#nothing_body.position.x = weapon.dist - 1
-		audio_shoot.play()
-		gun_smoke(weapon.style)
-		shell_eject(weapon.shell)
-		stats.temp_shots += weapon.shots
+		#audio_shoot.play()
+			gun_smoke(weapon.style)
+			shell_eject(weapon.shell)
+			stats.temp_shots += weapon.shots
 
-		if ray.is_colliding() and target.is_in_group("wall"):
-			ray.enabled = false
-		elif ray.is_colliding() and target.is_in_group("living"):
-			if randf_range(0,100.0) <= float(weapon.chance_hit):
-				target.hp -=weapon.damage
-				target.bleed += randi_range(0,weapon.bleed_max)
-		else:
-			#print("miss lol")
-			pass
-		recoil()
+			if ray.is_colliding() and target.is_in_group("wall"):
+				ray.enabled = false
+			elif ray.is_colliding() and target.is_in_group("living"):
+				if randf_range(0,100.0) <= float(weapon.chance_hit):
+					target.hp -=weapon.damage
+					target.bleed += randi_range(0,weapon.bleed_max)
+			else:
+				#print("miss lol")
+				pass
+			recoil()
 
-		weapon.rounds -= weapon.shots
-		match weapon.in_hands:
-			weapon.current_prim:
-				bank.rounds_prim = weapon.rounds
-			weapon.current_sec:
-				bank.rounds_sec = weapon.rounds
-		can_shoot = false
-		await get_tree().create_timer(weapon.delay).timeout
-		can_shoot = true
+			weapon.rounds -= weapon.shots
+			match weapon.in_hands:
+				weapon.current_prim:
+					bank.rounds_prim = weapon.rounds
+				weapon.current_sec:
+					bank.rounds_sec = weapon.rounds
+			can_shoot = false
+			await get_tree().create_timer(weapon.delay).timeout
+			can_shoot = true
+		else: pass
+	else: pass
 
 
 func reload():
@@ -204,7 +211,6 @@ func equip_ult():
 		target.interaction(self)
 
 func doors():
-	
 	var target = ray_door.get_collider()
 	if Input.is_action_just_pressed("e"):
 		if ray_door.is_colliding() and target.is_in_group("door"):
@@ -260,9 +266,9 @@ func shell_eject(shell):
 	shell_inst.shell_look = shell
 
 	shell_inst.global_transform = pos.global_transform
-	shell_inst.position = pos.global_position + Vector2(randi_range(-5,5),randi_range(-5,5));
+	shell_inst.position = pos.global_position + Vector2(randi_range(-10,10),randi_range(-10,10));
 	shell_inst.rotation_degrees = pos.rotation_degrees
-	shell_inst.rotation_degrees += randi_range(0,70)
+	shell_inst.rotation_degrees += randi_range(0,120)
 
 	add_sibling(shell_inst)
 
@@ -278,7 +284,7 @@ func end_game():
 	shoot_he = false
 	move_he = false
 	setup()
-	$end_screen.show()
+	gui.end_show()
 
 func proceed():
 	save_game()
@@ -331,6 +337,9 @@ func save_game():
 	save_data.melee = weapon.current_melee
 	save_data.gren = weapon.current_gren
 	save_data.hands = weapon.in_hands
+	
+	save_data.shop_prim = weapon.primaries
+	save_data.shop_sec = weapon.secondaries
 	ResourceSaver.save(save_data, "user://savegame.tres")
 
 func load_game():
@@ -341,4 +350,7 @@ func load_game():
 		weapon.current_melee=save_data.melee
 		weapon.current_gren=save_data.gren
 		weapon.in_hands=save_data.hands 
+		
+		weapon.primaries =save_data.shop_prim 
+		weapon.secondaries= save_data.shop_sec 
 		return save_data

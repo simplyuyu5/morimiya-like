@@ -1,5 +1,5 @@
 extends RigidBody2D
-@onready var weapons = $"/root/Node2D/CharacterBody2D/weapons"
+#@onready var weapons = $"/root/Node2D/CharacterBody2D/weapons"
 
 #@onready var shat_sprite = $shatter_ray/grenade_shatter
 @onready var gren_sprite = $grenade_sprite

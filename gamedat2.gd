@@ -7,3 +7,6 @@ class_name GameData
 @export var melee:String 
 @export var gren:String
 @export var hands:String
+
+@export var shop_prim:Dictionary
+@export var shop_sec:Dictionary

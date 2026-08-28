@@ -1,56 +1,57 @@
-[gd_scene load_steps=10 format=3 uid="uid://c7ecu7c3yakg2"]
+[gd_scene load_steps=11 format=3 uid="uid://c7ecu7c3yakg2"]
 
 [ext_resource type="Script" uid="uid://celxqhvm7winm" path="res://scenes/maps/door_2.gd" id="1_rj56d"]
 [ext_resource type="Texture2D" uid="uid://bh88308qkrcfx" path="res://images/tiles/doortest.png" id="2_32fce"]
+[ext_resource type="Texture2D" uid="uid://r6gbf86au6tp" path="res://images/tiles/door_grey.png" id="2_mkqif"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oo5xu"]
+atlas = ExtResource("2_mkqif")
+region = Rect2(0, 0, 24, 12)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xltkm"]
 atlas = ExtResource("2_32fce")
 region = Rect2(0, 0, 24, 12)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_elcdo"]
-atlas = ExtResource("2_32fce")
-region = Rect2(24, 0, 36, 12)
+[sub_resource type="AtlasTexture" id="AtlasTexture_87ygt"]
+atlas = ExtResource("2_mkqif")
+region = Rect2(0, 12, 24, 36)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ttkqu"]
 atlas = ExtResource("2_32fce")
 region = Rect2(0, 16, 24, 28)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_aewf8"]
-atlas = ExtResource("2_32fce")
-region = Rect2(24, 17, 36, 26)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_ttkqu"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_rj56d"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_xltkm")
+"texture": SubResource("AtlasTexture_oo5xu")
 }],
-"loop": true,
-"name": &"closed_2",
+"loop": false,
+"name": &"closed_2_grey",
 "speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_elcdo")
+"texture": SubResource("AtlasTexture_xltkm")
 }],
-"loop": true,
-"name": &"closed_3",
+"loop": false,
+"name": &"closed_2_yel",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_87ygt")
+}],
+"loop": false,
+"name": &"open_2_grey",
 "speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ttkqu")
 }],
-"loop": true,
-"name": &"open_2",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_aewf8")
-}],
-"loop": true,
-"name": &"open_3",
+"loop": false,
+"name": &"open_2_yel",
 "speed": 5.0
 }]
 
@@ -66,8 +67,8 @@ collision_mask = 2
 script = ExtResource("1_rj56d")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_ttkqu")
-animation = &"closed_2"
+sprite_frames = SubResource("SpriteFrames_rj56d")
+animation = &"open_2_yel"
 metadata/_edit_lock_ = true
 
 [node name="open1" type="CollisionShape2D" parent="."]

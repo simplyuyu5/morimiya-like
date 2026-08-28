@@ -1,0 +1,21 @@
+{
+	"exampleWeapon":{
+		"sreload_type":"mag", 
+		"sdamage":1,
+		"srounds_max":100,
+		"smags_max":1,
+		"sdist":10,
+		"sdelay":1, 
+		"rel_time":1.5,
+		"sshots":1,
+		"sstyle":0, 
+		"ssound":1, 
+		"srecoil":6,
+		"sshell":0, 
+		"sdesc":"you can put any text here \n cookies!",
+		"sbought":false, 
+		"cost":20,
+		"special":false, 
+		"sicon":"res://custom/weapon_icons/example.png",
+	}
+}

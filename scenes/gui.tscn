@@ -1,10 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://bhoacu7owtw6m"]
+[gd_scene load_steps=9 format=3 uid="uid://bhoacu7owtw6m"]
 
 [ext_resource type="Script" uid="uid://dwqegnnb8d4p1" path="res://scripts/gui.gd" id="1_7yii4"]
-[ext_resource type="Texture2D" uid="uid://brmdkm2ix0opo" path="res://images/weapons_portraits/g17_shop.png" id="2_4yt8u"]
-[ext_resource type="Texture2D" uid="uid://dlfu1udpvweav" path="res://images/weapons_portraits/m14_shop.png" id="3_p54wi"]
 [ext_resource type="Texture2D" uid="uid://c4mhgvel1egqo" path="res://images/weapons_portraits/nothing.png" id="4_xki8e"]
-[ext_resource type="Texture2D" uid="uid://dq47xwlg3pwa4" path="res://images/weapons_portraits/ar_shop.png" id="5_v3be1"]
 [ext_resource type="Texture2D" uid="uid://bwtlauc2loalf" path="res://images/effects/progbarreload3.png" id="6_xqxrh"]
 [ext_resource type="Texture2D" uid="uid://cyrhfr2vowgim" path="res://images/effects/progbarreload2.png" id="7_qupqx"]
 [ext_resource type="Texture2D" uid="uid://pqg5irp4tf24" path="res://images/objects/ui-counter.png" id="8_4yt8u"]
@@ -15,34 +12,10 @@
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_4yt8u")
-}],
-"loop": true,
-"name": &"g17",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_p54wi")
-}],
-"loop": true,
-"name": &"m14",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": ExtResource("4_xki8e")
 }],
-"loop": true,
-"name": &"null",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("5_v3be1")
-}],
-"loop": true,
-"name": &"xm15",
+"loop": false,
+"name": &"placeholder",
 "speed": 5.0
 }]
 
@@ -101,7 +74,7 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(130, 580)
 scale = Vector2(1.6, 1.6)
 sprite_frames = SubResource("SpriteFrames_i4ail")
-animation = &"xm15"
+animation = &"placeholder"
 
 [node name="reloadbar" type="TextureProgressBar" parent="."]
 visible = false
@@ -159,7 +132,7 @@ offset_bottom = 20.5
 scale = Vector2(0.5, 0.5)
 theme_override_fonts/font = ExtResource("9_p54wi")
 theme_override_font_sizes/font_size = 60
-text = "Injured : 1"
+text = "Injured : 0"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
@@ -185,43 +158,23 @@ visible = false
 metadata/_edit_use_anchors_ = true
 
 [node name="Panel" type="Panel" parent="loadout_screen"]
-anchors_preset = -1
-anchor_left = 0.022569444
-anchor_top = 0.037037037
-anchor_right = 0.9774306
-anchor_bottom = 0.962963
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("10_xki8e")
-metadata/_edit_use_anchors_ = true
-
-[node name="question" type="Label" parent="loadout_screen/Panel"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.03181818
-anchor_top = 0.06349207
-anchor_right = 0.9718182
-anchor_bottom = 0.1944643
-offset_right = 1034.0
-offset_bottom = 78.58332
-scale = Vector2(0.5, 0.5)
-theme_override_fonts/font = ExtResource("9_p54wi")
-theme_override_font_sizes/font_size = 120
-text = "Start shooting?"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-metadata/_edit_lock_ = true
 
 [node name="weapons" type="Label" parent="loadout_screen/Panel"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.020909091
-anchor_top = 0.21666667
-anchor_right = 0.6009091
-anchor_bottom = 0.535
-offset_right = 638.0
-offset_bottom = 190.99994
+anchor_top = 0.24305555
+anchor_right = 1.0
+anchor_bottom = 0.6388889
+offset_right = 1152.0
+offset_bottom = 166.5
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.5, 0.5)
@@ -229,8 +182,9 @@ theme_override_fonts/font = ExtResource("9_p54wi")
 theme_override_font_sizes/font_size = 120
 text = "Primary: m14
 Secondary: g17
-Meelee: kitchen knife
+Melee: kitchen knife
 Explosives: pipe bomb"
+horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
@@ -276,7 +230,178 @@ anchor_bottom = 0.94666666
 grow_horizontal = 0
 theme_override_fonts/font = ExtResource("9_p54wi")
 theme_override_font_sizes/font_size = 40
-text = "proceed"
+text = "start"
+metadata/_edit_use_anchors_ = true
+
+[node name="end_screen" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Panel" type="Panel" parent="end_screen"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("10_xki8e")
+metadata/_edit_use_anchors_ = true
+
+[node name="points" type="RichTextLabel" parent="end_screen/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.013020833
+anchor_top = 0.027777778
+anchor_right = 0.3125
+anchor_bottom = 0.08950617
+offset_top = 2.0
+offset_bottom = 2.0
+theme_override_fonts/normal_font = ExtResource("9_p54wi")
+theme_override_font_sizes/normal_font_size = 50
+text = "Points earned:"
+scroll_active = false
+metadata/_edit_lock_ = true
+metadata/_edit_use_anchors_ = true
+
+[node name="stats" type="RichTextLabel" parent="end_screen/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.013020833
+anchor_top = 0.23148148
+anchor_right = 0.3125
+anchor_bottom = 0.29320988
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("9_p54wi")
+theme_override_font_sizes/normal_font_size = 50
+text = "Statistics:"
+scroll_active = false
+autowrap_trim_flags = 64
+metadata/_edit_lock_ = true
+metadata/_edit_use_anchors_ = true
+
+[node name="stats_texts" type="Control" parent="end_screen/Panel"]
+anchors_preset = 0
+anchor_left = 0.011284722
+anchor_top = 0.2824074
+anchor_right = 0.046006944
+anchor_bottom = 0.3441358
+metadata/_edit_lock_ = true
+metadata/_edit_use_anchors_ = true
+
+[node name="kill" type="RichTextLabel" parent="end_screen/Panel/stats_texts"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.25
+anchor_right = 9.125
+anchor_bottom = 1.25
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("9_p54wi")
+theme_override_font_sizes/normal_font_size = 50
+text = "Killed -"
+scroll_active = false
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="inj" type="RichTextLabel" parent="end_screen/Panel/stats_texts"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.5
+anchor_right = 9.125
+anchor_bottom = 2.5
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("9_p54wi")
+theme_override_font_sizes/normal_font_size = 50
+text = "Injured -"
+scroll_active = false
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="flee" type="RichTextLabel" parent="end_screen/Panel/stats_texts"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 2.75
+anchor_right = 9.125
+anchor_bottom = 3.75
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("9_p54wi")
+theme_override_font_sizes/normal_font_size = 50
+text = "Fleed -"
+scroll_active = false
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="special" type="RichTextLabel" parent="end_screen/Panel/stats_texts"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.75
+anchor_top = 4.0
+anchor_right = 9.375
+anchor_bottom = 5.0
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("9_p54wi")
+theme_override_font_sizes/normal_font_size = 50
+text = "Special -"
+scroll_active = false
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="info" type="Control" parent="end_screen/Panel"]
+layout_mode = 1
+anchor_left = 0.4826389
+anchor_right = 0.5173611
+anchor_bottom = 0.061728396
+grow_horizontal = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="info" type="RichTextLabel" parent="end_screen/Panel/info"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.25
+anchor_top = 0.5
+anchor_right = 11.25
+anchor_bottom = 1.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("9_p54wi")
+theme_override_font_sizes/normal_font_size = 50
+text = "Run info:"
+scroll_active = false
+metadata/_edit_use_anchors_ = true
+
+[node name="weap" type="RichTextLabel" parent="end_screen/Panel/info"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.25
+anchor_top = 1.975
+anchor_right = 11.25
+anchor_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("9_p54wi")
+theme_override_font_sizes/normal_font_size = 50
+text = "weapon primary:
+
+weapon secondary:
+
+grenades:
+
+"
+scroll_active = false
+metadata/_edit_use_anchors_ = true
+
+[node name="proceed" type="Button" parent="end_screen/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.7118056
+anchor_top = 0.81790125
+anchor_right = 0.9722222
+anchor_bottom = 0.95679015
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("9_p54wi")
+theme_override_font_sizes/font_size = 40
+text = "Continue"
 metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="loadout_screen/Panel/close_loadout" to="." method="_on_close_loadout_pressed"]

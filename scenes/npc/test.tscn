@@ -1,9 +1,13 @@
-[gd_scene load_steps=23 format=3 uid="uid://c71i2mqmbbow3"]
+[gd_scene load_steps=24 format=3 uid="uid://c71i2mqmbbow3"]
 
 [ext_resource type="Script" uid="uid://b7ao0byb5ooas" path="res://scripts/test_npc.gd" id="1_rmalr"]
 [ext_resource type="Texture2D" uid="uid://cecdnh2t8e4wd" path="res://images/living/corpses/dead_list.png" id="2_hc3et"]
 [ext_resource type="Texture2D" uid="uid://b6oyr1hf1j4si" path="res://images/living/npc_list.png" id="3_41tco"]
 [ext_resource type="Texture2D" uid="uid://ceovhpu6us6vy" path="res://images/living/corpses/down_list.png" id="4_by1if"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rmalr"]
+radius = 15.0
+height = 42.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_168wh"]
 atlas = ExtResource("2_hc3et")
@@ -138,8 +142,11 @@ animations = [{
 collision_layer = 2
 collision_mask = 18
 script = ExtResource("1_rmalr")
+wanderPointsAmt = 2
+baker_sec = 1.0
 
-[node name="hp" type="Node" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_rmalr")
 
 [node name="dead" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -170,9 +177,20 @@ offset = Vector2(-0.0033444103, -1.4788249)
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
-[node name="Timer" type="Timer" parent="NavigationAgent2D"]
+[node name="thinker" type="Timer" parent="NavigationAgent2D"]
+process_callback = 0
 wait_time = 0.1
 autostart = true
 
 [node name="eyes" type="RayCast2D" parent="."]
 target_position = Vector2(500, 0)
+collision_mask = 18
+
+[node name="baker" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="goal_help" type="Node2D" parent="."]
+
+[connection signal="timeout" from="NavigationAgent2D/thinker" to="." method="_on_thinker_timeout"]
+[connection signal="timeout" from="baker" to="." method="_on_baker_timeout"]

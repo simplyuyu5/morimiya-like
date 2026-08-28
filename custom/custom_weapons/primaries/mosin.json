@@ -1,0 +1,21 @@
+{
+	"MosinNagant":{
+		"sreload_type":"pump", 
+		"sdamage":120,
+		"srounds_max":6,
+		"smags_max":15,
+		"sdist":500,
+		"sdelay":0.9, 
+		"rel_time":1,
+		"sshots":1,
+		"sstyle":1, 
+		"ssound":1, 
+		"srecoil":20,
+		"sshell":0, 
+		"sdesc":"3 line bolt-action rifle, still used nowadays!",
+		"sbought":true, 
+		"cost":9000,
+		"special":false, 
+		"sicon":"res://custom/weapon_icons/example.png",
+	}
+}

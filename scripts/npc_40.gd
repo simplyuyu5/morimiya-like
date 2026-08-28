@@ -16,8 +16,7 @@ var direction = Vector2(0,0)
 @onready var agent = $NavigationAgent2D
 @onready var timer_nav = $NavigationAgent2D/Timer
 @onready var goal_node = $goal_node
-@onready var game_data = $"/root/Node2D/CharacterBody2D/game_data"
-
+@onready var game_data = saveMain
 @onready var player= $"/root/Node2D/CharacterBody2D"
 
 

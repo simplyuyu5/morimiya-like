@@ -1143,3 +1143,4 @@ navigation_enabled = false
 [node name="door_2" parent="floor/walls/doors" instance=ExtResource("7_elcdo")]
 position = Vector2(0, -186)
 is_open = true
+type = "yel"
