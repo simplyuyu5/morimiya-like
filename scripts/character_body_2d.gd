@@ -4,7 +4,7 @@ extends CharacterBody2D
 @onready var cam = $Camera2D
 @onready var ray = $ray_long
 #@onready var nothing_body = $ray_long/nothin
-@onready var weapon = $weapons
+@onready var weapon =weapons
 @onready var ray_pick = $pickup_ray
 @onready var ray_door = $door_ray
 @onready var body_top = $"Mc-top"
@@ -28,7 +28,7 @@ var base_anim:String
 
 #@onready var settings = $settings
 
-var spread :bool = false
+#var spread :bool = false
 var weapon_under :bool = false
 var pickup_under :bool = false
 var under_name
@@ -68,6 +68,7 @@ func _process(_delta: float) -> void:
 func _physics_process(_delta: float) -> void:
 	
 	if homicidin == true:
+		weapons.process(_delta)
 		change()
 		shoot()
 		reload()
@@ -104,9 +105,9 @@ func shoot():
 		weapon.rounds -= weapon.shots
 		match weapon.in_hands:
 			weapon.current_prim:
-				weapon.bank.rounds_prim = weapon.rounds
+				bank.rounds_prim = weapon.rounds
 			weapon.current_sec:
-				weapon.bank.rounds_sec = weapon.rounds
+				bank.rounds_sec = weapon.rounds
 		can_shoot = false
 		await get_tree().create_timer(weapon.delay).timeout
 		can_shoot = true
@@ -120,15 +121,16 @@ func reload():
 		await get_tree().create_timer(weapon.reload_time).timeout
 		match weapon.in_hands: 
 			weapon.current_prim:
-				weapon.bank.mags_prim = weapon.mags - 1
+				bank.mags_prim = weapon.mags - 1
 			weapon.current_sec:
-				weapon.bank.mags_sec = weapon.mags - 1
+				bank.mags_sec = weapon.mags - 1
+		reloading_types()
 		match weapon.in_hands:
 			weapon.current_prim:
-				weapon.bank.rounds_prim = weapon.rounds
+				bank.rounds_prim = weapon.rounds
 			weapon.current_sec:
-				weapon.bank.rounds_sec = weapon.rounds
-		reloading_types()
+				bank.rounds_sec = weapon.rounds
+		
 	else:pass
 
 func grenade():
@@ -159,10 +161,10 @@ func reloading_types():
 				weapon.rounds += 1
 
 func recoil():
-	spread = true
+	weapon.spread = true
 	weapon.chance_hit -= weapon.recoil
 	await get_tree().create_timer(3).timeout
-	spread = false
+	weapon.spread = false
 
 func run():
 	pass
@@ -194,8 +196,8 @@ func change():
 
 func equip_ult():
 	var target = ray_pick.get_collider()
-	if ray_pick.is_colliding() and target.is_in_group("weapon_pick"):
-		equip_weapon()
+	#if ray_pick.is_colliding() and target.is_in_group("weapon_pick"):
+		#equip_weapon()
 	if ray_pick.is_colliding() and target.is_in_group("weapons_desk"):
 		store.init()
 	if ray_pick.is_colliding() and target.is_in_group("interactable"):
@@ -209,18 +211,18 @@ func doors():
 			target.interact()
 	else:pass
 
-func equip_weapon():
-	var target = ray_pick.get_collider()
-	if Input.is_action_just_pressed("p"):
-			weapon.in_hands = target.name
-			weapon.weapon_change()
-			target.free()
-			ray_pick.enabled = false
-			await get_tree().create_timer(1.0).timeout
-			ray_pick.enabled = true
-			
-	else:
-		pass
+#func equip_weapon():
+	#var target = ray_pick.get_collider()
+	#if Input.is_action_just_pressed("p"):
+			#weapon.in_hands = target.name
+			#weapon.weapon_change()
+			#target.free()
+			#ray_pick.enabled = false
+			#await get_tree().create_timer(1.0).timeout
+			#ray_pick.enabled = true
+			#
+	#else:
+		#pass
 
 
 

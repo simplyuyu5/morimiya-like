@@ -1,9 +1,11 @@
-extends Node
+class_name bank
 
-var mags_prim = 4
-var mags_sec = 2
+extends Object
 
-var grens = 0
+static var mags_prim := 4
+static var mags_sec := 2
 
-var rounds_prim = 0
-var rounds_sec = 0
+static var grens := 2
+
+static var rounds_prim := 0
+static var rounds_sec :=0

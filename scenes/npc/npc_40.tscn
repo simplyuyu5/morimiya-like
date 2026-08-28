@@ -1,0 +1,213 @@
+[gd_scene load_steps=25 format=3 uid="uid://bu1rrshvu7xhr"]
+
+[ext_resource type="Texture2D" uid="uid://cecdnh2t8e4wd" path="res://images/living/corpses/dead_list.png" id="1_fojyq"]
+[ext_resource type="Script" uid="uid://g205wrf181oy" path="res://scripts/npc_40.gd" id="1_mfrv5"]
+[ext_resource type="Texture2D" uid="uid://b6oyr1hf1j4si" path="res://images/living/npc_list.png" id="2_0ydl2"]
+[ext_resource type="Script" uid="uid://cfhiihppfx3jj" path="res://scripts/30_npc_area.gd" id="2_hcp22"]
+[ext_resource type="Texture2D" uid="uid://ceovhpu6us6vy" path="res://images/living/corpses/down_list.png" id="3_0ydl2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_168wh"]
+atlas = ExtResource("1_fojyq")
+region = Rect2(0, 0, 15, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k73aa"]
+atlas = ExtResource("1_fojyq")
+region = Rect2(15, 0, 15, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aqwbi"]
+atlas = ExtResource("1_fojyq")
+region = Rect2(30, 0, 15, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kbm7u"]
+atlas = ExtResource("1_fojyq")
+region = Rect2(45, 0, 15, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rk3wh"]
+atlas = ExtResource("1_fojyq")
+region = Rect2(60, 0, 15, 25)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mfrv5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_168wh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k73aa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aqwbi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kbm7u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rk3wh")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ymru"]
+atlas = ExtResource("2_0ydl2")
+region = Rect2(0, 0, 10, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mbqj5"]
+atlas = ExtResource("2_0ydl2")
+region = Rect2(10, 0, 10, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_btcon"]
+atlas = ExtResource("2_0ydl2")
+region = Rect2(20, 0, 10, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4xgab"]
+atlas = ExtResource("2_0ydl2")
+region = Rect2(30, 0, 10, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kyfuo"]
+atlas = ExtResource("2_0ydl2")
+region = Rect2(40, 0, 10, 11)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hcp22"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ymru")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mbqj5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_btcon")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4xgab")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kyfuo")
+}],
+"loop": true,
+"name": &"bodies",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mfrv5"]
+atlas = ExtResource("3_0ydl2")
+region = Rect2(0, 0, 15, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hcp22"]
+atlas = ExtResource("3_0ydl2")
+region = Rect2(15, 0, 15, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_64d3a"]
+atlas = ExtResource("3_0ydl2")
+region = Rect2(30, 0, 15, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qab5g"]
+atlas = ExtResource("3_0ydl2")
+region = Rect2(45, 0, 15, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r680s"]
+atlas = ExtResource("3_0ydl2")
+region = Rect2(60, 0, 15, 25)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_64d3a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mfrv5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hcp22")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_64d3a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qab5g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r680s")
+}],
+"loop": true,
+"name": &"down",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mfrv5"]
+radius = 18.000002
+height = 36.000004
+
+[node name="npc40" type="CharacterBody2D" groups=["living"]]
+collision_layer = 2
+collision_mask = 18
+script = ExtResource("1_mfrv5")
+
+[node name="hp" type="Node" parent="." node_paths=PackedStringArray("parent_help")]
+script = ExtResource("2_hcp22")
+parent_help = NodePath("..")
+
+[node name="dead" type="AnimatedSprite2D" parent="."]
+visible = false
+visibility_layer = 16
+z_index = -5
+scale = Vector2(4.999999, 4.999999)
+sprite_frames = SubResource("SpriteFrames_mfrv5")
+animation = &"dead"
+
+[node name="alive" type="AnimatedSprite2D" parent="."]
+visibility_layer = 4
+position = Vector2(-5.9604645e-07, -2.3283064e-09)
+rotation = 1.5707964
+scale = Vector2(4.999999, 4.999999)
+sprite_frames = SubResource("SpriteFrames_hcp22")
+animation = &"bodies"
+offset = Vector2(-0.0033444103, -1.4788249)
+
+[node name="down" type="AnimatedSprite2D" parent="."]
+visible = false
+visibility_layer = 16
+position = Vector2(-5.9604645e-07, -2.3283064e-09)
+rotation = 1.5707964
+scale = Vector2(4.999999, 4.999999)
+sprite_frames = SubResource("SpriteFrames_64d3a")
+animation = &"down"
+offset = Vector2(-0.0033444103, -1.4788249)
+
+[node name="goal_node" type="Node2D" parent="."]
+top_level = true
+position = Vector2(44, -4)
+
+[node name="ColorRect" type="ColorRect" parent="goal_node"]
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="eyes" type="RayCast2D" parent="."]
+position = Vector2(0, -1)
+target_position = Vector2(500, 0)
+collision_mask = 18
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+scale = Vector2(0.9999998, 0.9999998)
+shape = SubResource("CapsuleShape2D_mfrv5")
+debug_color = Color(1, 0, 0, 0.19607843)
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 10.0
+target_desired_distance = 5.0
+path_max_distance = 170.0
+simplify_path = true
+simplify_epsilon = 1.0
+path_return_max_length = 200.0
+avoidance_enabled = true
+avoidance_layers = 2
+avoidance_mask = 2
+debug_enabled = true
+
+[node name="Timer" type="Timer" parent="NavigationAgent2D"]
+wait_time = 0.1
+
+[connection signal="timeout" from="NavigationAgent2D/Timer" to="." method="_on_timer_timeout"]

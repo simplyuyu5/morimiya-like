@@ -11,7 +11,7 @@ var inder = 0
 @onready var list_buy_prim = $Panel/weapons_shop/prim_buy/itemlist_prim
 @onready var list_buy_sec = $Panel/weapons_shop/sec_buy/itemList_sec
 
-@onready var weapons = $"/root/Node2D/CharacterBody2D/weapons"
+#@onready var weapons = $"/root/Node2D/CharacterBody2D/weapons"
 @onready var prim = weapons.primaries
 @onready var sec = weapons.secondaries
 @onready var saves = $"/root/Node2D/CharacterBody2D/game_data"
@@ -139,7 +139,7 @@ func _on_equip_pressed() -> void:
 	elif inder in weapons.secondaries:
 		weapons.current_sec = inder
 		weapons.assign_weapon_rounds(2)
-	print(weapons.current_sec," ",weapons.current_prim)
+	#print(weapons.current_sec," ",weapons.current_prim)
 
 
 func _on_itemlist_eq_item_selected(index: int) -> void:

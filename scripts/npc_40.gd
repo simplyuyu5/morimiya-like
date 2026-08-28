@@ -9,18 +9,17 @@ var direction = Vector2(0,0)
 
 @onready var collision = $CollisionShape2D3
 @onready var dead = $dead
-@onready var alive = $alive
-#@onready var audio = $audio
-@onready var eyes_ray = $eyes
 @onready var hp_man = $hp
+@onready var down = $down
+@onready var alive = $alive
+@onready var eyes_ray = $eyes
 @onready var agent = $NavigationAgent2D
+@onready var timer_nav = $NavigationAgent2D/Timer
 @onready var goal_node = $goal_node
 @onready var game_data = $"/root/Node2D/CharacterBody2D/game_data"
 
 @onready var player= $"/root/Node2D/CharacterBody2D"
 
-@onready var timer_nav = $NavigationAgent2D/nav_timer
-#@onready var timer_sound = $audio/randi_sound
 
 var goal
 var danger
@@ -32,7 +31,7 @@ enum states {
 	RUN,
 	ATTACK
 }
-var state_cur = states.CALM
+@export var state_cur = states.WANDER
 
 var persons = {
 	"Null":{
@@ -43,7 +42,7 @@ var persons = {
 	},
 }
 
-@export var personality = persons["Agressive"]
+#@export var personality = persons["Agressive"]
 
 func _ready() -> void:
 	skins(randi_range(0,4))
@@ -124,6 +123,7 @@ func goal_reset():
 func skins(num):
 	dead.frame = num
 	alive.frame = num
+	down.frame = num
 
 func eyes():
 	eyes_ray.enabled = true
@@ -135,9 +135,12 @@ func eyes():
 		danger = target
 		state_cur = states.RUN
 
+func fall():
+	pass
+	#npc falls when at low hp, continues crawling, perharps slowly heals back and/or stands up after some time
 
 func die():
-	game_data.temp_injured += -1
+	game_data.temp_injured -= 1
 	game_data.temp_killed += 1
 	print(game_data.temp_injured)
 	hp_man.injured = false
@@ -147,8 +150,11 @@ func die():
 	collision.free()
 	alive.hide()
 
-	dead.rotation_degrees = randf_range(0,360)
-	dead.show()
+	down.rotation_degrees = randf_range(0,360)
+	down.show()
+
+	#dead.rotation_degrees = randf_range(0,360)
+	#dead.show()
 
 
 func decal_bleed():
@@ -159,7 +165,7 @@ func decal_bleed():
 	blood.fram = randi_range(0,6)
 	get_tree().current_scene.add_child(blood)
 
-func _on_nav_timer_timeout() -> void:
+func _on_timer_timeout() -> void:
 	if agent.target_position != goal_node.global_position:
 		agent.target_position = goal_node.global_position
 

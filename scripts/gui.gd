@@ -9,7 +9,7 @@ extends CanvasLayer
 @onready var injured = $stats/injured
 @onready var fleed = $stats/fleed
 @onready var parent = $"/root/Node2D/CharacterBody2D"
-@onready var weapon = $"/root/Node2D/CharacterBody2D/weapons"
+@onready var weapon =weapons #$"/root/Node2D/CharacterBody2D/weapons"
 @onready var base = $"/root/Node2D/CharacterBody2D"
 @onready var stats = $"/root/Node2D/CharacterBody2D/game_data"
 

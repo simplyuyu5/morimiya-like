@@ -1,39 +1,43 @@
-extends Node
+class_name weapons
 
-@onready var parent = get_parent()
-@onready var bank = $saved_data
+extends Resource
 
-var reload_type:String = "mag" 
-var shots:int = 1 #for burst fire?
-var damage:int = 0
-var recoil:int = 0
-var description:String = ""
-var reload_time:float = 1 #time needed to reload in s 
-var delay:float = 0 #delay between shots #P.S. morimiya's BS3, KS25 and many other shotguns are reason for adding this
-var dist:int = 300 #effective distantion
-var sound = 0
+
+#@onready var parent = get_parent()
+#@onready var bank = $saved_data
+
+static var reload_type:String = "mag" 
+static var shots:int = 1 #for burst fire?
+static var damage:int = 0
+static var recoil:int = 0
+static var spread:bool = false
+static var description:String = ""
+static var reload_time:float = 1 #time needed to reload in s 
+static var delay:float = 0 #delay between shots #P.S. morimiya's BS3, KS25 and many other shotguns are reason for adding this
+static var dist:int = 300 #effective distantion
+static var sound = 0
 #^ 0-5 loudness ig. 4 for shotguns 5 is supah loud
 
-var style = 0 
-var shell = 0
+static var style = 0 
+static var shell = 0
 
-var bleed_max:float = 40
+static var bleed_max:float = 40
 
-var chance_hit:int = 100
-var chance_max:int = 100
+static var chance_hit:int = 100
+static var chance_max:int = 100
 
 #var max_angle = 20
 #var angle = 0
 #var min_angle = -20
 
-var rounds_max:int = 0
-var mags_max:int = 0
-var rounds:int = 0
-var mags:int = 0
+static var rounds_max:int = 0
+static var mags_max:int = 0
+static var rounds:int = 0
+static var mags:int = 0
 
 
 
-var primaries = {
+static var primaries = {
 	"xm15":{
 		"sreload_type":"mag",
 		"sdamage":50,
@@ -169,7 +173,7 @@ var primaries = {
 	},
 }
 
-var secondaries = {
+static var secondaries = {
 	"g17":{
 		"sreload_type":"mag",
 		"sdamage":30,
@@ -228,7 +232,7 @@ var secondaries = {
 }
 
 
-var grenades = {
+static var grenades = {
 	"pipemedium" = {
 		"sdamage_rad":120,
 		"sdamage_shat":70,
@@ -248,33 +252,34 @@ var grenades = {
 }
 
 #stats for gren
-var damage_rad:int
-var damage_shat:int
-var radius:int
-var fuse:float
-var fuse_rand:bool
-var shatter:bool
-var shatter_amt_min:int
-var shatter_amt_max:int
-var shatter_dst_min:int
-var shatter_dst_max:int
-var amt_max:int
+static var damage_rad:int #explosion damage
+static var damage_shat:int
+static var radius:int #rad of explosion ig
+static var fuse:float #time before blowing up
+static var fuse_rand:bool #randomizes fuse time a bit
+static var shatter:bool #does grenades creates shatters?
+static var shatter_amt_min:int
+static var shatter_amt_max:int
+static var shatter_dst_min:int
+static var shatter_dst_max:int
+static var amt_max:int
 
 #ADD GRENADES !!!!!!!!!
 #Added :3
 
-var current_sec:String = "g17"
-var current_prim:String= "m14"
-var current_melee:String = "knife"
-var current_gren:String = "pipemedium"
-var in_hands:String = "m14"
+static var current_sec:String = "g17"
+static var current_prim:String= "m14"
+static var current_melee:String = "knife"
+static var current_gren:String = "pipemedium"
+static var in_hands:String = "m14"
 
-func _ready() -> void:
+static func _ready():
+	bank.new()
 	weapon_change(1)
 	gren_change()
 
 
-func assign_weapon_rounds(num):
+static func assign_weapon_rounds(num):
 	match num:
 			1:
 				if primaries[current_prim] != null:
@@ -295,7 +300,7 @@ func assign_weapon_rounds(num):
 
 
 
-func weapon_change(num):
+static func weapon_change(num):
 	if in_hands != null:
 		match num:
 			1:
@@ -335,11 +340,12 @@ func weapon_change(num):
 					delay = secondaries[current_sec]["sdelay"]
 					mags = bank.mags_sec
 					rounds = bank.rounds_sec
+					
 	#else:
 		#print("null")
 		#in_hands = "null"
 
-func gren_change():
+static func gren_change():
 	damage_rad = grenades[current_gren]["sdamage_rad"]
 	damage_shat = grenades[current_gren]["sdamage_shat"]
 	radius = grenades[current_gren]["sradius"]
@@ -352,15 +358,17 @@ func gren_change():
 	shatter_dst_max = grenades[current_gren]["shatter_dist_max"]
 	amt_max = grenades[current_gren]["samount_max"]
 
-func recoil_regen():
-	if parent.spread == false:
+static func recoil_regen():#spread:bool):
+	if spread == false:
 		chance_hit += 1
 	else:
 		pass
 
-func _process(_delta: float) -> void:
+
+static func process(_delta: float) -> void:
 
 	recoil_regen()
+	#taking recoil from player in original
 
 	if chance_hit <= 0:
 		chance_hit = 0
